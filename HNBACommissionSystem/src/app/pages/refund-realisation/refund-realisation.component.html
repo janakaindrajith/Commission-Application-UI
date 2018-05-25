@@ -1,0 +1,225 @@
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="well">
+      <div class="row">
+        <!-- <table class="table vitamins"> -->
+        <table class="table table-striped table-hover " id="myTable">
+          <thead>
+            <tr>
+              <!-- <th>Select</th> -->
+              <th style="display:none;">RECEIPT_NO</th>
+              <th>RECEIPT_NO</th>
+              <th>RECEIPT_DATE</th>
+              <th>RECEIPT_AMT</th>
+              <th>CHEQUE_NO</th>
+              <th>RECEIPT_STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let PID of PIDList | paginate: {itemsPerPage:5 , currentPage:page1, id: 'one'}; let i = index" (click)="setPIDReceiptNo(i,PID.RfdReceiptNo,PID.RfdAmt);">
+
+              <!-- <td><a href="javascript:void(0)">View</a></td> -->
+
+              <!-- <td>
+                <input type="checkbox" on="OnChangeCheckbox(this)" class="largerCheckbox" [checked]="PID.State" ngControl="Receipt" [(ngModel)]="PID.selected">
+              </td> -->
+
+
+              <td style="display:none;">
+                {{PID.RfdReceiptNo}}
+              </td>
+              <td>
+                {{PID.RfdReceiptNo}}
+              </td>
+              <td>
+                {{PID.RfdRefundDate}}
+              </td>
+              <td>
+                {{PID.RfdAmt}}
+              </td>
+              <td>
+                {{PID.RfdRefundDate}}
+              </td>
+              <td>
+                {{PID.RfdRecStatus}}
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="page1 = $event" id="one" maxSize="5" directionLinks="true" autoHide="true">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-1">
+  </div>
+
+
+
+
+
+
+
+
+  <div class="col-sm-4">
+
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Refund Confirmation</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="form-group">
+
+          </div>
+        </div>
+
+        <form class="form-horizontal">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-6">Refund Amount</p>
+              <div class="col-xs-5">
+                <input type="text" [readonly]="true" class="form-control" [(ngModel)]="REFUND_AMT" name="REFUND_AMT" id="REFUND_AMT" placeholder="">
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <form class="form-horizontal">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-6">Utilized Amount</p>
+              <div class="col-xs-5">
+                <input type="text" [readonly]="true" class="form-control" [(ngModel)]="UTILIZED_AMT" name="UTILIZED_AMT" id="UTILIZED_AMT"
+                  placeholder="">
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- <form class="form-horizontal">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-6">Balance Amount</p>
+              <div class="col-xs-5">
+                <input type="text" [readonly]="true" class="form-control" [(ngModel)]="BALANCE_AMT" name="BALANCE_AMT" id="BALANCE_AMT" placeholder="">
+              </div>
+            </div>
+          </div>
+        </form> -->
+
+        <div class="row">
+          <div class="form-group">
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-xs-6">
+              <button type="button" [disabled]="isSAVEDisabled" (click)="CalculatedRecords()" class="btn orange-flat-button">Calculate</button>
+            </div>
+            <div class="col-xs-6">
+              <button type="button" [disabled]="isSAVEDisabled" (click)="ConfirmedRecords()" class="btn orange-flat-button">Confirm</button>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="well">
+      <div class="row">
+        <!-- <table class="table vitamins"> -->
+        <table class="table table-striped table-hover " id="myTable1">
+          <thead>
+            <tr>
+              <th>View</th>
+              <th style="display:none;">RFD_PROPOSAL_NO</th>
+              <th>RFD_PROPOSAL_NO</th>
+              <th>RFD_RECEIPT_NO</th>
+              <th>RFD_REFUND_DATE</th>
+              <th>RFD_AMT</th>
+              <th>RFD_REASON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:10 , currentPage:page, id: 'two'}; let i = index" (click)="setRefundProposalNo(i,RFD.RfdProposalNo,RFD.RfdAmt);">
+
+              <!-- <td><a href="javascript:void(0)">View</a></td> -->
+
+              <td><a href="javascript:void(0)">View</a></td>
+
+
+              <td style="display:none;">
+                {{RFD.RfdId}}
+              </td>
+              <td>
+                {{RFD.RfdProposalNo}}
+              </td>
+              <td>
+                {{RFD.RfdReceiptNo}}
+              </td>
+              <td>
+                {{RFD.RfdRefundDate}}
+              </td>
+              <td>
+                {{RFD.RfdAmt}}
+              </td>
+              <td>
+                {{RFD.RfdReason}}
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="page = $event" id="two" maxSize="10" directionLinks="true" autoHide="true">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

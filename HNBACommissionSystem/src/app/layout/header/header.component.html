@@ -1,0 +1,152 @@
+
+
+<nav class="navbar navbar-default navbar-static">
+
+  <div class="collapse navbar-collapse js-navbar-collapse">
+
+    <ul class="nav navbar-nav">
+
+      <li class="dropdown dropdown-large">
+
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">||||-||||-||||<b class=""></b></a>
+
+
+        <ul class="dropdown-menu dropdown-menu-large row">
+          <li class="col-sm-3">
+            <ul>
+              <!-- <span class="glyphicon glyphicon-th-large"></span> -->
+              <li class="dropdown-header glyphicon glyphicon-th-large"> AGENT MODULE</li>
+              <!-- <li class="divider"></li> -->
+              <hr>
+
+              <li [hidden]=isAGTMasterHidden><a [routerLink]="['/','agent']">Agent/Banca Master</a></li>
+              <li [hidden]=isDesignationHidden><a [routerLink]="['/','designation']">Designation Master</a></li>
+              <li [hidden]=isChangeReasonHidden><a [routerLink]="['/','changereason']">Change Reason Master</a></li>
+              <li [hidden]=isAGTLevelHidden><a [routerLink]="['/','level']">Agent Level Master</a></li>
+              <li [hidden]=isProductCATHidden><a [routerLink]="['/','productcategory']">Product Category</a></li>
+              <li [hidden]=isProductsHidden><a [routerLink]="['/','product']">Products</a></li>
+              <li [hidden]=isBancaOfficerHidden><a [routerLink]="['/','BancaOfficerComponent']">Banca Officer Master</a></li>
+              <li [hidden]=isAGTSummeryHidden><a [routerLink]="['/','summery']">Agent Summery</a></li>
+              <!-- <li class="divider"></li> -->
+
+
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div> -->
+
+              <li class="dropdown-header">Welcome to - {{ UserDisplayName }} </li>
+              <!-- <li><a href="#">Example</a></li> -->
+
+
+            </ul>
+          </li>
+          <li class="col-sm-3">
+            <ul>
+              <li class="dropdown-header  glyphicon glyphicon-th-large"> COMMISSION MODULE</li>
+              <!-- <li class="divider"></li> -->
+              <hr>
+              <li [hidden]=isComORRateHidden><a [routerLink]="['/','commissionratechart']">Commission Rate Chart</a></li>
+              <li [hidden]=isComORRateHidden><a [routerLink]="['/','overrridingratechart']">Overriding Rate Chart</a></li>
+              <li [hidden]=isReturnHidden><a [routerLink]="['/','ReturnRefundCancellation']">Return / Refund / Cancellation</a></li>
+              <li [hidden]=isReturnConfirmHidden><a [routerLink]="['/','ReturnRefundCancellationConfirm']">Return / Refund / Cancellation Confirm</a></li>
+              <li [hidden]=isManualDPTSHidden><a [routerLink]="['/','ManualUploadsComponent']">Manual Uploads - DPTS</a></li>
+              <li [hidden]=isManualReceiptHidden><a [routerLink]="['/','ManualUploadsReceiptsComponent']">Manual Uploads - Receipts</a></li>
+
+              <li class="divider"></li>
+              <li class="divider"></li>
+              <li class="dropdown-header  glyphicon glyphicon-th-large"> BANK RECONSILATION</li>
+              <hr>
+              <li [hidden]=isRefundRealisationComponentHidden><a [routerLink]="['/','RefundRealisationComponent']">Refund Realisation</a></li>
+              <li [hidden]=isRecConfirmationComponentHidden><a [routerLink]="['/','RecConfirmationComponent']">Reconciliation - Confirmation</a></li>
+
+              <!-- <li><img class "img-responsive" src="http://placehold.it/200x150" /></li> -->
+            </ul>
+          </li>
+          <li class="col-sm-3">
+            <ul>
+              <li class="dropdown-header  glyphicon glyphicon-th-large"> INCENTIVE-MODULE - NON BANC</li>
+              <!-- <li class="divider"></li> -->
+              <hr>
+              <li [hidden]=isFstAllowanceComponentHidden><a [routerLink]="['/','FstAllowanceComponent']">FST Allowance Rate Chart</a></li>
+              <li [hidden]=isTargetAllowanceComponentHidden><a [routerLink]="['/','TargetAllowanceComponent']">Target Allowance Rate Chart</a></li>
+              <li [hidden]=isRetainerAllowanceComponentHidden><a [routerLink]="['/','RetainerAllowanceComponent']">Retainer Allowance Rate Chart</a></li>
+              <li [hidden]=isRetainerBonusComponentHidden><a [routerLink]="['/','RetainerBonusComponent']">Retainer Bonus Rate Chart</a></li>
+              <li [hidden]=isGroupAchievementComponentHidden><a [routerLink]="['/','GroupAchievementComponent']">Group Achievement Rate Chart</a></li>
+              <li [hidden]=isAdvisorDevelopmentAllowanceComponentHidden><a [routerLink]="['/','AdvisorDevelopmentAllowanceComponent']">Advisor Development Rate Chart</a></li>
+              <li [hidden]=isAdvisorRankingComponentHidden><a [routerLink]="['/','AdvisorRankingComponent']">Advisor Ranking (P-Category)</a></li>
+              <li [hidden]=isTargetMaintainComponentHidden><a [routerLink]="['/','TargetMaintainComponent']">Advisor Target Maintain</a></li>
+
+              <li class="divider"></li>
+              <li class="dropdown-header  glyphicon glyphicon-th-large"> INCENTIVE-MODULE - BANC</li>
+              <hr>
+              <li [hidden]=isIncevtiveRateBancComponentHidden><a [routerLink]="['/','IncevtiveRateBancComponent']">Incentive Rates - Banc</a></li>
+              <li [hidden]=isIncevtiveConfigBancComponentHidden><a [routerLink]="['/','IncevtiveConfigBancComponent']">Incentive Config - Banc</a></li>
+
+            </ul>
+          </li>
+          <li class="col-sm-3">
+            <ul>
+              <li class="dropdown-header  glyphicon glyphicon-th-large"> SETTINGS</li>
+              <!-- <li class="divider"></li> -->
+              <hr>
+              <li [hidden]=isAccSettingsHidden><a href="#">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+              <li [hidden]=isUserStatHidden><a href="#">User stats <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
+              <li [hidden]=isMassagesHidden><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
+              <li [hidden]=isFavourHidden><a href="#">Favourites Snippets <span class="glyphicon glyphicon-heart pull-right"></span></a></li>
+              <li [hidden]=isSignOutHidden><a (click)="logout()">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+
+
+
+              <!-- <li class="divider"></li> -->
+
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                </div>
+              </div>
+
+              <li class="dropdown-header">HNB Assurance PLC</li>
+
+              <div class="thumbnail"><img src="../../../../assets/images/incentive/images.jpg" /></div>
+
+
+            </ul>
+          </li>
+
+        </ul>
+
+      </li>
+
+
+
+    </ul>
+
+
+  </div>
+  <!-- /.nav-collapse -->
+</nav>

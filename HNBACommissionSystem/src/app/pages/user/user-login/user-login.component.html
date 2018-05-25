@@ -1,0 +1,71 @@
+<div class="mainbg">
+
+
+
+  <div class="row">
+    <div class="form-group">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+    </div>
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-4">
+
+      <div class="panel panel-default bg">
+        <div class="panel-heading">Login Details</div>
+        <div class="panel-body">
+
+
+          <div *ngIf="isLoading">
+            <app-spinner-large></app-spinner-large>
+          </div>
+          <div class="container">
+
+          </div>
+          <div class="form" *ngIf="!isLoading">
+            <div class="thumbnail">
+              <img src="../../../../assets/images/logo_150.png" /></div>
+
+            <form class="login-form">
+              <input type="text" placeholder="User Name" [(ngModel)]="UserName" name="UserName" id="UserName" />
+              <input type="password" placeholder="Password" [(ngModel)]="Password" name="Password" id="Password" />
+              <button (click)="validateUser()" class="btn orange-flat-button" type="button">login</button>
+
+
+              <!-- <button (click)="loginWithWindowsUser()" type="button">Windows User</button> -->
+              <p class="text-danger">{{message}}</p>
+              <!--<p class="message">Developed by Tharindu @ HNBA IT Dept.</p>-->
+            </form>
+          </div>
+
+
+        </div>
+        <div class="col-sm-2">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

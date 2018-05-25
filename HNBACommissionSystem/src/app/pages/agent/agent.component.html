@@ -1,0 +1,2325 @@
+<!--<div class="panel-heading">-->
+<!-- Nav tabs -->
+
+
+<div class="row">
+
+
+  <!-- <div *ngIf="isLoading">
+    <app-spinner-large></app-spinner-large>
+  </div> -->
+
+  <!-- <div class="form" *ngIf="!isLoading"> -->
+  <ul class="nav nav-tabs xxx" role="tablist">
+
+    <li class="active"><a href="#Personal" role="tab" data-toggle="tab"> Personal Details</a></li>
+    <li id="Tab-width"><a href="#Other" role="tab" data-toggle="tab"> Other Details</a></li>
+    <li><a href="#Level" role="tab" data-toggle="tab"> Level Details</a></li>
+    <li><a href="#Search" role="tab" data-toggle="tab"> Agent Search</a></li>
+    <li><a href="#Documents" role="tab" data-toggle="tab"> Documents</a></li>
+    <li><a href="#Terminations" role="tab" data-toggle="tab"> Notifications</a></li>
+    <li><a href="#Hierarchy" role="tab" data-toggle="tab"> Hierarchy View</a></li>
+    <li><a href="#TcsStatus" role="tab" data-toggle="tab"> TCS Status</a></li>
+
+  </ul>
+  <!-- </div> -->
+
+  <!-- Tab panes + Panel body -->
+  <div class="panel-body tab-content body">
+
+    <!--################################### START PERSONAL TAB #####################################-->
+    <div class="tab-pane active" id="Personal">
+
+      <div class="row">
+        <div class="form-group">
+        </div>
+      </div>
+
+      <!--###############First Column######################################################################################-->
+      <div class="col-sm-3">
+
+        <form class="form-horizontal">
+
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <div class="col-xs-1">
+                  </div>
+                  <div class="col-xs-8">
+
+                    <img class="AgentImage" id="logo" [src]="AGT_IMAGE" alt="" />
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="well">
+            <div class="row">
+              <div class="{{AGT_TYPE_ID_CLS}}">
+                <!-- <div class="col-xs-1">
+                </div> -->
+                <p class="control-label col-xs-4"> Type</p>
+                <div class="col-xs-8">
+
+                  <select type="text" [disabled]="isAGT_TYPE_IDDisabled" class="form-control input-sm" [(ngModel)]="AGT_TYPE_ID" name="AGT_TYPE_ID"
+                    id="AGT_TYPE_ID" (ngModelChange)="onSelectOfTypeID($event)" required>
+                    <option value="0">SELECT</option>
+                <option *ngFor="let AgentType of AgentTypeList" value={{AgentType.ID}}>{{AgentType.DESCRIPTION}}</option>
+                </select>
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="{{AGT_CODE_ID_CLS}}">
+                <!-- <div class="col-xs-1">
+                </div> -->
+                <p class="control-label col-xs-4">Code</p>
+                <div class="col-xs-8">
+
+                  <select type="text" [disabled]="isAGT_CODE_IDDisabled" class="form-control input-sm" [(ngModel)]="AGT_CODE_ID" name="AGT_CODE_ID"
+                    id="AGT_CODE_ID" required>
+                <option value="0">SELECT</option>
+                <option *ngFor="let AgentCode of AgentCodeList" value={{AgentCode.ID}}>{{AgentCode.DESCRIPTION}}</option>
+                </select>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- Banc Assurance Level -->
+          <!-- <div class="well">
+            <div class="row">
+              <div class="{{LEVEL_BANC_CLS}}">
+
+                <p class="control-label col-xs-4">Level-Banc</p>
+                <div class="col-xs-8">
+                  <select class="form-control" [disabled]="isAGT_LEVEL_BANCDisabled" [(ngModel)]="LEVEL_BANC" name="LEVEL_BANC" id="LEVEL_BANC">
+                                        <option value="1">OTHER</option>
+                                        <option value="2">BANC ASSURANCE OFFICER</option>
+                                        <option value="3">RELATION OFFICER</option>
+                                        <option value="4">CLUSTER IN CHARGE</option>
+                                    </select>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- ------------------------------ -->
+
+          <div class="well">
+            <div class="row">
+              <div class="{{AGT_MDRT_STATUS_CLS}}">
+                <!-- <div class="col-xs-1">
+                </div> -->
+                <p class="control-label col-xs-4">MDRT</p>
+                <div class="col-xs-8">
+                  <select [disabled]="isAGT_MDRT_STATUSDisabled" class="form-control" [(ngModel)]="AGT_MDRT_STATUS" name="AGT_MDRT_STATUS"
+                    id="AGT_MDRT_STATUS">
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="row">
+              <div class="{{AGT_MDRT_YEAR_CLS}}">
+                <!-- <div class="col-xs-1">
+                </div> -->
+                <p class="control-label col-xs-4">YEAR</p>
+                <div class="col-xs-8">
+                  <select [disabled]="isAGT_MDRT_YEARDisabled" class="form-control" [(ngModel)]="AGT_MDRT_YEAR" name="AGT_MDRT_YEAR" id="AGT_MDRT_YEAR">
+                    <option value="0">SELECT</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </form>
+
+
+      </div>
+      <!--#################################################################################################################-->
+
+
+      <!--################Second Column####################################################################################-->
+      <div class="col-sm-5">
+
+        <form class="form-horizontal">
+
+
+          <div class="row">
+            <div class="{{AGT_SYSTEM_ID_CLS}}">
+              <!--<p class="control-label col-xs-5">Agent System ID</p>-->
+              <div class="col-xs-7">
+                <input type="hidden" class="form-control" [(ngModel)]="AGT_SYSTEM_ID" name="AGT_SYSTEM_ID" id="AGT_SYSTEM_ID" placeholder="">
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="{{AGT_SUB_CODE_CLS}}">
+              <p class="control-label col-xs-3">Agent Code</p>
+              <div class="col-xs-9">
+                <input type="text" class="form-control" [(ngModel)]="AGT_CODE" name="AGT_CODE" id="AGT_CODE" placeholder="" [readonly]="!dd">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="{{AGT_TITLE_CLS}}">
+              <p class="control-label col-xs-3">Title</p>
+              <div class="col-xs-9">
+                <select type="text" [disabled]="isAGT_TITLEDisabled" class="form-control input-sm" [(ngModel)]="AGT_TITLE" name="AGT_TITLE"
+                  id="AGT_TITLE">
+                    <option value="0">SELECT</option>
+                    <option value="DR.">DR.</option>
+                    <option value="M/S">M/S</option>
+                    <option value="MISS.">MISS.</option>
+                    <option value="MR.">MR.</option>
+                    <option value="MRS.">MRS.</option>
+                    <option value="MS.">MS.</option>
+                    <!-- <option value="PROF.">PROF.</option>
+                    <option value="REV.">REV.</option> -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_FIRST_NAME_CLS}}">
+              <p class="control-label col-xs-3">First Name</p>
+              <div class="col-xs-9">
+                <input type="text" [disabled]="isAGT_FIRST_NAMEDisabled" class="form-control" [(ngModel)]="AGT_FIRST_NAME" name="AGT_FIRST_NAME"
+                  id="AGT_FIRST_NAME" placeholder="">
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="{{AGT_LAST_NAME_CLS}}">
+              <p class="control-label col-xs-3">Last Name</p>
+              <div class="col-xs-9">
+                <input type="text" [disabled]="isAGT_LAST_NAMEDisabled" class="form-control" [(ngModel)]="AGT_LAST_NAME" name="AGT_LAST_NAME"
+                  id="AGT_LAST_NAME" placeholder="">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_ADD1_CLS}}">
+              <p class="control-label col-xs-3">Address Line 1</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_ADD1Disabled" class="form-control" [(ngModel)]="AGT_ADD1" name="AGT_ADD1" id="AGT_ADD1"
+                  placeholder="">
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="{{AGT_ADD2_CLS}}">
+              <p class="control-label col-xs-3">Address Line 2</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_ADD2Disabled" class="form-control" [(ngModel)]="AGT_ADD2" name="AGT_ADD2" id="AGT_ADD2"
+                  placeholder="">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_ADD3_CLS}}">
+              <p class="control-label col-xs-3">Address Line 3</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_ADD3Disabled" class="form-control" [(ngModel)]="AGT_ADD3" name="AGT_ADD3" id="AGT_ADD3"
+                  placeholder="">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_BRANCH_CODE_CLS}}">
+              <p class="control-label col-xs-3">Branch</p>
+              <div class="col-xs-9">
+                <select type="text" [disabled]="isAGT_BRANCH_CODEDisabled" class="form-control input-sm" [(ngModel)]="AGT_BRANCH_CODE" name="SelectedBranchID"
+                  id="SelectedBranchID" required>
+                  <option value="0">SELECT</option>
+                  <option *ngFor="let branch of branchList" value={{branch.CODE}}>{{branch.DESCRIPTION}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_NIC_NO_CLS}}">
+              <p class="control-label col-xs-3">NIC Number</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_NIC_NODisabled" class="form-control" [(ngModel)]="AGT_NIC_NO" name="AGT_NIC_NO" id="AGT_NIC_NO"
+                  placeholder="">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_DOB_CLS}}">
+              <p class="control-label col-xs-3">Date Of Birth</p>
+
+              <div class="col-xs-9">
+                <div class="col-xs-12">
+                  <!--[ng-disabled]="isAGT_DOBDisabled"-->
+                  <!-- <datetime name="DateOfBirth" id="AGT_DOB" [datepicker]="datepickerOpts" [(ngModel)]="AGT_DOB"
+                    [timepicker]="false" [readonly]="xxx" ></datetime> -->
+
+
+
+                  <span *ngIf="!xxx">
+                    <datetime name="DateOfBirth" [readonly]="false" id="AGT_DOB" [datepicker]="datepickerOpts" [(ngModel)]="AGT_DOB" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                    <datetime name="DateOfBirth1" [readonly]="true" id="AGT_DOB" [datepicker]="datepickerOpts" [(ngModel)]="AGT_DOB" [timepicker]="false"></datetime>
+                  </span>
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="{{AGT_MOBILE_CLS}}">
+              <p class="control-label col-xs-3">Mobile No</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_MOBILEDisabled" class="form-control" [(ngModel)]="AGT_MOBILE" name="AGT_MOBILE" id="AGT_MOBILE"
+                  placeholder="">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_TEL_NO_CLS}}">
+              <p class="control-label col-xs-3">Residence No</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_TEL_NODisabled" class="form-control" [(ngModel)]="AGT_TEL_NO" name="AGT_TEL_NO" id="AGT_TEL_NO"
+                  placeholder="">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_FAX_NO_CLS}}">
+              <p class="control-label col-xs-3">Fax No</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_FAX_NODisabled" class="form-control" [(ngModel)]="AGT_FAX_NO" name="AGT_FAX_NO" id="AGT_FAX_NO"
+                  placeholder="">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_FAX_NO_CLS}}">
+              <p class="control-label col-xs-3">Email</p>
+              <div class="col-xs-9">
+                <input type="email" [disabled]="isAGT_EMAIL_NODisabled" class="form-control" [(ngModel)]="AGT_EMAIL" name="AGT_EMAIL" id="AGT_EMAIL"
+                  placeholder="">
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </form>
+      </div>
+      <!--#################################################################################################################-->
+
+
+      <!--###############Third Column######################################################################################-->
+      <div class="col-sm-4">
+        <form class="form-horizontal">
+          <!--<div class="row">
+            <div class="{{AGT_BRANCH_CODE_CLS}}">
+              <p class="control-label col-xs-5">Branch</p>
+              <div class="col-xs-4">
+                <select type="text" class="form-control input-sm" [(ngModel)]="AGT_BRANCH_CODE" name="SelectedBranchID" id="SelectedBranchID"
+                  required>
+                  <option value="0">SELECT</option>
+                  <option *ngFor="let branch of branchList" value={{branch.CODE}}>{{branch.DESCRIPTION}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>-->
+
+          <div class="row">
+            <div class="{{AGT_BANK_ID_CLS}}">
+              <p class="control-label col-xs-6">Bank</p>
+              <div class="col-xs-6">
+
+
+
+
+                <select type="text" [disabled]="isAGT_BANK_IDDisabled" class="form-control input-sm" [(ngModel)]="AGT_BANK_ID" name="SelectedBankID"
+                  id="SelectedBankID" (ngModelChange)="onSelectOfBankId($event)" required>
+                  <option value="0">SELECT</option>
+                  <option *ngFor="let bank of bankList" value={{bank.ID}}>{{bank.DESCRIPTION}}</option>
+                  </select>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_BANK_BRANCH_ID_CLS}}">
+              <p class="control-label col-xs-6">Bank Branch</p>
+              <div class="col-xs-6">
+
+
+
+                <select type="text" [disabled]="isAGT_BANK_BRANCH_IDDisabled" class="form-control input-sm" [(ngModel)]="AGT_BANK_BRANCH_ID"
+                  name="AGT_BANK_BRANCH_ID" id="AGT_BANK_BRANCH_ID" required>
+                    <option value="0">SELECT</option>
+                    <option *ngFor="let Bbank of bankBranchList" value={{Bbank.ID}}>{{Bbank.DESCRIPTION}}</option>
+                    </select>
+
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_BANK_ACC_NO_CLS}}">
+              <p class="control-label col-xs-6">Bank Acc No</p>
+              <div class="col-xs-6">
+                <!--<input type="email" class="form-control" id="inputEmail" placeholder="">-->
+                <input type="email" [disabled]="isAGT_BANK_ACC_NODisabled" class="form-control" [(ngModel)]="AGT_BANK_ACC_NO" name="AGT_BANK_ACC_NO"
+                  id="AGT_BANK_ACC_NO" placeholder="">
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- <div class="row">
+            <div class="{{AGT_LEADER_CODE_CLS}}">
+              <p class="control-label col-xs-5">Leader Code</p>
+              <div class="col-xs-7">
+
+                <input type="email" [disabled]="isAGT_LEADER_CODEDisabled" class="form-control" [(ngModel)]="AGT_LEADER_CODE" name="AGT_LEADER_CODE"
+                  id="AGT_LEADER_CODE" placeholder="">
+
+              </div>
+            </div>
+          </div> -->
+
+
+          <div class="row">
+            <div class="{{AGT_APPOINT_DATE_CLS}}">
+              <p class="control-label col-xs-6">Appointment Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+
+                  <span *ngIf="!xxx">
+                      <datetime name="AGT_APPOINT_DATE" [readonly]="false" item-height="50px" [disabled]="isAGT_APPOINT_DATEDisabled" id="AGT_APPOINT_DATE" [datepicker]="datepickerOpts"
+                      [(ngModel)]="AGT_APPOINT_DATE" [timepicker]="false"></datetime>
+
+                  </span>
+                  <span *ngIf="xxx">
+                      <datetime name="AGT_APPOINT_DATE" [readonly]="true" item-height="50px" [disabled]="isAGT_APPOINT_DATEDisabled" id="AGT_APPOINT_DATE" [datepicker]="datepickerOpts"
+                      [(ngModel)]="AGT_APPOINT_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_SLII_EXAM_CLS}}">
+              <p class="control-label col-xs-6">SLII Exam Status</p>
+              <div class="col-xs-6">
+                <select class="form-control" [disabled]="isAGT_SLII_EXAMDisabled">
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select> </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_SLII_EXAM_DATE_CLS}}">
+              <p class="control-label col-xs-6">SLII Exam Reg Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="AGT_SLII_EXAM_DATE" [readonly]="false" [disabled]="isAGT_SLII_EXAM_DATEDisabled" id="AGT_SLII_EXAM_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_SLII_EXAM_DATE" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="AGT_SLII_EXAM_DATE" [readonly]="true" [disabled]="isAGT_SLII_EXAM_DATEDisabled" id="AGT_SLII_EXAM_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_SLII_EXAM_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_BANK_ID_CLS}}">
+              <p class="control-label col-xs-6">Language</p>
+              <div class="col-xs-6">
+                <select type="text" [disabled]="isAGT_LANGUAGEDisabled" class="form-control input-sm" [(ngModel)]="AGT_LANGUAGE" name="AGT_LANGUAGE"
+                  id="AGT_LANGUAGE" required>
+                        <option value="0">SELECT</option>
+                        <option *ngFor="let lang of LanguageList" value={{lang.Id}}>{{lang.Description}}</option>
+                        </select>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="{{AGT_EFFECTIVE_DATE_CLS}}">
+              <p class="control-label col-xs-6">Effective Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="AGT_EFFECTIVE_DATE" [readonly]="false" [disabled]="isAGT_EFFECTIVE_DATEDisabled" id="AGT_EFFECTIVE_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_EFFECTIVE_DATE" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="AGT_EFFECTIVE_DATE" [readonly]="true" [disabled]="isAGT_EFFECTIVE_DATEDisabled" id="AGT_EFFECTIVE_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_EFFECTIVE_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+
+
+
+
+        </form>
+      </div>
+      <!--#################################################################################################################-->
+
+
+
+
+
+
+
+
+
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-9">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="row">
+    </div>
+    <!--################################### END PERSONAL TAB #####################################-->
+
+
+    <!--################################### START OTHER TAB #####################################-->
+    <div class="tab-pane" id="Other">
+
+      <!-------------------------Start First col of Other Tab-------------------------->
+
+      <div class="col-sm-7">
+        <form class="form-horizontal">
+          <div class="row">
+            <div class="{{AGT_AGMT_RECEIVED_CLS}}">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-5">Agmt. Issued / Received Date</p>
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                    <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_AGMT_DATE_ISSUEDDisabled" id="AGT_AGMT_DATE_ISSUED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_AGMT_DATE_ISSUED" [timepicker]="false"></datetime>
+                </span>
+                  <span *ngIf="xxx">
+                                    <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_AGMT_DATE_ISSUEDDisabled" id="AGT_AGMT_DATE_ISSUED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_AGMT_DATE_ISSUED" [timepicker]="false"></datetime>
+                </span>
+
+
+                </div>
+              </div>
+
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_AGMT_DATE_RECEIVEDDisabled" id="AGT_AGMT_DATE_RECEIVED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_AGMT_DATE_RECEIVED" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_AGMT_DATE_RECEIVEDDisabled" id="AGT_AGMT_DATE_RECEIVED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_AGMT_DATE_RECEIVED" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_APP_RECEIVED_CLS}}">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-5">App. Received / Issued Date</p>
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+
+                  <span *ngIf="!xxx">
+  
+                  <datetime name="AGT_APP_DATE_RECEIVED" [readonly]="false" [disabled]="isAGT_APP_DATE_RECEIVEDDisabled" id="AGT_APP_DATE_RECEIVED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_APP_DATE_RECEIVED" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+  
+                  <datetime name="AGT_APP_DATE_RECEIVED" [readonly]="true" [disabled]="isAGT_APP_DATE_RECEIVEDDisabled" id="AGT_APP_DATE_RECEIVED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_APP_DATE_RECEIVED" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="AGT_APP_DATE_ISSUED" [readonly]="false" [disabled]="isAGT_APP_DATE_ISSUEDDisabled" id="AGT_APP_DATE_ISSUED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_APP_DATE_ISSUED" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="AGT_APP_DATE_ISSUED" [readonly]="true" [disabled]="isAGT_APP_DATE_ISSUEDDisabled" id="AGT_APP_DATE_ISSUED" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_APP_DATE_ISSUED" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          <div class="row">
+            <div class="{{AGT_ID_ISSUED_CLS}}">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-5">Comp ID Issued</p>
+              <div class="col-xs-3">
+                <select class="form-control" [disabled]="isAGT_ID_ISSUEDDisabled" [(ngModel)]="AGT_ID_ISSUED" name="AGT_ID_ISSUED" id="AGT_ID_ISSUED"
+                  required>
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_ID_ISSUED_DATE_CLS}}">
+              <p class="control-label col-xs-5">Comp ID Issue Date</p>
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="AGT_ID_ISSUED_DATE" [readonly]="false" [disabled]="isAGT_ID_ISSUED_DATEDisabled" id="AGT_ID_ISSUED_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_ID_ISSUED_DATE" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="AGT_ID_ISSUED_DATE" [readonly]="true" [disabled]="isAGT_ID_ISSUED_DATEDisabled" id="AGT_ID_ISSUED_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_ID_ISSUED_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="row">
+            <div class="{{AGT_TRNS_BRANCH_CODE_CLS}}">
+              <div class="col-xs-0">
+              </div>
+              <p class="control-label col-xs-5">Transfer Branch / Date</p>
+              <div class="col-xs-3">
+
+
+                <select type="text" [disabled]="isAGT_TRNS_BRANCH_CODEDisabled" class="form-control input-sm" [(ngModel)]="AGT_TRNS_BRANCH_CODE"
+                  name="AGT_TRNS_BRANCH_CODE" id="AGT_TRNS_BRANCH_CODE" required>
+                      <option value="0">SELECT</option>
+                      <option *ngFor="let branch of branchList" value={{branch.CODE}}>{{branch.DESCRIPTION}}</option>
+                      </select>
+
+
+              </div>
+
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="AGT_TRNS_BRANCH_DATE" [readonly]="false" [disabled]="isAGT_TRNS_BRANCH_DATEDisabled" id="AGT_TRNS_BRANCH_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_TRNS_BRANCH_DATE" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="AGT_TRNS_BRANCH_DATE" [readonly]="true" [disabled]="isAGT_TRNS_BRANCH_DATEDisabled" id="AGT_TRNS_BRANCH_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_TRNS_BRANCH_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+              <div class="col-xs-1">
+                <button type="button" class="btn TestImage" data-toggle="modal" data-target="#TransBranchHiostoryModel">--</button>
+
+                <div id="TransBranchHiostoryModel" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Transfer Branch History</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!--<p>Some text in the modal.</p>-->
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr class="bg-primary">
+                              <th>Trans.Branch</th>
+                              <th>Trans.Date</th>
+                              <th>Remarks</th>
+                              <th>Created By</th>
+                              <th>Created Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let history of BranchTransferList | paginate: {itemsPerPage:7 , currentPage:page, id: 'one1'}; let i = index">
+                              <!--<td><a href="#">View</a></td>
+                              <td style="display:none;">-->
+                              <td>
+                                {{history.Column1}}
+                              </td>
+                              <td>
+                                {{history.Column2}}
+                              </td>
+                              <td>
+                                {{history.Column3}}
+                              </td>
+                              <td>
+                                {{history.Column4}}
+                              </td>
+                              <td>
+                                {{history.Column5}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="page = $event" id="one1" maxSize="3" directionLinks="true" autoHide="true">
+                        </pagination-controls>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="{{AGT_STOP_COMM_DATE_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-4">Stop Commission Date</p>
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="DateOfBirth" [readonly]="false"   [disabled]="isAGT_STOP_COMM_DATEDisabled" id="AGT_STOP_COMM_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_STOP_COMM_DATE" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_STOP_COMM_DATEDisabled" id="AGT_STOP_COMM_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_STOP_COMM_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+
+
+
+
+
+
+              <!----------Start Stop Commission History Popup--------->
+              <div class="col-xs-2">
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn TestImage" data-toggle="modal" data-target="#StopComHistoryModel">--</button>
+
+                <!-- Modal 2-->
+                <div id="StopComHistoryModel" class="modal fade" role="dialog">
+
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Stop Commission History</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!--<p>Some text in the modal.</p>-->
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr class="bg-primary">
+                              <th>Comm. Stop Date</th>
+                              <th>Comm. Stop Reason</th>
+                              <th>Remarks</th>
+                              <th>Created By</th>
+                              <th>Created Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let history of StopCommissionList | paginate: {itemsPerPage:7 , currentPage:page, id: 'two'}; let i = index">
+                              <!--<td><a href="#">View</a></td>
+                              <td style="display:none;">-->
+                              <td>
+                                {{history.Column1}}
+                              </td>
+                              <td>
+                                {{history.Column2}}
+                              </td>
+                              <td>
+                                {{history.Column3}}
+                              </td>
+                              <td>
+                                {{history.Column4}}
+                              </td>
+                              <td>
+                                {{history.Column5}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="page = $event" id="two" maxSize="5" directionLinks="true" autoHide="true">
+                        </pagination-controls>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-------------End Stop Commission History popup------------>
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_STOP_COMM_REASON_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-4">Reason For Stop Commission</p>
+              <div class="col-xs-7">
+                <textarea class="form-control" [disabled]="isAGT_STOP_COMM_REASONDisabled" rows="3" id="comment" item-height="1px" [(ngModel)]="AGT_STOP_COMM_REASON"
+                  name="AGT_STOP_COMM_REASON" id="xx" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_RELEASE_COMM_DATE_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-4">Release Commission Date</p>
+              <div class="col-xs-3">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                      <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_RELEASE_COMM_DATEDisabled" id="AGT_RELEASE_COMM_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_RELEASE_COMM_DATE" [timepicker]="false"></datetime>
+                  </span>
+                  <span *ngIf="xxx">
+                                      <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_RELEASE_COMM_DATEDisabled" id="AGT_RELEASE_COMM_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_RELEASE_COMM_DATE" [timepicker]="false"></datetime>
+                  </span>
+
+
+                </div>
+              </div>
+
+              <!--Start Stop Commission popup-->
+              <div class="col-xs-2">
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn TestImage" data-toggle="modal" data-target="#ReleaseCommissionHistoryModel">--</button>
+
+                <!-- Modal 1-->
+                <div id="ReleaseCommissionHistoryModel" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Release Commission History</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!--<p>Some text in the modal.</p>-->
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr class="bg-primary">
+                              <th>Comm. Release Date</th>
+                              <th>Comm. Release Reason</th>
+                              <th>Remarks</th>
+                              <th>Created By</th>
+                              <th>Created Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let history of ReleaseCommissionList | paginate: {itemsPerPage:7 , currentPage:page, id: 'three'}; let i = index">
+                              <!--<td><a href="#">View</a></td>
+                              <td style="display:none;">-->
+                              <td>
+                                {{history.Column1}}
+                              </td>
+                              <td>
+                                {{history.Column2}}
+                              </td>
+                              <td>
+                                {{history.Column3}}
+                              </td>
+                              <td>
+                                {{history.Column4}}
+                              </td>
+                              <td>
+                                {{history.Column5}}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="page = $event" id="three" maxSize="5" directionLinks="true" autoHide="true">
+                        </pagination-controls>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- End Stop Commission popup -->
+
+
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_RELEASE_COMM_REASON_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-4">Reason For Release Commission</p>
+              <div class="col-xs-7">
+                <textarea class="form-control" [disabled]="isAGT_RELEASE_COMM_REASONDisabled" rows="3" id="comment" item-height="1px" [(ngModel)]="AGT_RELEASE_COMM_REASON"
+                  name="AGT_RELEASE_COMM_REASON" id="AGT_RELEASE_COMM_REASON" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="{{AGT_CUSTOMER_COMPLAIN_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-4">Customer Complaints</p>
+              <div class="col-xs-7">
+                <textarea class="form-control" [disabled]="isAGT_CUSTOMER_COMPLAINDisabled" rows="3" id="comment" item-height="1px" [(ngModel)]="AGT_CUSTOMER_COMPLAIN"
+                  name="AGT_CUSTOMER_COMPLAIN" id="AGT_CUSTOMER_COMPLAIN" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+
+
+      <div class="col-sm-5">
+        <form class="form-horizontal">
+
+          <div class="row">
+            <div class="{{AGT_TERMINATE_NOTICE_DATE_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">Notice Of Termination Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                        <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_TERMINATE_NOTICE_DATEDisabled" id="AGT_TERMINATE_NOTICE_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_TERMINATE_NOTICE_DATE" [timepicker]="false"></datetime>
+                    </span>
+                  <span *ngIf="xxx">
+                                        <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_TERMINATE_NOTICE_DATEDisabled" id="AGT_TERMINATE_NOTICE_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_TERMINATE_NOTICE_DATE" [timepicker]="false"></datetime>
+                    </span>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_TERMINATE_DATE_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">Termination Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                        <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_TERMINATE_DATEDisabled" id="AGT_TERMINATE_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_TERMINATE_DATE" [timepicker]="false"></datetime>
+                    </span>
+                  <span *ngIf="xxx">
+                                        <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_TERMINATE_DATEDisabled" id="AGT_TERMINATE_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_TERMINATE_DATE" [timepicker]="false"></datetime>
+                    </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_TERMINATE_REASON_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">Reason For Termination</p>
+              <div class="col-xs-6">
+                <textarea class="form-control" [disabled]="isAGT_TERMINATE_REASONDisabled" rows="3" id="comment" item-height="10px" [(ngModel)]="AGT_TERMINATE_REASON"
+                  name="AGT_TERMINATE_REASON" id="AGT_TERMINATE_REASON" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="{{AGT_BLACK_LISTED_DATE_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">IASL Black Listed Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+
+                  <span *ngIf="!xxx">
+                                          <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_BLACK_LISTED_DATEDisabled" id="AGT_BLACK_LISTED_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_BLACK_LISTED_DATE" [timepicker]="false"></datetime>
+                      </span>
+                  <span *ngIf="xxx">
+                                          <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_BLACK_LISTED_DATEDisabled" id="AGT_BLACK_LISTED_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_BLACK_LISTED_DATE" [timepicker]="false"></datetime>
+                      </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_DUES_TO_COMPANY_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">Dues To Company</p>
+              <div class="col-xs-6">
+                <textarea class="form-control" [disabled]="isAGT_DUES_TO_COMPANYDisabled" rows="3" id="comment" item-height="1px" [(ngModel)]="AGT_DUES_TO_COMPANY"
+                  name="AGT_DUES_TO_COMPANY" id="AGT_DUES_TO_COMPANY" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_REJOINED_DATE_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">Rejoined / Reinstate Date</p>
+              <div class="col-xs-6">
+                <div class="col-xs-12">
+
+                  <span *ngIf="!xxx">
+                                        <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_REJOINED_DATEDisabled" id="AGT_REJOINED_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_REJOINED_DATE" [timepicker]="false"></datetime>
+                    </span>
+                  <span *ngIf="xxx">
+                                        <datetime name="DateOfBirth" [readonly]="true"  [disabled]="isAGT_REJOINED_DATEDisabled" id="AGT_REJOINED_DATE" [datepicker]="datepickerOpts"
+                    [(ngModel)]="AGT_REJOINED_DATE" [timepicker]="false"></datetime>
+                    </span>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="{{AGT_REMARKS_CLS}}">
+              <div class="col-xs-1">
+              </div>
+              <p class="control-label col-xs-5">Remarks</p>
+              <div class="col-xs-6">
+                <textarea class="form-control" [disabled]="isAGT_REMARKSDisabled" rows="5" id="comment" item-height="1px" [(ngModel)]="AGT_REMARKS"
+                  name="AGT_REMARKS" id="AGT_REMARKS" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+
+
+
+
+      <div class="col-sm-2">
+      </div>
+
+
+    </div>
+    <!--################################### END OTHER TAB #####################################-->
+
+    <!--################################### START LEVEL TAB #####################################-->
+
+    <!--------------------Start First Column------------------>
+    <div class="tab-pane" id="Level">
+      <div class="col-sm-4">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Direct Reporting Leader Details</div>
+          <div class="panel-body">
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Leader's Agent Code</p>
+                  <div class="col-xs-4">
+                    <input type="text" class="form-control" [(ngModel)]="AGT_LEADER_AGENT_CODE_V" name="AGT_LEADER_AGENT_CODE_V" id="AGT_LEADER_AGENT_CODE_V"
+                      placeholder="">
+                  </div>
+                  <!--[disabled]="isNEWDisabled"-->
+                  <button type="button" (click)="GetLeaderCode()" class="btn TestImage"></button>
+
+
+
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Leader's Leader Code</p>
+                  <div class="col-xs-5">
+                    <input type="text" class="form-control" [readonly]="!dd" [(ngModel)]="AGT_LEADER_LEADER_CODE_V" name="AGT_LEADER_LEADER_CODE_V"
+                      id="AGT_LEADER_LEADER_CODE_V" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Agent Details</div>
+          <div class="panel-body">
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Agent hierarchy Type</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_HIERARCHY_TYPE_IDDisabled" [(ngModel)]="AGT_HIERARCHY_TYPE_ID" name="AGT_HIERARCHY_TYPE_ID"
+                      id="AGT_HIERARCHY_TYPE_ID" required>
+                    <option value="0">SELECT</option>
+                    <option value="1">INDIVIDUAL</option>
+                    <option value="2">GROUP</option>
+                    <!-- <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option> -->
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Agent Level</p>
+                  <div class="col-xs-6">
+
+                    <select type="text" [disabled]="isAGT_LEVELDisabled" class="form-control input-sm" [(ngModel)]="AGT_LEVEL" name="AGT_LEVEL"
+                      id="AGT_LEVEL" required>
+                        <!--<option value="0">Select</option>-->
+                        <option value="0">SELECT</option>
+                        <option *ngFor="let level of AgentLevelList" value={{level.Id}}>{{level.Description}}</option>
+                        </select>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <!--<div class="{{AGT_LEADER_CODE_CLS}}">-->
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Level Code</p>
+                  <div class="col-xs-6">
+                    <input type="email" class="form-control" [(ngModel)]="AGT_LEVEL_CODE" name="AGT_LEVEL_CODE" id="AGT_LEVEL_CODE" placeholder="">
+                    <!--[readonly]="!dd"-->
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <!--<div class="{{AGT_LEADER_CODE_CLS}}">-->
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Leader Code</p>
+                  <div class="col-xs-6">
+                    <input type="email" [disabled]="isAGT_LEADER_CODEDisabled" class="form-control" [(ngModel)]="AGT_LEADER_CODE" name="AGT_LEADER_CODE"
+                      id="AGT_LEADER_CODE" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_BUSINESS_TYPE_CLS}}">
+                  <!-- <div class="form-group"> -->
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Bussiness Type</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_BUSINESS_TYPEDisabled" [(ngModel)]="AGT_BUSINESS_TYPE" name="AGT_BUSINESS_TYPE"
+                      id="AGT_BUSINESS_TYPE" required>
+                    <option value="0">SELECT</option>
+                    <option value="1">LIFE</option>
+                    <option value="2">GENERAL</option>
+                    <option value="3">BOTH</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+            <div class="row">
+            </div>
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Designation</p>
+                  <div class="col-xs-6">
+
+                    <select type="text" [disabled]="isAGT_DESIGNATION_IDDisabled" class="form-control input-sm" [(ngModel)]="AGT_DESIGNATION_ID"
+                      name="AGT_DESIGNATION_ID" id="AGT_DESIGNATION_ID" required>
+                        <!--<option value="0">Select</option>-->
+                        <option value="0">SELECT</option>
+                        <option *ngFor="let Designation of DesignationList" value={{Designation.Id}}>{{Designation.Description}}</option>
+                        </select>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Reason</p>
+                  <div class="col-xs-6">
+
+                    <select type="text" [disabled]="isAGT_CHANGE_REASON_IDDisabled" class="form-control input-sm" [(ngModel)]="AGT_CHANGE_REASON_ID"
+                      name="AGT_CHANGE_REASON_ID" id="AGT_CHANGE_REASON_ID" required>
+                        <!--<option value="0">Select</option>-->
+                        <option value="0">SELECT</option>
+                        <option *ngFor="let CR of ChangeReasonList" value={{CR.Id}}>{{CR.Description}}</option>
+                        </select>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <!--<div class="{{AGT_LEADER_CODE_CLS}}">-->
+                  <!--<div class="col-xs-0">
+                  </div>-->
+                  <p class="control-label col-xs-6">Comment</p>
+                  <div class="col-xs-6">
+                    <input type="email" [disabled]="isAGT_CHANGE_REASONDisabled" class="form-control" [(ngModel)]="AGT_CHANGE_REASON" name="AGT_CHANGE_REASON"
+                      id="AGT_CHANGE_REASON" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_LEADER_GIVEN_DATE_CLS}}">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Leader Given Date</p>
+                  <div class="col-xs-6">
+                    <div class="col-xs-12">
+                      <span *ngIf="!xxx">
+                         <datetime name="DateOfBirth" [readonly]="false" id="AGT_LEADER_GIVEN_DATE" [datepicker]="datepickerOpts" [(ngModel)]="AGT_LEADER_GIVEN_DATE" [timepicker]="false"></datetime>
+
+                    </span>
+                      <span *ngIf="xxx">
+                         <datetime name="DateOfBirth" [readonly]="true" id="AGT_LEADER_GIVEN_DATE" [datepicker]="datepickerOpts" [(ngModel)]="AGT_LEADER_GIVEN_DATE" [timepicker]="false"></datetime>
+
+                    </span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </form>
+
+
+
+          </div>
+        </div>
+
+
+        <!--<form class="form-horizontal">
+        <div class="row">
+          <div class="{{AGT_LEVEL_CLS}}">
+            <div class="col-xs-0">
+            </div>
+            <p class="control-label col-xs-5">Agent Level</p>
+            <div class="col-xs-6">
+              <select class="form-control" [(ngModel)]="AGT_LEVEL" name="AGT_LEVEL" id="AGT_LEVEL" required>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                </select>
+            </div>
+          </div>
+        </div>
+      </form>-->
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+
+      <!--------------------End First Column------------------>
+
+
+
+      <!--------------------Start Second Column------------------>
+      <div class="col-sm-4">
+
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Horizontal Details</div>
+          <div class="panel-body">
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Leader's Agent Code</p>
+                  <div class="col-xs-5">
+                    <!--[disabled]="isAGT_LEADER_AGENT_CODE_HDisabled"-->
+                    <input type="email" disabled class="form-control" [(ngModel)]="AGT_LEADER_AGENT_CODE_H" name="AGT_LEADER_AGENT_CODE_H" id="AGT_LEADER_AGENT_CODE_H"
+                      placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Leader's Leader Code</p>
+                  <div class="col-xs-5">
+                    <!--[disabled]="isAGT_LEADER_LEADER_CODE_HDisabled"-->
+                    <input type="email" disabled class="form-control" [(ngModel)]="AGT_LEADER_LEADER_CODE_H" name="AGT_LEADER_LEADER_CODE_H"
+                      id="AGT_LEADER_LEADER_CODE_H" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Status Details</div>
+          <div class="panel-body">
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_STATUS_CLS}}">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Agent Status</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_STATUSDisabled" [(ngModel)]="AGT_STATUS" name="AGT_STATUS" id="AGT_STATUS"
+                      required>
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_TERMINATE_STATUS_CLS}}">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Termination Status</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_TERMINATE_STATUSDisabled" [(ngModel)]="AGT_TERMINATE_STATUS" name="AGT_TERMINATE_STATUS"
+                      id="AGT_TERMINATE_STATUS" required>
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_STOP_COMM_STATUS_CLS}}">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Com. Stop Status</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_STOP_COMM_STATUSDisabled" [(ngModel)]="AGT_STOP_COMM_STATUS" name="AGT_STOP_COMM_STATUS"
+                      id="AGT_STOP_COMM_STATUS" required>
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <!--------------------End Second Column------------------>
+
+      <!--------------------Start Third Column------------------>
+      <div class="col-sm-4">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">IS Details (Income Support Details)</div>
+          <div class="panel-body">
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_ISS_STATUS_CLS}}">
+                  <div class="col-xs-1">
+                  </div>
+                  <p class="control-label col-xs-4">IS Status</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_ISS_STATUSDisabled" [(ngModel)]="AGT_ISS_STATUS" name="SelectedISSid" id="SelectedISSid"
+                      (ngModelChange)="onSelectOfISSStatus($event)" required>
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                    <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_ISS_AMOUNT_CLS}}">
+                  <div class="col-xs-1">
+                  </div>
+                  <p class="control-label col-xs-4">IS Amount</p>
+                  <div class="col-xs-6">
+                    <input type="email" [disabled]="isAGT_ISS_AMOUNTDisabled" class="form-control" [(ngModel)]="AGT_ISS_AMOUNT" name="AGT_ISS_AMOUNT"
+                      id="AGT_ISS_AMOUNT" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_ISS_GIVEN_DATE_CLS}}">
+                  <div class="col-xs-1">
+                  </div>
+                  <p class="control-label col-xs-4">IS Given Date</p>
+                  <div class="col-xs-6">
+                    <div class="col-xs-12">
+
+                      <span *ngIf="!xxx">
+                                                <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_ISS_GIVEN_DATEDisabled" id="AGT_ISS_GIVEN_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_ISS_GIVEN_DATE" [timepicker]="false"></datetime>
+                        </span>
+                      <span *ngIf="xxx">
+                                                <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_ISS_GIVEN_DATEDisabled" id="AGT_ISS_GIVEN_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_ISS_GIVEN_DATE" [timepicker]="false"></datetime>
+                        </span>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_ISS_CLOSE_DATE_CLS}}">
+                  <div class="col-xs-1">
+                  </div>
+                  <p class="control-label col-xs-4">IS Close Date</p>
+                  <div class="col-xs-6">
+                    <div class="col-xs-12">
+
+                      <span *ngIf="!xxx">
+                        <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_ISS_CLOSE_DATEDisabled" id="AGT_ISS_CLOSE_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_ISS_CLOSE_DATE" [timepicker]="false"></datetime>
+                      </span>
+                      <span *ngIf="xxx">
+                        <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_ISS_CLOSE_DATEDisabled" id="AGT_ISS_CLOSE_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_ISS_CLOSE_DATE" [timepicker]="false"></datetime>
+                      </span>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Retainer Details</div>
+          <div class="panel-body">
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_RETAINER_STATUS_CLS}}">
+                  <div class="col-xs-1">
+                  </div>
+                  <p class="control-label col-xs-4">Retainer Status</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="isAGT_RETAINER_STATUSDisabled" [(ngModel)]="AGT_RETAINER_STATUS" name="AGT_RETAINER_STATUS"
+                      id="AGT_RETAINER_STATUS" required>
+                    <!-- <option value="0">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="2">NO</option> -->
+                                       <option value="2">SELECT</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
+
+                </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_RETAINER_AMOUNT_CLS}}">
+                  <div class="col-xs-1">
+                  </div>
+                  <p class="control-label col-xs-4">Retainer Amount</p>
+                  <div class="col-xs-6">
+
+                    <input type="email" [disabled]="isAGT_RETAINER_AMOUNTDisabled" class="form-control" [(ngModel)]="AGT_RETAINER_AMOUNT" name="AGT_RETAINER_AMOUNT"
+                      id="AGT_RETAINER_AMOUNT" placeholder="">
+
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_RETAINER_GIVEN_DATE_CLS}}">
+
+                  <p class="control-label col-xs-5">Retainer Given date</p>
+                  <div class="col-xs-6">
+                    <div class="col-xs-12">
+
+                      <span *ngIf="!xxx">
+                                            <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_RETAINER_GIVEN_DATEDisabled" id="AGT_RETAINER_GIVEN_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_RETAINER_GIVEN_DATE" [timepicker]="false"></datetime>
+                    </span>
+                      <span *ngIf="xxx">
+                                            <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_RETAINER_GIVEN_DATEDisabled" id="AGT_RETAINER_GIVEN_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_RETAINER_GIVEN_DATE" [timepicker]="false"></datetime>
+                    </span>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="{{AGT_RETAINER_CLOSE_DATE_CLS}}">
+
+                  <p class="control-label col-xs-5">Retainer Close Date</p>
+                  <div class="col-xs-6">
+                    <div class="col-xs-12">
+
+                      <span *ngIf="!xxx">
+                                            <datetime name="DateOfBirth" [readonly]="false" [disabled]="isAGT_RETAINER_CLOSE_DATEDisabled" id="AGT_RETAINER_CLOSE_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_RETAINER_CLOSE_DATE" [timepicker]="false"></datetime>
+                    </span>
+                      <span *ngIf="xxx">
+                                            <datetime name="DateOfBirth" [readonly]="true" [disabled]="isAGT_RETAINER_CLOSE_DATEDisabled" id="AGT_RETAINER_CLOSE_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="AGT_RETAINER_CLOSE_DATE" [timepicker]="false"></datetime>
+                    </span>
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+
+
+
+
+      </div>
+      <!--------------------End Third Column------------------>
+
+
+
+
+      <div class="row">
+
+        <div class="form-group">
+          <!-- <div class="col-sm-2">
+          </div>
+          <div class="col-sm-2">
+          </div>
+          <div class="col-sm-2">
+          </div>
+          <div class="col-sm-2">
+          </div>
+          <div class="col-sm-2">
+          </div> -->
+
+        </div>
+      </div>
+
+
+
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-2">
+            <button type="button" [disabled]="isNEWDisabled" (click)="NewRecord()" class="btn btnCustom btn-default btn-sm btn-warning">New Record</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" [disabled]="isEDITDisabled" (click)="EditRecord()" class="btn btnCustom btn-default btn-sm btn-warning">Edit Record</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" [disabled]="isSAVEDisabled" (click)="SaveRecord()" class="btn btnCustom btn-default btn-sm btn-warning">Save Record</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" [disabled]="isCANCELDisabled" (click)="CancelRecord()" class="btn btnCustom btn-default btn-sm btn-warning">Cancel Record</button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+    <!--Agent Search Start-->
+    <div class="tab-pane" id="Search">
+
+
+      <div class="well wellsearch">
+
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="form-group">
+              <input type="text" class="form-control" id="AGT_SEARCH_CODE" [(ngModel)]="AGT_SEARCH_CODE" placeholder="Agent Code">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="AGT_SEARCH_NAME" [(ngModel)]="AGT_SEARCH_NAME" placeholder="Agent Name">
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="AGT_SEARCH_ADDRESS" [(ngModel)]="AGT_SEARCH_ADDRESS" placeholder="Agent Address">
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="AGT_SEARCH_NIC_NO" [(ngModel)]="AGT_SEARCH_NIC_NO" placeholder="Agent NIC">
+          </div>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="AGT_SEARCH_MOBILE" [(ngModel)]="AGT_SEARCH_MOBILE" placeholder="Agent Mobile">
+          </div>
+          <div class="col-sm-1">
+            <button type="button" (click)="SearchRecord()" class="btn orange-flat-button">Search</button>
+          </div>
+          <div class="col-sm-1">
+            <button type="button" (click)="ClearSearch()" class="btn orange-flat-button">Clear</button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="form-group">
+        </div>
+      </div>
+
+      <div class="well wellnew1">
+        <table class="table table-striped table-hover .table-bordered">
+          <thead>
+            <tr>
+              <th>View</th>
+              <th style="display:none;">ID</th>
+              <th>CODE</th>
+              <th>NAME</th>
+              <th>ADDRESS</th>
+              <th>NIC</th>
+              <th>MOBILE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let agent of AgentSearchList | paginate: {itemsPerPage:20 , currentPage:page, id: 'four'}; let i = index" (click)="setClickedRow(i,agent.AGT_ID,agent.AGT_CODE);">
+              <td><a>View</a></td>
+              <td style="display:none;">
+                {{agent.AGT_ID}}
+              </td>
+              <!--<td>
+              {{agent.AGT_ID}}
+            </td>-->
+              <td>
+                {{agent.AGT_CODE}}
+              </td>
+              <td>
+                {{agent.AGT_NAME}}
+              </td>
+              <td>
+                {{agent.AGT_ADDRESS}}
+              </td>
+              <td>
+                {{agent.AGT_NIC_NO}}
+              </td>
+              <td>
+                {{agent.AGT_MOBILE}}
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="page = $event" id="four" maxSize="20" directionLinks="true" autoHide="false">
+        </pagination-controls>
+      </div>
+    </div>
+    <!--Agent Search End-->
+    <!--Document Upload Start-->
+    <div class="tab-pane" id="Documents">
+
+
+      <div class="well wellsearch">
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <input type="email" class="form-control" [(ngModel)]="AGT_UPLOAD_DOC_DESC" name="AGT_UPLOAD_DOC_DESC" id="AGT_UPLOAD_DOC_DESC"
+                placeholder="Document Description">
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="form-group">
+
+              <select type="text" class="form-control input-sm" placeholder="Document Type" [(ngModel)]="AGT_LEVEL_CODE" name="AGT_LEVEL_CODE"
+                id="AGT_LEVEL_CODE" required (ngModelChange)="onSelectOfUploadDocTypeId($event)">
+              <option *ngFor="let DocType of UploadDocTypeList" value={{DocType.DocTypeId}}>{{DocType.DocTypeName}}</option>
+              </select>
+
+              <!-- <select type="text" class="form-control input-sm" placeholder="Document Type" [(ngModel)]="AGT_LEVEL_CODE" name="AGT_LEVEL_CODE"
+                id="AGT_LEVEL_CODE" required (ngModelChange)="onSelectOfUploadDocTypeId($event)">
+            <option *ngFor="let DocType of UploadDocTypeList" value={{DocType.DocTypeId}}>{{DocType.DocTypeName}}</option>
+            </select> -->
+
+            </div>
+          </div>
+
+          <div class="col-sm-1">
+            <div class="form-group">
+              <div class="button-container">
+                <label class="upload-button is-pulled-left">
+                    <input type="file"
+                class="hidden"
+                ngFileSelect
+                [options]="uploaderOptions"
+                [events]="inputUploadEvents"
+                (onUpload)="handleUpload($event)"
+                
+                (beforeUpload)="beforeUpload($event)">
+                  <div class="btn orange-flat-button-browse">Browse</div> 
+                  </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-1">
+            <div class="form-group">
+              <button type="button" class="btn orange-flat-button" (click)="startUpload()">Upload</button>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="well wellnew1">
+        <div class="row">
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>View Document</th>
+                <th style="display:none;">ID</th>
+                <th>DOCUMENT TYPE</th>
+                <th>DOCUMENT DESCRIPTION</th>
+                <th>UPLOADED BY</th>
+                <th>UPLOADED DATE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of UploadDocList | paginate: {itemsPerPage:25 , currentPage:page, id: '1'}; let i = index" (click)="setDocumentPath(i,doc.DocUrl);">
+                <td><a href="#">View</a></td>
+                <td style="display:none;">
+                  {{doc.Id}}
+                </td>
+                <td>
+                  {{doc.DocTypeDesc}}
+                </td>
+                <td>
+                  {{doc.DocDescription}}
+                </td>
+                <td>
+                  {{doc.CreatedBy}}
+                </td>
+                <td>
+                  {{doc.CreatedDate}}
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+          <pagination-controls (pageChange)="page = $event" id="1" maxSize="25" directionLinks="true" autoHide="true">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="Terminations">
+    </div>
+
+
+
+
+    <div class="tab-pane" id="Hierarchy">
+
+      <div class="col-sm-12">
+
+        <form class="form-horizontal">
+
+          <div class="row">
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-2" style="padding-left: 47px">
+              <img class="img responsive img-responsive AgentMainImage" id="logo" [src]="AGT_PROFILE_DOC_URL_LEADER_V" alt="" />
+            </div>
+            <div class="col-sm-8">
+
+            </div>
+          </div>
+
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-2" style="padding-left: 47px">
+              <img class="img responsive img-responsive AgentMainImage" id="logo" [src]="AGT_IMAGE" alt="" />
+
+            </div>
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-2" style="padding-left: 47px">
+              <img class="img responsive img-responsive AgentMainImage" id="logo" [src]="AGT_PROFILE_DOC_URL_LEADER_H" alt="" />
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+          <div class="form-group">
+
+          </div>
+          <div class="form-group">
+          </div>
+
+          <div class="form-group">
+
+          </div>
+          <div class="form-group">
+          </div>
+
+
+          <!--<table class="table table-bordered">
+            <thead>
+              <tr class="bg-primary">
+                <th>Trans.Branch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of AttachedAgentsUploadDocList">
+                <td>
+  
+                <img class="AgentSubImage" id="logo" [src]="doc.DocUrl" alt="" />
+
+
+                </td>
+              </tr>
+            </tbody>
+          </table>-->
+
+          <!--
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-2">
+              </div>
+              <div class="col-sm-6">
+                <div class="outer-div">
+                  <div class="inner-div">
+                    <ul style="display: block;list-style: none;width: 80%;" *ngFor="let doc of AttachedAgentsUploadDocList">
+                      <li style="float: left;width: 20%; padding-bottom: 20px">
+                        <img class="AgentSubImage" id="logo" [src]="doc.DocUrl" alt="" />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+              </div>
+            </div>
+          </div>-->
+
+
+          <div class="row">
+
+            <div class="col-md-2" style="padding-left: 47px" *ngFor="let doc of AttachedAgentsUploadDocList">
+              <img class="img responsive img-responsive AgentMainImage" [src]="doc.DocUrl" alt="" />
+            </div>
+          </div>
+
+
+
+
+
+          <div class="form-group">
+
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+          <div class="form-group">
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+
+    <div class="tab-pane" id="TcsStatus">
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">Agent Details - TCS</div>
+            <div class="panel-body">
+
+
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-2">Code</p>
+                  <div class="col-xs-5">
+                    <input type="text" class="form-control" id="AGT_CODE_TCS" [(ngModel)]="AGT_CODE_TCS" placeholder="">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-2">Name</p>
+                  <div class="col-xs-7">
+                    <input type="text" class="form-control" id="AGT_NAME_TCS" [(ngModel)]="AGT_NAME_TCS" placeholder="">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-2">Status</p>
+                  <div class="col-xs-5">
+                    <input type="text" class="form-control" id="AGT_STATUS_TCS" [(ngModel)]="AGT_STATUS_TCS" placeholder="">
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- <div class="row">
+              <p class="col-sm-2">Agent Code</p>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" disabled id="AGT_CODE_TCS" [(ngModel)]="AGT_CODE_TCS" placeholder="Agent Name">
+              </div>
+
+            </div>
+
+            <div class="row">
+                <p class="control-label col-xs-2">Agent Name</p>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" disabled id="AGT_NAME_TCS" [(ngModel)]="AGT_NAME_TCS" placeholder="Agent Address">
+              </div>
+            </div>
+
+            <div class="row">
+                <p class="control-label col-xs-2">Agent Status</p>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" disabled id="AGT_STATUS_TCS" [(ngModel)]="AGT_STATUS_TCS" placeholder="Agent Address">
+              </div>
+            </div> -->
+
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+  <div class="container-fluid">
+
+
+    <div class="form-group">
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+  <!--
+  <form class="form-horizontal">
+    <div class="container-fluid">
+      <h1>Hello World!</h1>
+      <div class="row">
+        <div class="form-group">
+          <div class="col-sm-3">
+            <button type="button" [disabled]="isNEWDisabled" (click)="NewRecord()" class="btn btn-default btn-sm">New Record</button>
+          </div>
+          <div class="col-sm-3">
+            <button type="button" [disabled]="isEDITDisabled" (click)="EditRecord()" class="btn btn-default btn-sm">Edit Record</button>
+          </div>
+          <div class="col-sm-3">
+            <button type="button" [disabled]="isSAVEDisabled" (click)="SaveRecord()" class="btn btn-default btn-sm">Save Record</button>
+          </div>
+          <div class="col-sm-3">
+            <button type="button" [disabled]="isCANCELDisabled" (click)="CancelRecord()" class="btn btn-default btn-sm">Cancel Record</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>-->
+
+</div>
+
+
+
+
+<!--Document Upload End-->
+<!--################################### END LEVEL TAB #####################################-->

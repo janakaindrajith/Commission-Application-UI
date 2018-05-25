@@ -1,0 +1,69 @@
+<div class="col-sm-4">
+
+  <div class="well">
+
+    <div class="row">
+      <div class="form-group">
+        <p class="control-label col-xs-5">Code :</p>
+        <div class="col-xs-7">
+          <input type="text" class="form-control" id="txtCode" [(ngModel)]="Code" placeholder=""> </div>
+      </div>
+    </div>
+
+    <div class="row">
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <p class="control-label col-xs-5">Description :</p>
+        <div class="col-xs-7">
+          <input type="text" class="form-control" id="txtDesc" [(ngModel)]="Description">
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <div class="col-xs-7">
+        <div class="form-group">
+
+          <button (click)="SaveRecord()" class="btn btn-success">Save Record</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-sm-8">
+  <div class="well">
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>CODE</th>
+          <th>DESCRIPTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bank of bankList">
+          <td>
+            {{bank.ID}}
+          </td>
+          <td>
+            {{bank.CODE}}
+          </td>
+          <td>
+            {{bank.DESCRIPTION}}
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+

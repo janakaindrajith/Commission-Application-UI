@@ -1,0 +1,344 @@
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Product Details</div>
+      <div class="panel-body">
+
+        <div class="col-sm-5">
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="{{CODE_CLS}}">
+                <!-- <div class="col-xs-0">
+                        </div> -->
+                <p class="control-label col-xs-6">Rule Code</p>
+                <div class="col-xs-3">
+                  <input type="text" class="form-control" [(ngModel)]="CODE" name="CODE" id="CODE" placeholder="">
+                </div>
+              </div>
+
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class={{DESCRIPTION_CLS}}>
+                <!-- <div class="col-xs-0">
+                                </div> -->
+                <p class="control-label col-xs-6">Rule Descriptions</p>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" [(ngModel)]="DESCRIPTION" name="DESCRIPTION" id="DESCRIPTION" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="{{AGENT_TYPE_CLS}}">
+                <p class="control-label col-xs-6">Agent Type</p>
+                <div class="col-xs-6">
+                  <select type="text" class="form-control input-sm" [(ngModel)]="AGENT_TYPE" name="AGENT_TYPE" id="AGENT_TYPE">
+                                                <option value="0">SELECT</option>
+                                                <option *ngFor="let agt of AgentTypeList" value={{agt.ID}}>{{agt.DESCRIPTION}}</option>
+                                                </select>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="{{COM_LEVEL_CLS}}">
+                <p class="control-label col-xs-6">Commission Level</p>
+                <div class="col-xs-6">
+                  <select type="text" class="form-control input-sm" [(ngModel)]="COM_LEVEL" name="COM_LEVEL" id="COM_LEVEL">
+                    
+                        <option value="0">SELECT</option>
+                        <option *ngFor="let lvl of LevelList" value={{lvl.Code}}>{{lvl.Description}}</option>
+                        </select>
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+          <div class="row">
+              <div class="form-group">
+              </div>
+            </div>
+
+
+          <form class="form-horizontal">
+              <div class="row">
+                <div class="{{COM_YEAR_CLS}}">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Commission Year</p>
+                  <div class="col-xs-4">
+                    <select class="form-control" [(ngModel)]="COM_YEAR" name="COM_YEAR" id="COM_YEAR">
+                      <option value="1">YEAR 1</option>
+                      <option value="2">YEAR 2</option>
+                      <option value="3">YEAR 3</option>
+                      <option value="4">YEAR 4</option>
+                      <option value="5">YEAR 5</option>
+                      <option value="6">YEAR 6</option>
+                      <option value="7">YEAR 7</option>
+                      <option value="8">YEAR 8</option>
+                      <option value="9">YEAR 9</option>
+                      <option value="10">YEAR 10</option>
+                  </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+
+
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="{{COM_RATE_CLS}}">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Comm. Rate</p>
+                <div class="col-xs-3">
+                  <input type="text" class="form-control" [(ngModel)]="COM_RATE" name="COM_RATE" id="COM_RATE" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="{{ACTIVE_STATUS_CLS}}">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">  Status</p>
+                <div class="col-xs-6">
+                  <select class="form-control" [(ngModel)]="ACTIVE_STATUS" name="ACTIVE_STATUS" id="ACTIVE_STATUS">
+                    <option value="1">ACTIVE</option>
+                    <option value="0">INACTIVE</option>
+                </select>
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+          <div class="col-sm-6">
+          </div>
+        </div>
+        <div class="col-sm-5">
+
+
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class={{DATE_FROM_CLS}}>
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">   Date From</p>
+                <div class="col-xs-5">
+
+                  <span *ngIf=true>
+    
+                              <datetime name="date" [readonly]="false" item-height="50px" [disabled]="isAGT_APPOINT_DATEDisabled" id="DATE_FROM" [datepicker]="datepickerOpts"
+                              [(ngModel)]="DATE_FROM" [timepicker]="false"></datetime>
+        
+                          </span>
+
+                </div>
+
+              </div>
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class={{DATE_TO_CLS}}>
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Date To</p>
+                <div class="col-xs-5">
+
+                  <span *ngIf=true>
+          
+                                    <datetime name="date" [readonly]="false" item-height="50px" [disabled]="isAGT_APPOINT_DATEDisabled" id="DATE_TO" [datepicker]="datepickerOpts"
+                                    [(ngModel)]="DATE_TO" [timepicker]="false"></datetime>
+              
+                                </span>
+
+                </div>
+
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-sm-1">
+    </div>
+
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>
+
+
+
+
+
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-10">
+
+
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isNEWDisabled" (click)="NewRecord()" class="btn orange-flat-button">New Record</button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isEDITDisabled" (click)="EditRecord()" class="btn orange-flat-button">Edit Record</button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isSAVEDisabled" (click)="SaveRecord()" class="btn orange-flat-button">Save Record</button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isCANCELDisabled" (click)="CancelRecord()" class="btn orange-flat-button">Cancel Record</button>
+    </div>
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-1">
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-10">
+    <div class="well">
+      <div class="row">
+        <!-- <table class="table vitamins"> -->
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>View</th>
+              <th style="display:none;">ID</th>
+              <th>CODE</th>
+              <th>DESCRIPTION</th>
+              <th>AGENT TYPE</th>
+              <th>COM LEVEL</th>
+              <th>COM YEAR</th>
+              <th>COM RATE</th>
+              <th>FROM DATE</th>
+              <th>TO DATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ORD of ORDRateChartList | paginate: {itemsPerPage:10 , currentPage:page, id: '1'}; let i = index" (click)="setORDRateID(i,ORD.Id);">
+              <td><a href="javascript:void(0)">View</a></td>
+              <td style="display:none;">
+                {{ORD.Id}}
+              </td>
+              <td>
+                {{ORD.Code}}
+              </td>
+              <td>
+                {{ORD.Description}}
+              </td>
+              <td>
+                {{ORD.AgtTypeId}}
+              </td>
+              <td>
+                {{ORD.ComLevelId}}
+              </td>
+              <td>
+                {{ORD.ComYearId}}
+              </td>
+              <td>
+                {{ORD.Rate}}
+              </td>
+              <td>
+                {{ORD.FromDate}}
+              </td>
+              <td>
+                {{ORD.ToDate}}
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="page = $event" id="1" maxSize="10" directionLinks="true" autoHide="true">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>

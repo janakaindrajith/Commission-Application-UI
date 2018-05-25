@@ -1,0 +1,321 @@
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">FST Allowance Details</div>
+      <div class="panel-body">
+
+        <div class="col-sm-6">
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Rule Code</p>
+                <div class="col-xs-5">
+                  <input type="text" class="form-control" [(ngModel)]="CODE" name="CODE" id="CODE" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Rule Descriptions</p>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" [(ngModel)]="DESCRIPTION" name="DESCRIPTION" id="DESCRIPTION" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+
+                <p class="control-label col-xs-6">FST Amt - MIN / MAX</p>
+                <div class="col-xs-3">
+                  <input type="text" class="form-control" [(ngModel)]="FST_MIN_AMT" name="FST_MIN_AMT" id="FST_MIN_AMT" placeholder="">
+                </div>
+
+                <div class="col-xs-3">
+                  <input type="text" class="form-control" [(ngModel)]="FST_MAX_AMT" name="FST_MAX_AMT" id="FST_MAX_AMT" placeholder="">
+                </div>
+
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="{{AGT_RETAINER_STATUS_CLS}}">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6"> Status</p>
+                <div class="col-xs-5">
+                  <select class="form-control" [(ngModel)]="ACTIVE_STATUS" name="ACTIVE_STATUS" id="ACTIVE_STATUS">
+                      <option value="1">ACTIVE</option>
+                      <option value="0">INACTIVE</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="form-group">
+            </div>
+          </div>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class={{DATE_FROM_CLS}}>
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Date From</p>
+                <div class="col-xs-4">
+
+                  <span *ngIf=true>
+
+                          <datetime name="date" [readonly]="false" item-height="50px" [disabled]="isAGT_APPOINT_DATEDisabled" id="DATE_FROM" [datepicker]="datepickerOpts"
+                          [(ngModel)]="DATE_FROM" [timepicker]="false"></datetime>
+    
+                      </span>
+
+                </div>
+
+              </div>
+            </div>
+          </form>
+
+          <div class="col-sm-6">
+          </div>
+        </div>
+        <div class="col-sm-4">
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Maximum Years</p>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" [(ngModel)]="MAX_YEARS" name="MAX_YEARS" id="MAX_YEARS" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Maximum Allowance</p>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" [(ngModel)]="MAX_ALLOWANCE" name="MAX_ALLOWANCE" id="MAX_ALLOWANCE" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+
+                <!-- <div class="col-xs-6"></div> -->
+                <p class="control-label col-xs-6">Allowance</p>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" [(ngModel)]="ALLOWANCE" name="ALLOWANCE" id="ALLOWANCE" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class="form-group">
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">No Of Policies</p>
+                <div class="col-xs-3">
+                  <input type="text" class="form-control" [(ngModel)]="POLICY_COUNT" name="POLICY_COUNT" id="POLICY_COUNT" placeholder="">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form class="form-horizontal">
+            <div class="row">
+              <div class={{DATE_TO_CLS}}>
+                <div class="col-xs-0">
+                </div>
+                <p class="control-label col-xs-6">Date To</p>
+                <div class="col-xs-6">
+
+                  <span *ngIf=true>
+          
+                                    <datetime name="date" [readonly]="false" item-height="50px" [disabled]="isAGT_APPOINT_DATEDisabled" id="DATE_TO" [datepicker]="datepickerOpts"
+                                    [(ngModel)]="DATE_TO" [timepicker]="false"></datetime>
+              
+                                </span>
+
+                </div>
+
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-sm-1">
+    </div>
+
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>
+
+
+
+
+
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-10">
+
+
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isNEWDisabled" (click)="NewRecord()" class="btn orange-flat-button">New Record</button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isEDITDisabled" (click)="EditRecord()" class="btn orange-flat-button">Edit Record</button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isSAVEDisabled" (click)="SaveRecord()" class="btn orange-flat-button">Save Record</button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" [disabled]="isCANCELDisabled" (click)="CancelRecord()" class="btn orange-flat-button">Cancel Record</button>
+    </div>
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-1">
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-10">
+    <div class="well">
+      <div class="row">
+        <!-- <table class="table vitamins"> -->
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>View</th>
+              <th style="display:none;">ID</th>
+              <!-- <th>CODE</th> -->
+              <th>DESCRIPTION</th>
+              <th>MAX_YEARS</th>
+              <th>MAX_ALLOWANCE</th>
+              <th>POL_COUNT</th>
+              <th>MIN_AMT</th>
+              <th>MAX_AMT</th>
+              <th>ALLOWANCE</th>
+              <th>CREATED_BY</th>
+              <th>CREATED_DATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fst of FSTAllowanceList | paginate: {itemsPerPage:25 , currentPage:page, id: '1'}; let i = index" (click)="setFSTID(i,fst.Id);">
+              <td><a href="javascript:void(0)">View</a></td>
+              <td style="display:none;">
+                {{fst.Id}}
+              </td>
+              <!-- <td>
+                {{fst.Code}}
+              </td> -->
+              <td>
+                {{fst.Description}}
+              </td>
+
+              <td>
+                {{fst.MaximumYears}}
+              </td>
+              <td>
+                {{fst.MaximumAllowance}}
+              </td>
+              <td>
+                {{fst.PolicyCount}}
+              </td>
+              <td>
+                {{fst.FstMinimumAmt}}
+              </td>
+              <td>
+                {{fst.FstMaximumAmt}}
+              </td>
+              <td>
+                {{fst.Allowance}}
+              </td>
+
+              <td>
+                {{fst.CreatedBy}}
+              </td>
+              <td>
+                {{fst.CreatedDate}}
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+        <pagination-controls (pageChange)="page = $event" id="1" maxSize="25" directionLinks="true" autoHide="true">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>
