@@ -41,3 +41,24 @@ input:focus {
   background-color:#F8F8EB;
 }
 
+/* Custom Table CSS */
+
+table th, table td {
+  color: #999;
+  border: 1px solid rgb(241, 244, 205);
+  border-collapse: collapse;
+}
+
+table th {
+  text-transform: uppercase;
+  background: rgb(241, 244, 205);
+  font-size: 12px;
+}
+
+table tr:hover {
+  background: rgb(241, 244, 205);
+}
+table tr:hover td {
+  font-style: italic;
+}
+/* Custom Table CSS */

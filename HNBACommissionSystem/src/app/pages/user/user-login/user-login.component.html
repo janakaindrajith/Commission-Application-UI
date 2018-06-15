@@ -1,71 +1,250 @@
-<div class="mainbg">
+<!-- <h2>Responsive Social Login Form</h2>
+<p>Resize the browser window to see the responsive effect. When the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other.</p> -->
 
-
-
-  <div class="row">
-    <div class="form-group">
-    </div>
+<div class="row">
+  <div class="form-group">
   </div>
-  <div class="row">
-    <div class="form-group">
-    </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
   </div>
-  <div class="row">
-    <div class="form-group">
-    </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
   </div>
-  <div class="row">
-    <div class="form-group">
-    </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
   </div>
-  <div class="row">
-    <div class="form-group">
-    </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
   </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
 
 
 
 
-  <div class="row">
-    <div class="col-sm-6">
-    </div>
-    <div class="col-sm-4">
 
-      <div class="panel panel-default bg">
-        <div class="panel-heading">Login Details</div>
-        <div class="panel-body">
+<div class="container">
+  <form action="/action_page.php">
+    <div class="row">
+      <h2 style="text-align:center">Login with Social Media or Manually</h2>
+      <div class="vl">
+        <span class="vl-innertext">or</span>
+      </div>
 
+      <div class="col">
+        <a href="#" class="fb btn">
+          <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+         </a>
+        <a href="#" class="twitter btn">
+          <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+        </a>
+        <a href="#" class="google btn"><i class="fa fa-google fa-fw">
+          </i> Login with Google+
+        </a>
+      </div>
 
-          <div *ngIf="isLoading">
-            <app-spinner-large></app-spinner-large>
-          </div>
-          <div class="container">
-
-          </div>
-          <div class="form" *ngIf="!isLoading">
-            <div class="thumbnail">
-              <img src="../../../../assets/images/logo_150.png" /></div>
-
-            <form class="login-form">
-              <input type="text" placeholder="User Name" [(ngModel)]="UserName" name="UserName" id="UserName" />
-              <input type="password" placeholder="Password" [(ngModel)]="Password" name="Password" id="Password" />
-              <button (click)="validateUser()" class="btn orange-flat-button" type="button">login</button>
-
-
-              <!-- <button (click)="loginWithWindowsUser()" type="button">Windows User</button> -->
-              <p class="text-danger">{{message}}</p>
-              <!--<p class="message">Developed by Tharindu @ HNBA IT Dept.</p>-->
-            </form>
-          </div>
-
-
+      <div class="col">
+        <div class="hide-md-lg">
+          <p>Or sign in manually:</p>
         </div>
-        <div class="col-sm-2">
-        </div>
+
+        <!-- <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login"> -->
+
+        <input type="text" placeholder="User Name" [(ngModel)]="UserName" name="UserName" id="UserName" />
+        <input type="password" placeholder="Password" [(ngModel)]="Password" name="Password" id="Password" />
+        <button (click)="validateUser()" class="btn orange-flat-button" type="submit">login</button>
+
       </div>
 
     </div>
+  </form>
+</div>
+
+
+
+<div class="row">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-1">             
+            </div>
+            <div class="col-sm-8">
+                <h5>2018 © HNBA Commission and Incentive Management System HNBA-IT</h5>
+            </div>
+          </div>   
+    </div>
   </div>
 
+  
 
+<div class="bottom-container">
+
+</div>
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-4">
+    <a href="#" style="color:white" class="btn">Sign up</a>
+  </div>
+  <div class="col-sm-4">
+    <a href="#" style="color:white" class="btn">Forgot password?</a>
+  </div>
+  <div class="col-sm-2">
+  </div>
 </div>

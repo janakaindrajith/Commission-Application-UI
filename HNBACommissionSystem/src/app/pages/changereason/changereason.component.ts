@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../shared/models/user/user.model';
 import { ChangereasonService } from '../../shared/services/ChangeReason/changereason.service';
 import { IChangeReason } from '../../shared/models/ChangeReason.models';
+import { ToastrService } from "toastr-ng2/toastr";
+
+
 
 @Component({
   selector: 'app-changereason',
@@ -24,7 +27,7 @@ export class ChangereasonComponent implements OnInit {
   isSAVEDisabled: boolean = false;
   isCANCELDisabled: boolean = false;
 
-  constructor(private ChangereasonService: ChangereasonService) { }
+  constructor(private ChangereasonService: ChangereasonService,private toastrService: ToastrService) { }
 
   ngOnInit() {
 
@@ -32,6 +35,25 @@ export class ChangereasonComponent implements OnInit {
     this.FormButtonStatusChange('LOAD');
     this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
   }
+
+  showSuccess(message) {
+    this.toastrService.success(message, 'Success!');
+    }
+    
+      
+    showError(message) {
+    this.toastrService.error(message, 'Oops!');
+    }
+    
+      
+    showWarning(message) {
+    this.toastrService.warning(message, 'Alert!');
+    }
+    
+      
+    showInfo(message) {
+    this.toastrService.info(message);
+    }
 
   getChangeReasons() {
     this.ChangereasonService.getchangereasons()
@@ -58,6 +80,15 @@ export class ChangereasonComponent implements OnInit {
 
   SaveRecord() {
 
+    if (this.CODE.length == 0) {
+      this.showError("Code can not be empty....");
+      return;
+    }
+
+    if (this.DESCRIPTION.length == 0) {
+      this.showError("Description can not be empty....");
+      return;
+    }
 
     try {
 

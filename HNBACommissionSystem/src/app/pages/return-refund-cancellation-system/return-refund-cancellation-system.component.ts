@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MomentModule } from 'angular2-moment';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -21,11 +22,11 @@ import { NgZone, Inject, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ToastrService } from "toastr-ng2/toastr";
 
 @Component({
-  selector: 'app-return-refund-cancellation',
-  templateUrl: './return-refund-cancellation.component.html',
-  styleUrls: ['./return-refund-cancellation.component.css']
+  selector: 'app-return-refund-cancellation-system',
+  templateUrl: './return-refund-cancellation-system.component.html',
+  styleUrls: ['./return-refund-cancellation-system.component.css']
 })
-export class ReturnRefundCancellationComponent implements OnInit {
+export class ReturnRefundCancellationSystemComponent implements OnInit {
 
   datepickerOpts = {
     format: 'dd/mm/yyyy'
@@ -98,7 +99,7 @@ export class ReturnRefundCancellationComponent implements OnInit {
   rtnDate: Date = null;
   User: IUser;
 
-  PIDList: Array<IPIDSearch> = [];
+  PIDList: Array<IRefund> = [];
 
   RefundList: Array<ICommon> = [];
 
@@ -114,27 +115,48 @@ export class ReturnRefundCancellationComponent implements OnInit {
   isCANCELDisabled: boolean = false;
 
 
-    //--------------------Control Enabled Disabled variables----------------------
-    isTypeDisabled: boolean = false;
-    isCancellationFeeDisabled: boolean = false;
-    isAdviceRefDisabled: boolean = false;
-    isRecoveryFeeDisabled: boolean = false;
-    isNarrationDisabled: boolean = false;
-    isAmountDisabled: boolean = false;
+  //--------------------Control Enabled Disabled variables----------------------
+  isTypeDisabled: boolean = false;
+  isCancellationFeeDisabled: boolean = false;
+  isAdviceRefDisabled: boolean = false;
+  isRecoveryFeeDisabled: boolean = false;
+  isNarrationDisabled: boolean = false;
+  isAmountDisabled: boolean = false;
 
-    isLoading: string;
+
 
   constructor(private PIDSearchService: PIDSearchService, private PIDDetailsService: PIDDetailsService, private RefundService: RefundService, private CommonService: CommonService, private toastrService: ToastrService) { }
   //constructor(private PIDSearchService: PIDSearchService) { }
 
   ngOnInit() {
 
-    this.isLoading = "Unloading";
+    this.getMappingFailedRefunds();
 
     this.FormButtonStatusChange('LOAD');
 
     this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
 
+  }
+
+
+  getMappingFailedRefunds() {
+
+    this.RefundService.GetSystemMappingFailedRefunds()
+      .subscribe((data) => {
+
+        this.PIDList = data;
+
+        console.log(JSON.stringify(data));
+
+        if (this.PIDList.length == 0) {
+          //alert('No Record Found....');
+          this.showWarning('No Refund Records Found....');
+          this.PIDList = null;
+          return;
+        }
+
+      },
+      (err) => console.log(err));
   }
 
 
@@ -176,7 +198,7 @@ export class ReturnRefundCancellationComponent implements OnInit {
 
   clearRecord() {
     this.RFD_AMT = "";
-    this.RFD_REASON = "";
+    //this.RFD_REASON = "";
     this.RFD_CANCELLATION_FEE = "";
     this.RFD_RECOVERY_FEE = "";
     this.RFD_ADVICE_REF = "";
@@ -235,11 +257,11 @@ export class ReturnRefundCancellationComponent implements OnInit {
       this.RFD_ADVICE_REF_CLS = "form-group";
 
 
-      this.isTypeDisabled= false;
-      this.isCancellationFeeDisabled= false;
-      this.isAdviceRefDisabled= false;
-      this.isRecoveryFeeDisabled= false;
-      this.isNarrationDisabled= false;
+      this.isTypeDisabled = false;
+      this.isCancellationFeeDisabled = false;
+      this.isAdviceRefDisabled = false;
+      this.isRecoveryFeeDisabled = false;
+      this.isNarrationDisabled = false;
       this.isAmountDisabled = false;
 
 
@@ -271,11 +293,11 @@ export class ReturnRefundCancellationComponent implements OnInit {
       this.isSAVEDisabled = true;
       this.isCANCELDisabled = true;
 
-      this.isTypeDisabled= true;
-      this.isCancellationFeeDisabled= true;
-      this.isAdviceRefDisabled= true;
-      this.isRecoveryFeeDisabled= true;
-      this.isNarrationDisabled= true;
+      this.isTypeDisabled = true;
+      this.isCancellationFeeDisabled = true;
+      this.isAdviceRefDisabled = true;
+      this.isRecoveryFeeDisabled = true;
+      this.isNarrationDisabled = true;
       this.isAmountDisabled = true;
 
       this.PID_RECEIPT_NO = "";
@@ -297,11 +319,11 @@ export class ReturnRefundCancellationComponent implements OnInit {
       this.isSAVEDisabled = true;
       this.isCANCELDisabled = true;
 
-      this.isTypeDisabled= true;
-      this.isCancellationFeeDisabled= true;
-      this.isAdviceRefDisabled= true;
-      this.isRecoveryFeeDisabled= true;
-      this.isNarrationDisabled= true;
+      this.isTypeDisabled = true;
+      this.isCancellationFeeDisabled = true;
+      this.isAdviceRefDisabled = true;
+      this.isRecoveryFeeDisabled = true;
+      this.isNarrationDisabled = true;
       this.isAmountDisabled = true;
 
       this.PID_RECEIPT_NO = "";
@@ -321,6 +343,7 @@ export class ReturnRefundCancellationComponent implements OnInit {
       this.PID_AVAILABLE_AMT = "";
       this.RFD_PV_NO = "";
       this.RFD_TYPE = 0;
+      this.RFD_REASON = "";
     }
     if (Status == 'LOAD') {
       this.isNEWDisabled = false;
@@ -328,11 +351,11 @@ export class ReturnRefundCancellationComponent implements OnInit {
       this.isSAVEDisabled = true;
       this.isCANCELDisabled = true;
 
-      this.isTypeDisabled= true;
-      this.isCancellationFeeDisabled= true;
-      this.isAdviceRefDisabled= true;
-      this.isRecoveryFeeDisabled= true;
-      this.isNarrationDisabled= true;
+      this.isTypeDisabled = true;
+      this.isCancellationFeeDisabled = true;
+      this.isAdviceRefDisabled = true;
+      this.isRecoveryFeeDisabled = true;
+      this.isNarrationDisabled = true;
       this.isAmountDisabled = true;
 
       // this.PID_RECEIPT_NO = "";
@@ -356,16 +379,20 @@ export class ReturnRefundCancellationComponent implements OnInit {
     }
   }
 
-  private setPIDReceiptNo = function (index, ID) {
+  private setPIDReceiptNo = function (index, RFD_ID, RECIEPT_NO) {
 
-    this.getPIDDetailsByID(ID);
+
+    this.getRefundNOTRecordsByReceiptNo(RFD_ID);
     //this.FormButtonStatusChange('EDIT');
 
-    this.getRefundDetails(ID);
+    if (RECIEPT_NO.length > 0) {
 
-    this.getCommissionDetails(ID);
+      // this.getRefundDetails(RECIEPT_NO);
+      // this.getCommissionDetails(RECIEPT_NO);
+      // this.getCommissionRefundDetails(RECIEPT_NO);
 
-    this.getCommissionRefundDetails(ID);
+    }
+
 
   }
 
@@ -429,22 +456,30 @@ export class ReturnRefundCancellationComponent implements OnInit {
   }
 
 
-  getPIDDetailsByID(ID) {
+  getRefundNOTRecordsByReceiptNo(RFD_ID) {
 
-    this.PIDDetailsService.getPIDDetails(ID)
+    this.RefundService.GetRefundNOT(RFD_ID)
       .subscribe((data) => {
         console.log(data);
 
-        let obj: IPID = JSON.parse(JSON.stringify(data));
+        let obj: IRefund = JSON.parse(JSON.stringify(data));
 
-        this.PID_RECEIPT_NO = obj.PidReceiptNo,
-          this.PID_RECEIPT_AMT = obj.PidReceiptAmt.toLocaleString(),
-          this.PID_RECEIPT_DATE = obj.PidReceiptDate.toString(),
-          this.PID_PROPOSAL_NO = obj.PidProposalNo.toString(),
-          this.PID_POLICY_NO = obj.PidPolicyNo.toString(),
-          this.PID_CUSTOMER = obj.PidCustomerName.toString(),
-          this.PID_AVAILABLE_AMT = obj.PidAvailableAmt.toString()
-        this.PID_AGT_CODE = obj.PidAgtCode.toString()
+        console.log(obj);
+        // <!-- 1 - refund  / 2 - cancellation  3 - cheque returns -->
+        this.RFD_ID = obj.RfdId,
+          this.RFD_RECEIPT_NO = obj.RfdReceiptNo,
+          this.PID_RECEIPT_AMT = obj.RfdAmt.toLocaleString(),
+          this.RFD_REFUND_DATE = obj.RfdRefundDate.toString()
+        this.RFD_TYPE = obj.RfdType;
+
+        this.PID_PROPOSAL_NO = obj.RfdProposalNo;
+        this.PID_POLICY_NO = obj.RfdPolicyNo;
+        this.RFD_REASON = obj.RfdReason
+        // this.rf = obj.RfdProposalNo.toString(),
+        // this.PID_POLICY_NO = obj.RfdPolicyNo.toString(),
+        // this.PID_CUSTOMER = '',
+        // this.PID_AVAILABLE_AMT = '',
+        // this.PID_AGT_CODE = obj.RfdAgtCode
 
       });
   }
@@ -485,6 +520,12 @@ export class ReturnRefundCancellationComponent implements OnInit {
   SaveRecord() {
 
     try {
+
+      if ((Number(this.RFD_AMT) + Number(this.RFD_CANCELLATION_FEE) + Number(this.RFD_RECOVERY_FEE) != Number(this.PID_RECEIPT_AMT.replace(',', '')))) {
+        this.showError('Please check the amounts you have entered....');
+        return;
+      }
+
 
       this.RFD_AMT_CLS = "form-group";
       this.RFD_CANCELLATION_FEE_CLS = "form-group";
@@ -527,15 +568,16 @@ export class ReturnRefundCancellationComponent implements OnInit {
       }
 
       // if (this.RFD_AMT > this.PID_AVAILABLE_AMT) {
-      if (Number(this.RFD_AMT) > Number(this.PID_AVAILABLE_AMT)) {
-        alert('Refund Amount Cannot be Exceeded than the Available Amount..');
-        return;
-      }
-      
+      // if (Number(this.RFD_AMT) > Number(this.PID_AVAILABLE_AMT)) {
+      //   alert('Refund Amount Cannot be Exceeded than the Available Amount..');
+      //   return;
+      // }
+
+
 
       let obj: IRefund = {
         RfdId: this.RFD_ID,
-        RfdReceiptNo: this.PID_RECEIPT_NO,
+        RfdReceiptNo: this.RFD_RECEIPT_NO,
         RfdRefundDate: this.SetDateFormat(this.RFD_REFUND_DATE).toString(),
         RfdType: this.RFD_TYPE,
         RfdAmt: parseFloat(this.RFD_AMT.toString()),
@@ -560,41 +602,37 @@ export class ReturnRefundCancellationComponent implements OnInit {
       }
       console.log(obj);
 
-      this.RefundService.saveRefund(obj).subscribe((data: any) => {
+      this.RefundService.saveRefundNOT(obj).subscribe((data: any) => {
         console.log(data);
 
-        //this.getLevels();
-
-
-
-
-        //this.RFD_PV_NO = data.substring(0 + 1, data.indexOf("|"));
-        //this.RFD_PV_NO = data.substring(data.indexOf("|") + 1, data.indexOf("||"));
-
-
         let body = data.text()
-
         this.RFD_PV_NO = body.substring(1, 9);
 
-
+        this.getMappingFailedRefunds();
+        this.FormButtonStatusChange('LOAD');
 
         if (data.toString().replace(/"/g, '') == "ERROR") {
-          console.log("Error saving Designation");
+          console.log("Error saving Refund");
           //alert("Error Occured.");
           this.showError('Error Occured.');
         } else {
-          console.log("Designation Successfully Saved.");
+          console.log("Refund Successfully Saved.");
           //alert("Successfully Saved.");
           this.showSuccess('Refund Successfully Saved.');
+
+
+
         }
       },
         (err) => {
           console.log(err);
-          console.log("Error saving Designation");
+          console.log("Error saving Refund");
           //alert("Error Occured.");
           this.showError('Error Occured.');
         },
         () => console.log('done'));
+
+
 
     } catch (error) {
 
@@ -607,8 +645,6 @@ export class ReturnRefundCancellationComponent implements OnInit {
 
 
   SearchRecord() {
-
-    this.isLoading = "loading";
 
     let obj: IPIDSearch = {
 
@@ -631,17 +667,14 @@ export class ReturnRefundCancellationComponent implements OnInit {
     console.log(obj);
 
     this.PIDSearchService.GetPIDDetails(obj)
-      .subscribe((data) => { 
+      .subscribe((data) => {
 
         this.PIDList = data;
-
-        this.isLoading = "Unloading";
 
         console.log(JSON.stringify(data));
 
         if (this.PIDList.length == 0) {
           // alert('No Record Found....');
-          this.isLoading = "Unloading";
           this.showWarning('No PID Records Found....');
           this.PIDList = null;
           return;
@@ -649,6 +682,8 @@ export class ReturnRefundCancellationComponent implements OnInit {
 
       },
       (err) => console.log(err));
-      this.isLoading = "Unloading";
   }
+
+
 }
+

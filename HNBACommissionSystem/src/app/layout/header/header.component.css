@@ -25,7 +25,7 @@
 
 
 /* ============================Mega Mneu Start============================= */
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+/* @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700); */
 
 body{
   font-family: 'Open Sans',sans-serif;
@@ -106,7 +106,14 @@ body{
   height: auto !important;
   padding-bottom: 1px;
   /* overflow: visible !important; */
-  background-color: #31465a;
+  /* background-color: #31465a; */
+
+
+  height: 200px;
+  background: red; /* For browsers that do not support gradients */
+  /* background: linear-gradient(to bottom right , #274B93, #8E71E6);  */
+  background: linear-gradient(to bottom right , #042D6C, #042D6C);
+  
   -webkit-box-shadow: inset 0 -2px #e8930c;
   box-shadow: inset 0 -2px #e8930c;
   box-shadow: 0 6px 12px rgba(0,0,0,0.175);
@@ -163,3 +170,71 @@ body {
 }
 
 
+
+
+
+body {margin:0;}
+
+.icon-bar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+}
+
+.icon-bar a {
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: 0px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 29px;
+}
+
+.icon-bar a:hover {
+    background-color: #000;
+}
+
+.active {
+    background-color: #eadc47ed !important;
+}
+
+.fa-size {
+  font-size: 33px;
+  width: 60px !important;
+  text-align: left;
+}
+
+.pointer {cursor: pointer;}
+
+/* ----------------------Horizontal line with text------------------------ */
+.content-subhead {
+  text-transform: uppercase;
+  color: #aaa;
+  border-bottom: 1px solid #eee;
+  padding: 0.4em 0;
+  font-size: 80%;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0;
+  text-align: right;
+}
+/* ----------------------Horizontal line with text------------------------ */
+
+/* ----------------------Uaer Login Lable--------------------------------- */
+.user {
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-size: 80%;
+  text-align: right;
+  /* border-bottom: 1px solid #eee;
+  padding: 0.4em 0;
+  font-size: 80%;
+  font-weight: 500;
+  letter-spacing: 0.1em; */
+}
+/* ----------------------Uaer Login Lable--------------------------------- */

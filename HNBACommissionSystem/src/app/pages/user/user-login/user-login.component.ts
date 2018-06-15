@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../../shared/services/user/authenticat
 import { IUser } from '../../../shared/models/user/user.model';
 
 import { USER } from '../../../shared/config/user';
+import { ToastrService } from "toastr-ng2/toastr";
 
 @Component({
   selector: 'app-user-login',
@@ -19,14 +20,29 @@ export class UserLoginComponent implements OnInit {
   Password: string;
   message: string;
 
-  constructor(private router: Router,
-    private authenticationService: AuthenticationService) { }
+  constructor(private router: Router, private toastrService: ToastrService , private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.authenticationService.logout();
 
     // this.UserName = "tda";
     // this.Password = "tda";
+  }
+
+  showSuccess(message) {
+    this.toastrService.success(message, 'Success!');
+  }
+
+  showError(message) {
+    this.toastrService.error(message, 'Oops!');
+  }
+
+  showWarning(message) {
+    this.toastrService.warning(message, 'Alert!');
+  }
+
+  showInfo(message) {
+    this.toastrService.info(message);
   }
 
   public loginWithWindowsUser() {
@@ -56,6 +72,7 @@ export class UserLoginComponent implements OnInit {
 
             } else {
               this.message = "Invalid User name or Password...";
+              
             }
           }),
           ((err) => {
@@ -76,38 +93,41 @@ export class UserLoginComponent implements OnInit {
 
   public validateUser() {
 
+    try {
 
-
-    this.isLoading = true;
-
-          //this.router.navigate(['/', 'mainDashboard']);
-
-    this.authenticationService.CheckAndLoadUser(this.UserName, this.Password)
-      .subscribe((data) => {
-
-
-        this.isLoading = false;
-        console.log(data);
-        this.User = data
-        if (this.User.UserName != null) {
-          USER.USER_AUTH_TOKEN = 'Basic ' + btoa(this.User.UserName + ':' + this.User.Password);
-          console.log(USER.USER_AUTH_TOKEN);
-          console.log('xx');
-          localStorage.setItem("currentCOMUser", JSON.stringify(this.User));
-          localStorage.setItem("currentCOMUserToken", USER.USER_AUTH_TOKEN);
-          this.router.navigate(['/', 'index']);
-
-        } else {
-          this.message = "Invalid User name or Password...";
-        }
-      }),
-      ((err) => {
-        console.log(err);
-        this.message = "Error while user login...";
-      });
-
-
-
+      this.isLoading = true;
+      
+                //this.router.navigate(['/', 'mainDashboard']);
+      
+          this.authenticationService.CheckAndLoadUser(this.UserName, this.Password)
+            .subscribe((data) => {
+      
+      
+              this.isLoading = false;
+              console.log(data);
+              this.User = data
+              if (this.User.UserName != null) {
+                USER.USER_AUTH_TOKEN = 'Basic ' + btoa(this.User.UserName + ':' + this.User.Password);
+                console.log(USER.USER_AUTH_TOKEN);
+                console.log('xx');
+                localStorage.setItem("currentCOMUser", JSON.stringify(this.User));
+                localStorage.setItem("currentCOMUserToken", USER.USER_AUTH_TOKEN);
+                this.router.navigate(['/', 'index']);
+      
+              } else {
+                this.message = "Invalid User name or Password...";
+                this.showWarning("Invalid User name or Password...");
+              }
+            }),
+            ((err) => {
+              console.log(err);
+              this.message = "Error while user login...";
+              alert('');
+            });
+      
+    } catch (error) {
+      this.showWarning(error);
+    }
 
   }
 }

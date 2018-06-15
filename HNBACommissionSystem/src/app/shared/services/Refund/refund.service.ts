@@ -33,7 +33,7 @@ export class RefundService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Authorization', USER.USER_AUTH_TOKEN);
     let options = new RequestOptions({ headers: headers });
-    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/Get', options)
+    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetNonConfirmedRefunds', options)
       .map((response: Response) => response.json())
       .timeout(60000)
       .catch((error: any) => {
@@ -57,20 +57,48 @@ export class RefundService {
       });
   }
 
+  GetRealisationRequiredRefundsForReconciliation(RefundID) {
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        headers.append('Authorization', USER.USER_AUTH_TOKEN);
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRealisationRequiredRefundsForReconciliation?RefundID=' + RefundID, options)
+          .map((response: Response) => response.json())
+          .timeout(60000)
+          .catch((error: any) => {
+            //this.handleError; 
+            return Observable.throw(new Error(error.status))
+          });
+      }
 
 
-  GetRealisationRequiredRefundsByProposalNo(ProposalNo) {
+  GetSystemMappingFailedRefunds() {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetSystemMappingFailedRefunds', options)
+      .map((response: Response) => response.json())
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError; 
+        return Observable.throw(new Error(error.status))
+      });
+  }
+
+
+
+  GetRealisationRequiredRefundsByRefundID(RefundID) {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     headers.append('Authorization', USER.USER_AUTH_TOKEN);
     let options = new RequestOptions({ headers: headers });
-    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRealisationRequiredRefundsByProposalNo?ProposalNo=' + ProposalNo, options)
-    .map((response: Response) => response.json())
-    .timeout(60000)
-    .catch((error: any) => {
-      //this.handleError; 
-      return Observable.throw(new Error(error.status))
-    });
+    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRealisationRequiredRefundsByRefundID?RefundID=' + RefundID, options)
+      .map((response: Response) => response.json())
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError; 
+        return Observable.throw(new Error(error.status))
+      });
 
   }
 
@@ -88,6 +116,20 @@ export class RefundService {
         return Observable.throw(new Error(error.status))
       });
   }
+
+    //getSingleRecord
+    GetRefundNOT(RFD_ID) {
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      headers.append('Authorization', USER.USER_AUTH_TOKEN);
+      let options = new RequestOptions({ headers: headers });
+      return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRefundNOT?RFD_ID=' + RFD_ID, options)
+        .map((response: Response) => response.json())
+        .timeout(60000)
+        .catch((error: any) => {
+          //this.handleError; 
+          return Observable.throw(new Error(error.status))
+        });
+    }
 
 
   //post   
@@ -108,7 +150,25 @@ export class RefundService {
   }
 
 
-  UpdateRecStatus(params){
+    //post   
+    saveRefundNOT(params) {
+      let body = params;
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      headers.append('Authorization', USER.USER_AUTH_TOKEN);
+      let postoptions = new RequestOptions({ headers: headers });
+      return this.http.post(URL_CONST.URL_PREFIX + 'api/Refund/SaveRefundNOT', body, postoptions)
+        .map((response: Response) => {
+          return response;
+        })
+        .timeout(60000)
+        .catch((error: any) => {
+          //this.handleError;
+          return Observable.throw(new Error(error.status))
+        });
+    }
+
+
+  UpdateRecStatus(params) {
 
     let body = params;
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -145,21 +205,21 @@ export class RefundService {
 
 
   RefundStatusChangeBulk(params) {
-    
-        let body = params;
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', USER.USER_AUTH_TOKEN);
-        let postoptions = new RequestOptions({ headers: headers });
-        return this.http.post(URL_CONST.URL_PREFIX + 'api/Refund/RefundStatusChangeBulk', body, postoptions)
-          .map((response: Response) => {
-            return response;
-          })
-          .timeout(60000)
-          .catch((error: any) => {
-            //this.handleError;
-            return Observable.throw(new Error(error.status))
-          });
-      }
+
+    let body = params;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let postoptions = new RequestOptions({ headers: headers });
+    return this.http.post(URL_CONST.URL_PREFIX + 'api/Refund/RefundStatusChangeBulk', body, postoptions)
+      .map((response: Response) => {
+        return response;
+      })
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError;
+        return Observable.throw(new Error(error.status))
+      });
+  }
 
 
 }

@@ -52,9 +52,13 @@ export class RecConfirmationComponent implements OnInit {
 
   RefundList: Array<IRefund> = [];
 
+  ChequeList: Array<IRefund> = [];
+
   SelectedList: any;
 
   isChecked: boolean = false;
+
+  isLoading: string;
 
   constructor(private RefundService: RefundService, private toastrService: ToastrService) { }
 
@@ -64,8 +68,37 @@ export class RecConfirmationComponent implements OnInit {
 
     this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
 
-    this.GetNonConfirmedRefunds();
+    this.GetRealisationRequiredRefunds();
 
+    //this.GetRealisationRequiredRefundsForReconciliation();
+
+  }
+
+  private GetRefundRelatedCheque = function (RefundID) {
+
+    this.isLoading = "loading";
+
+    this.GetRealisationRequiredRefundsForReconciliation(RefundID);
+
+    this.isLoading = "Unloading";
+
+  }
+
+  GetRealisationRequiredRefunds() {
+
+    this.RefundService.GetRealisationRequiredRefunds()
+      .subscribe((data) => {
+
+        this.RefundList = data;
+
+        console.log(JSON.stringify(data));
+
+        if (this.RefundList.length == 0) {
+          // alert('No Record Found....');
+          this.RefundList = null;
+          return;
+        }
+      });
   }
 
   //--------------Check Date when Save--------------------------------------------------
@@ -100,12 +133,12 @@ export class RecConfirmationComponent implements OnInit {
   }
   //------------------------------------------------------------------------------------
 
-  GetNonConfirmedRefunds() {
+  GetRealisationRequiredRefundsForReconciliation(RefundID) {
 
-    this.RefundService.GetRealisationRequiredRefunds()
+    this.RefundService.GetRealisationRequiredRefundsForReconciliation(RefundID)
       .subscribe((data) => {
 
-        this.RefundList = data;
+        this.ChequeList = data;
 
         console.log(JSON.stringify(data));
 
@@ -137,76 +170,128 @@ export class RecConfirmationComponent implements OnInit {
 
   UpdateRecords() {
 
-    if (this.RED_SELECTED_RECIEPT_NO == "") {
-      this.showError("Please select a record for update....");
-      return;
-    }
 
-    if (this.RED_SELECTED_APPROVE_STATUS == "") {
-      this.showError("Please select the status approve or reject....");
-      return;
-    }
+    let selectedRows = this.ChequeList.filter((data: any) => data.selected);
+    let NotselectedRows = this.ChequeList.filter((data: any) => data.NotselectedRows);
+
+
 
     if (confirm("Are you sure you want to confirm selected records? ")) {
-      try {
-        let obj: IRefund = {
-          RfdId: Number(this.RED_SELECTED_REFUND_ID),
-          RfdReceiptNo: this.RED_SELECTED_RECIEPT_NO,
-          RfdRefundDate: null,
-          RfdType: 0,
-          RfdAmt: Number(this.RED_SELECTED_RECIEPT_AMT),
-          RfdPercentage: 0,
-          RfdBy: '',
-          RfdReason: '',
-          RfdAgtCode: '',
-          RfdProcessInd: '',
-          RfdRvNo: '',
-          RfdPvNo: '',
-          RfdBalType: '',
-          RfdCreatedBy: '',
-          RfdStatus: 1, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
-          RfdProposalNo: this.RED_SELECTED_PROPOSAL_NO,
-          RfdPolicyNo: '',
-          RfdCancellationFee: 0,
-          RfdRecoveryFee: 0,
-          RfdRecStatus: this.RED_SELECTED_APPROVE_STATUS,
-          RfdRecNarration: this.RED_SELECTED_APPROVE_NARRATION,
-          RfdRecUpdatedBy: this.User.UserName,
-          RfdRecUpdatedDate: ''
+
+      //---------------Approve Cheque payments--------------
+      for (let entry of selectedRows) {
+        console.log(entry.RfdReceiptNo);
+
+        try {
+          let obj: IRefund = {
+            RfdId: Number(entry.RfdId),
+            RfdReceiptNo: entry.RfdReceiptNo,
+            RfdRefundDate: null,
+            RfdType: 0,
+            RfdAmt: 0,
+            RfdPercentage: 0,
+            RfdBy: '',
+            RfdReason: '',
+            RfdAgtCode: '',
+            RfdProcessInd: '',
+            RfdRvNo: '',
+            RfdPvNo: '',
+            RfdBalType: '',
+            RfdCreatedBy: '',
+            RfdStatus: 2, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
+            RfdProposalNo: '',
+            RfdPolicyNo: '',
+            RfdCancellationFee: 0,
+            RfdRecoveryFee: 0,
+            RfdRecStatus: '',
+            RfdRecNarration: '',
+            RfdRecUpdatedBy: this.User.UserName,
+            RfdRecUpdatedDate: ''
+          }
+
+          console.log(obj);
+
+          this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
+            console.log(data);
+
+            if (data.toString().replace(/"/g, '') == "ERROR") {
+              this.showError('Error Occured.');
+            } else {
+              this.showSuccess('Refund Successfully Saved.');
+            }
+          },
+            (err) => {
+              console.log(err);
+              console.log("Error saving Designation");
+              this.showError('Error Occured.');
+            },
+            () => console.log('done'));
+
+        } catch (error) {
+
         }
 
-        console.log(obj);
-
-        this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
-          console.log(data);
-          // let body = data.text()
-          // this.RFD_PV_NO = body.substring(1, 9);
-
-          if (data.toString().replace(/"/g, '') == "ERROR") {
-            console.log("Error saving Designation");
-            //alert("Error Occured.");
-            this.showError('Error Occured.');
-          } else {
-            console.log("Designation Successfully Saved.");
-            //alert("Successfully Saved.");
-            this.showSuccess('Refund Successfully Saved.');
-          }
-        },
-          (err) => {
-            console.log(err);
-            console.log("Error saving Designation");
-            //alert("Error Occured.");
-            this.showError('Error Occured.');
-          },
-          () => console.log('done'));
-
-      } catch (error) {
-
       }
+      //==================================================
+
+      //--------------Reject cheque payments--------------
+      for (let entry of NotselectedRows) {
+        console.log(entry.RfdReceiptNo);
+
+        try {
+          let obj: IRefund = {
+            RfdId: Number(entry.RfdId),
+            RfdReceiptNo: entry.RfdReceiptNo,
+            RfdRefundDate: null,
+            RfdType: 0,
+            RfdAmt: 0,
+            RfdPercentage: 0,
+            RfdBy: '',
+            RfdReason: '',
+            RfdAgtCode: '',
+            RfdProcessInd: '',
+            RfdRvNo: '',
+            RfdPvNo: '',
+            RfdBalType: '',
+            RfdCreatedBy: '',
+            RfdStatus: 3, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
+            RfdProposalNo: '',
+            RfdPolicyNo: '',
+            RfdCancellationFee: 0,
+            RfdRecoveryFee: 0,
+            RfdRecStatus: '',
+            RfdRecNarration: '',
+            RfdRecUpdatedBy: this.User.UserName,
+            RfdRecUpdatedDate: ''
+          }
+
+          console.log(obj);
+
+          this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
+            console.log(data);
+
+            if (data.toString().replace(/"/g, '') == "ERROR") {
+              this.showError('Error Occured.');
+            } else {
+              this.showSuccess('Refund Successfully Saved.');
+            }
+          },
+            (err) => {
+              console.log(err);
+              console.log("Error saving Designation");
+              this.showError('Error Occured.');
+            },
+            () => console.log('done'));
+
+        } catch (error) {
+
+        }
+      }
+      //========================================================
 
     }
 
-    this.GetNonConfirmedRefunds();
+    //this.GetRealisationRequiredRefundsForReconciliation();
 
   }
 
@@ -231,12 +316,13 @@ export class RecConfirmationComponent implements OnInit {
   // }
 
 
-  private setREFUNDReceiptNo = function (index, REFUND_RECEIPT_NO, REFUND_ID, RED_PROPOSAL_NO) {
+  private setREFUNDReceiptNo = function (index, REFUND_RECEIPT_NO, REFUND_ID, RED_PROPOSAL_NO, REFUND_AMT) {
 
 
     this.RED_SELECTED_RECIEPT_NO = REFUND_RECEIPT_NO;
     this.RED_SELECTED_REFUND_ID = REFUND_ID;
     this.RED_SELECTED_PROPOSAL_NO = RED_PROPOSAL_NO;
+    this.RED_SELECTED_RECIEPT_AMT = REFUND_AMT;
 
   }
 

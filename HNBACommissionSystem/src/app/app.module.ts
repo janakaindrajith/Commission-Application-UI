@@ -84,6 +84,8 @@ import { BancaOfficerComponent } from './pages/banca-officer/banca-officer.compo
 import { RefundRealisationComponent } from './pages/refund-realisation/refund-realisation.component';
 import { IndexComponent } from './pages/index/index.component';
 import { RecConfirmationComponent } from './pages/rec-confirmation/rec-confirmation.component';
+import { ReturnRefundCancellationSystemComponent } from './pages/return-refund-cancellation-system/return-refund-cancellation-system.component';
+import { BatchProcessComponent } from './pages/batch-process/batch-process.component';
 
 
 
@@ -126,7 +128,9 @@ import { RecConfirmationComponent } from './pages/rec-confirmation/rec-confirmat
     BancaOfficerComponent,
     RefundRealisationComponent,
     IndexComponent,
-    RecConfirmationComponent
+    RecConfirmationComponent,
+    ReturnRefundCancellationSystemComponent,
+    BatchProcessComponent
 
   ],
   imports: [

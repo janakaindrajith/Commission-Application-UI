@@ -127,17 +127,21 @@ div.desc {
 }
 
 .wellnew{
+    box-shadow: none;
 background-color:rgba(darkblue)!important;
 }
 
 .wellnew1{
     margin-left: 10px;
+    box-shadow: none;
     }
 
 .wellsearch{
+    box-shadow: none;
         margin-left: 10px;
-        background-color: #5eaabd;
-        box-shadow: 0 6px 12px rgba(150, 147, 230, 0.17);
+        background-color: #ecf0f1;
+        max-height: 90px;
+        /* box-shadow: 0 6px 12px rgba(150, 147, 230, 0.17); */
         }
     
 
@@ -177,6 +181,8 @@ background-color:rgba(darkblue)!important;
     border: 1px solid #dce4ec;
     /*background-color: #f4f7c5;*/
 }
+
+
 
 .input-group-addon {
     padding: 10px 15px;
@@ -246,18 +252,13 @@ margin-left: -3px;
 /*--------------------------------------------End CSS Custom ------------------------------------------------------*/
 
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+/* .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     color: #2c3e50;
-    background-color: #f9f4f0;
     border: 1px solid transparent;
     border-bottom-color: goldenrod;
     border-bottom-width: 3PX;
-    /* border-top-color: goldenrod; */
-
-
     cursor: default;
 
-    /* margin-right: 50px */
 }
 
 .nav > li > a {
@@ -266,7 +267,7 @@ margin-left: -3px;
     padding: 10px 14px;
     width: 140px;
     text-align:center
-}
+} */
 
 
 
@@ -325,4 +326,28 @@ margin-left: -3px;
 
 
 
+  /* Custom Table CSS */
+  .div-margin {
+    margin-left: 10px;
+    margin-right: -16px;
+  }
+
+table th, table td {
+    color: #999;
+    border: 1px solid rgb(241, 244, 205);
+    border-collapse: collapse;
+  }
   
+  table th {
+    text-transform: uppercase;
+    background: rgb(241, 244, 205);
+    font-size: 12px;
+  }
+  
+  table tr:hover {
+    background: rgb(241, 244, 205);
+  }
+  table tr:hover td {
+    font-style: italic;
+  }
+  /* Custom Table CSS */

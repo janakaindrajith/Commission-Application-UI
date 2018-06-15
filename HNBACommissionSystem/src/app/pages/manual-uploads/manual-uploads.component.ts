@@ -39,6 +39,8 @@ export class ManualUploadsComponent implements OnInit {
 
   Result: string;
 
+  isLoading: string;
+
 
   constructor( @Inject(NgZone) private zone: NgZone,private toastrService: ToastrService, private ref: ChangeDetectorRef, private UploadDocService: UploadDocService) {
 
@@ -62,6 +64,7 @@ export class ManualUploadsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isLoading = "Unloading";
 
     this.vHOSTED_URL_PREFIX = URL_CONST.HOSTED_URL_PREFIX;
 
@@ -170,7 +173,7 @@ export class ManualUploadsComponent implements OnInit {
   }
 
 
-  handleUpload(data: any) {
+  handleUpload(data: any) { this.isLoading = "loading";
     setTimeout(() => {
       this.zone.run(() => {
         // this.response = data;
@@ -182,9 +185,10 @@ export class ManualUploadsComponent implements OnInit {
 
           if (data.response.indexOf("An error has occurred.") == -1) {
             this.showSuccess("File Successfully Uploaded.");
-
+            this.isLoading = "Unloading";
           }else{
             this.showError(data.response);
+            this.isLoading = "Unloading";
             return;
           }
 
@@ -193,7 +197,7 @@ export class ManualUploadsComponent implements OnInit {
 
           console.log(JSON.parse(data.response));
           // this.showSuccess("Document Successfully Uploaded.");
-
+          this.isLoading = "Unloading";
         }
       });
     });

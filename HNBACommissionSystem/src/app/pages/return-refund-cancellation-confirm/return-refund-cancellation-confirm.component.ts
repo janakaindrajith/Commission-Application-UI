@@ -167,8 +167,6 @@ export class ReturnRefundCancellationConfirmComponent implements OnInit {
   GetTCSAuth(): Promise<any> {
     return new Promise((resolve, reject) => {
 
-
-
     });
   }
 
@@ -241,10 +239,10 @@ export class ReturnRefundCancellationConfirmComponent implements OnInit {
               //this.getLevels();
 
               if (data.toString().replace(/"/g, '') == "ERROR") {
-                console.log("Error saving Designation");
+                console.log("Error saving");
                 alert("Error Occured.");
               } else {
-                console.log("Designation Successfully Saved.");
+                console.log("Successfully Saved.");
                 alert("Successfully Saved.");
 
 
@@ -255,7 +253,7 @@ export class ReturnRefundCancellationConfirmComponent implements OnInit {
             },
               (err) => {
                 console.log(err);
-                console.log("Error saving Designation");
+                console.log("Error saving");
                 alert("Error Occured.");
 
                 reject(err);
@@ -327,6 +325,7 @@ export class ReturnRefundCancellationConfirmComponent implements OnInit {
               } else {
                 console.log("Designation Successfully Saved.");
 
+                this.GetNonConfirmedRefunds();
 
               }
 
@@ -387,10 +386,5 @@ export class ReturnRefundCancellationConfirmComponent implements OnInit {
         }
       });
   }
-
-
-
-
-
 
 }

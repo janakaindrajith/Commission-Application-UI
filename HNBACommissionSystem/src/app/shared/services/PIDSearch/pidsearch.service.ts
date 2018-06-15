@@ -12,50 +12,50 @@ export class PIDSearchService {
 
   constructor(private http: Http) { }
 
-  
+
   GetPIDDetails(params) {
 
-        console.log('GetPIDDetails');
+    console.log('GetPIDDetails');
 
-        let body = params;
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', USER.USER_AUTH_TOKEN);
-        let postoptions = new RequestOptions({ headers: headers });
-    
-        console.log(JSON.stringify(body));
+    let body = params;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let postoptions = new RequestOptions({ headers: headers });
 
-        console.log('C');
-    
-        return this.http.post(URL_CONST.URL_PREFIX + 'api/PIDSearch/SearchPID', body, postoptions)
-          .map((response: Response) => (response.json()))
-          .timeout(60000)
-          .catch((error: any) => {
-            //this.handleError;
-            return Observable.throw(new Error(error.status))
-          });
-      }
+    console.log(JSON.stringify(body));
+
+    console.log('C');
+
+    return this.http.post(URL_CONST.URL_PREFIX + 'api/PIDSearch/SearchPID', body, postoptions)
+      .map((response: Response) => (response.json()))
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError;
+        return Observable.throw(new Error(error.status))
+      });
+  }
 
 
-      GetPIDDetailsForRefund(params) {
-        
-                console.log('GetPIDDetails');
-        
-                let body = params;
-                let headers = new Headers({ 'Content-Type': 'application/json' });
-                headers.append('Authorization', USER.USER_AUTH_TOKEN);
-                let postoptions = new RequestOptions({ headers: headers });
-            
-                console.log(JSON.stringify(body));
-        
-                console.log('C');
-            
-                return this.http.post(URL_CONST.URL_PREFIX + 'api/PIDSearch/SearchPIDByProposalNo', body, postoptions)
-                  .map((response: Response) => (response.json()))
-                  .timeout(60000)
-                  .catch((error: any) => {
-                    //this.handleError;
-                    return Observable.throw(new Error(error.status))
-                  });
-              }
+  GetPIDDetailsForRefund(params) {
+
+    console.log('GetPIDDetails');
+
+    let body = params;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let postoptions = new RequestOptions({ headers: headers });
+
+    console.log(JSON.stringify(body));
+
+    console.log('C');
+
+    return this.http.post(URL_CONST.URL_PREFIX + 'api/PIDSearch/SearchPIDByProposalNo', body, postoptions)
+      .map((response: Response) => (response.json()))
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError;
+        return Observable.throw(new Error(error.status))
+      });
+  }
 
 }

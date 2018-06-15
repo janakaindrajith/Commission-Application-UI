@@ -1,0 +1,479 @@
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="content-subhead">Unsuccessful refunds by the automated refund mapping process.....</h1>
+  </div>
+</div>
+
+
+<!-- <div class="row">  
+    <div class="col-sm-4">
+        <hr class="style-two">
+    </div>
+</div> -->
+
+<div class="row">
+
+  <div class="col-sm-12">
+
+    <!-- <div class="well">
+      <div class="row"> -->
+    <!-- <table class="table vitamins"> -->
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>View</th>
+          <th style="display:none;">RECEIPT_NO</th>
+          <th>RECEIPT NO</th>
+          <th>REFUND AMT</th>
+          <th>REFUND DATE</th>
+          <th>PROPOSAL NO</th>
+          <th>POLICY NO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ORD of PIDList | paginate: {itemsPerPage:5  , currentPage:page, id: '1'}; let i = index" (click)="setPIDReceiptNo(i,ORD.RfdId,ORD.RfdReceiptNo);">
+
+          <td><a href="javascript:void(0)">View</a></td>
+          <td style="display:none;">
+            {{ORD.RfdId}}
+          </td>
+          <td>
+            {{ORD.RfdReceiptNo}}
+          </td>
+          <td>
+            {{ORD.RfdAmt}}
+          </td>
+          <td>
+            {{ORD.RfdRefundDate}}
+          </td>
+          <td>
+            {{ORD.RfdProposalNo}}
+          </td>
+          <td>
+            {{ORD.RfdPolicyNo}}
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+    <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
+    </pagination-controls>
+    <!-- </div>
+    </div> -->
+  </div>
+
+
+
+</div>
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-sm-12">
+
+    <div class="form-group">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">New Refund Details</div>
+        <div class="panel-body">
+
+
+
+          <div class="col-sm-4">
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Total Amount</p>
+                  <div class="col-xs-6">
+                    <input type="text" disabled="true" class="form-control" [(ngModel)]="PID_RECEIPT_AMT" name="PID_RECEIPT_AMT" id="PID_RECEIPT_AMT"
+                      placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Available Amount</p>
+                  <div class="col-xs-6">
+                    <input type="text" disabled="true" class="form-control" [(ngModel)]="PID_AVAILABLE_AMT" name="PID_AVAILABLE_AMT" id="PID_AVAILABLE_AMT"
+                      placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form> -->
+
+
+            <!-- <form class="form-horizontal">
+              <div class="row">
+                <div class={{RFD_ADVICE_REF_CLS}}>
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Advice Ref.</p>
+                  <div class="col-xs-6">
+                    <input type="text" class="form-control" [disabled]="true" [(ngModel)]="RFD_ADVICE_REF" name="RFD_ADVICE_REF"
+                      id="RFD_ADVICE_REF" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form> -->
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class={{RFD_AMT_CLS}}>
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Amount</p>
+                  <div class="col-xs-6">
+                    <input type="text" class="form-control" [disabled]="isAmountDisabled" [(ngModel)]="RFD_AMT" name="RFD_AMT" id="RFD_AMT" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+
+          <div class="col-sm-4">
+
+
+            <!-- <form class="form-horizontal">
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">PV Number</p>
+                  <div class="col-xs-6">
+                    <input type="text" disabled="true" class="form-control" [(ngModel)]="RFD_PV_NO" name="RFD_PV_NO" id="RFD_PV_NO" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form> -->
+
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class={{RFD_TYPE_CLS}}>
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Type</p>
+                  <div class="col-xs-6">
+                    <select class="form-control" [disabled]="true" [(ngModel)]="RFD_TYPE" name="RFD_TYPE" id="RFD_TYPE">
+                                <option value="0">-</option>
+                                <option value="1">REFUND</option>
+                                <option value="2">CANCELLATION</option>
+                                <option value="3">CHEQUE RETURN</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="row">
+              <div class="form-group">
+              </div>
+            </div>
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class={{RFD_CANCELLATION_FEE_CLS}}>
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-6">Cancellation Fee</p>
+                  <div class="col-xs-6">
+                    <input type="text" class="form-control" [disabled]="isCancellationFeeDisabled" [(ngModel)]="RFD_CANCELLATION_FEE" name="RFD_CANCELLATION_FEE"
+                      id="RFD_CANCELLATION_FEE" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+
+          <div class="col-sm-4">
+
+            <form class="form-horizontal">
+              <div class="row">
+                <div class={{RFD_REFUND_DATE_CLS}}>
+                  <div class="col-xs-0">
+                  </div>
+                  <p class="control-label col-xs-5">Date</p>
+                  <div class="col-xs-7">
+
+                    <span *ngIf=true>
+              
+                        <datetime name="date" [readonly]="false" item-height="50px" id="RFD_REFUND_DATE" [datepicker]="datepickerOpts"
+                        [(ngModel)]="RFD_REFUND_DATE" [timepicker]="false"></datetime>
+                        </span>
+
+                  </div>
+
+                </div>
+              </div>
+            </form>
+
+
+
+
+            <div class="row">
+              <div class="form-group">
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+
+            <!-- <div class="col-sm-4">
+              <form class="form-horizontal">
+                <div class="row">
+                  <div class={{RFD_ADVICE_REF_CLS}}>
+                    <div class="col-xs-0">
+                    </div>
+                    <p class="control-label col-xs-6">Advice Ref.</p>
+                    <div class="col-xs-6">
+                      <input type="text" class="form-control" [disabled]="isAdviceRefDisabled" [(ngModel)]="RFD_ADVICE_REF" name="RFD_ADVICE_REF"
+                        id="RFD_ADVICE_REF" placeholder="">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div> -->
+
+            <div class="col-sm-4">
+              <form class="form-horizontal">
+                <div class="row">
+                  <div class={{RFD_RECOVERY_FEE_CLS}}>
+                    <div class="col-xs-0">
+                    </div>
+                    <p class="control-label col-xs-6">Recovery Fee</p>
+                    <div class="col-xs-6">
+                      <input type="text" class="form-control" [disabled]="isRecoveryFeeDisabled" [(ngModel)]="RFD_RECOVERY_FEE" name="RFD_RECOVERY_FEE"
+                        id="RFD_RECOVERY_FEE" placeholder="">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-sm-12">
+              <form class="form-horizontal">
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-xs-0">
+                    </div>
+                    <p class="control-label col-xs-2">Narration</p>
+                    <div class="col-xs-10">
+                      <input type="text" class="form-control" [disabled]="true" [(ngModel)]="RFD_REASON" name="RFD_REASON" id="RFD_REASON" placeholder="">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8">
+              <div class="col-sm-2">
+                <button type="button" [disabled]="isNEWDisabled" (click)="NewRecord()" class="btn orange-flat-button">New Record</button>
+              </div>
+              <div class="col-sm-2">
+                <button type="button" [disabled]="isEDITDisabled" (click)="EditRecord()" class="btn orange-flat-button">Edit Record</button>
+              </div>
+              <div class="col-sm-2">
+                <button type="button" [disabled]="isSAVEDisabled" (click)="SaveRecord()" class="btn orange-flat-button">Save Record</button>
+              </div>
+              <div class="col-sm-2">
+                <button type="button" [disabled]="isCANCELDisabled" (click)="CancelRecord()" class="btn orange-flat-button">Cancel Record</button>
+              </div>
+            </div>
+            <div class="col-sm-2">
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- <div class="col-sm-4">
+
+    <div class="form-group">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Refund Receipt Details</div>
+        <div class="panel-body">
+
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>RECEIPT NO</th>
+                <th>AMOUNT</th>
+                <th>DATE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ORD of RefundList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index">
+
+
+                <td>
+                  {{ORD.Column1}}
+                </td>
+                <td>
+                  {{ORD.Column2}}
+                </td>
+                <td>
+                  {{ORD.Column3}}
+                </td>
+
+
+
+              </tr>
+            </tbody>
+
+          </table>
+          <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
+          </pagination-controls>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Commission Details</div>
+        <div class="panel-body">
+
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>RECEIPT NO</th>
+                <th>AMOUNT</th>
+                <th>DATE</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ORD of CommissionList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index">
+
+
+
+                <td>
+                  {{ORD.Column1}}
+                </td>
+                <td>
+                  {{ORD.Column2}}
+                </td>
+                <td>
+                  {{ORD.Column3}}
+                </td>
+
+
+
+              </tr>
+            </tbody>
+
+          </table>
+          <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
+          </pagination-controls>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Commission Refund Details</div>
+        <div class="panel-body">
+
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>RECEIPT NO</th>
+                <th>AMOUNT</th>
+                <th>DATE</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ORD of CommissionRefundList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index">
+
+
+
+                <td>
+                  {{ORD.Column1}}
+                </td>
+                <td>
+                  {{ORD.Column2}}
+                </td>
+                <td>
+                  {{ORD.Column3}}
+                </td>
+
+
+              </tr>
+            </tbody>
+
+          </table>
+          <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true">
+          </pagination-controls>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">New Refund Details</div>
+        <div class="panel-body">
+        </div>
+      </div>
+
+    </div>
+
+  </div> -->
+
+
+</div>
+
+
+
+
+
+
+<div class="row">
+  <div class="form-group">
+  </div>
+</div>

@@ -40,8 +40,9 @@ export class ManualUploadsReceiptsComponent implements OnInit {
 
   Result: string;
 
+  isLoading: string;
 
-  constructor( @Inject(NgZone) private zone: NgZone,private toastrService: ToastrService,private ref: ChangeDetectorRef, private UploadDocService: UploadDocService) {
+  constructor( @Inject(NgZone) private zone: NgZone, private toastrService: ToastrService, private ref: ChangeDetectorRef, private UploadDocService: UploadDocService) {
 
     this.inputUploadEvents = new EventEmitter<string>();
 
@@ -63,6 +64,7 @@ export class ManualUploadsReceiptsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isLoading = "Unloading";
 
     this.vHOSTED_URL_PREFIX = URL_CONST.HOSTED_URL_PREFIX;
 
@@ -97,9 +99,6 @@ export class ManualUploadsReceiptsComponent implements OnInit {
   onSelectOfUploadDocTypeId(docTypeId) {
 
 
-
-
-
     this.UploadDocTypeId = docTypeId;
     console.log('doc type-' + this.UploadDocTypeId);
 
@@ -110,13 +109,9 @@ export class ManualUploadsReceiptsComponent implements OnInit {
 
     // alert(URL_CONST.URL_PREFIX + 'api/UploadDoc/UploadDocument?vAGT_CODE=' + this.AGT_CODE);
 
-
-
     this.DocUploadUrl = URL_CONST.URL_PREFIX + 'api/UploadDoc/UploadExcel?vAGT_CODE=' + 'ReceiptManualUpload'; //'DPTSManualUpload'
 
     console.log('url - ' + this.DocUploadUrl);
-
-
 
     this.uploaderOptions = new NgUploaderOptions({
       url: this.DocUploadUrl,
@@ -169,7 +164,9 @@ export class ManualUploadsReceiptsComponent implements OnInit {
     this.toastrService.info(message);
   }
 
-  handleUpload(data: any) {
+
+
+  handleUpload(data: any) {   this.isLoading = "loading";
     setTimeout(() => {
       this.zone.run(() => {
         // this.response = data;
@@ -182,8 +179,11 @@ export class ManualUploadsReceiptsComponent implements OnInit {
           if (data.response.indexOf("An error has occurred.") == -1) {
             this.showSuccess("File Successfully Uploaded.");
 
-          }else{
+            this.isLoading = "Unloading";
+
+          } else {
             this.showError(data.response);
+            this.isLoading = "Unloading";
             return;
           }
 

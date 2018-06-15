@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../shared/models/user/user.model';
 import { LevelService } from '../../shared/services/Level/level.service';
 import { ILevel } from '../../shared/models/Level.models';
+import { ToastrService } from "toastr-ng2/toastr";
+
 
 @Component({
   selector: 'app-level',
@@ -26,13 +28,32 @@ export class LevelComponent implements OnInit {
     isSAVEDisabled: boolean = false;
     isCANCELDisabled: boolean = false;
   
-    constructor(private LevelService: LevelService) { }
+    constructor(private LevelService: LevelService,private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.getLevels();
     this.FormButtonStatusChange('LOAD');
     this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
   }
+
+  showSuccess(message) {
+    this.toastrService.success(message, 'Success!');
+    }
+    
+      
+    showError(message) {
+    this.toastrService.error(message, 'Oops!');
+    }
+    
+      
+    showWarning(message) {
+    this.toastrService.warning(message, 'Alert!');
+    }
+    
+      
+    showInfo(message) {
+    this.toastrService.info(message);
+    }
 
   getLevels() {
     this.LevelService.getLevel()
@@ -59,6 +80,23 @@ export class LevelComponent implements OnInit {
 
   SaveRecord() {
 
+    if (this.CODE.length == 0) {
+      this.showError("Code can not be empty....");
+      return;
+    }
+
+    if (this.DESCRIPTION.length == 0) {
+      this.showError("Description can not be empty....");
+      return;
+    }
+
+    if ((this.TYPE.toString() == '0')) {
+      this.showError("Type can not be empty....");
+      return;
+    }
+
+
+    
 
     try {
 

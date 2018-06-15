@@ -67,11 +67,11 @@ export class RefundRealisationComponent implements OnInit {
 
     this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
 
-    this.GetNonConfirmedRefunds();
+    this.GetRealisationRequiredRefunds();
 
   }
 
-  GetNonConfirmedRefunds() {
+  GetRealisationRequiredRefunds() {
 
     this.RefundService.GetRealisationRequiredRefunds()
       .subscribe((data) => {
@@ -196,8 +196,7 @@ export class RefundRealisationComponent implements OnInit {
   }
 
 
-  private setRefundProposalNo = function (index, ProposalNo, RefundAmt) {
-
+  private setRefundProposalNo = function (index, ProposalNo, RefundAmt,RefundID) {
 
     //this.GetDesignationDetails(ID);    
     //this.FormButtonStatusChange('SELECT');
@@ -208,7 +207,7 @@ export class RefundRealisationComponent implements OnInit {
     this.BALANCE_AMT= 0;
     this.UTILIZED_AMT_TEMP = 0;
 
-    this.SearchRecord(ProposalNo, RefundAmt);
+    this.SearchRecord(ProposalNo, RefundAmt,RefundID);
 
   }
 
@@ -261,10 +260,10 @@ export class RefundRealisationComponent implements OnInit {
     this.toastrService.info(message);
   }
 
-  SearchRecord(PropNo, RefundAmt) {
+  SearchRecord(PropNo, RefundAmt,RefundID) {
 
 
-    this.RefundService.GetRealisationRequiredRefundsByProposalNo(PropNo)
+    this.RefundService.GetRealisationRequiredRefundsByRefundID(RefundID)
       .subscribe((data) => {
 
         this.PIDList = data;

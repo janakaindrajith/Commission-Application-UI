@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   isMassagesHidden: Boolean;
   isFavourHidden: Boolean;
   isSignOutHidden: Boolean;
+  isBatchProcessHidden: Boolean;
 
   //Commission
   isComRateHidden: Boolean;
@@ -36,6 +37,8 @@ export class HeaderComponent implements OnInit {
   isReturnConfirmHidden: Boolean;
   isManualDPTSHidden: Boolean;
   isManualReceiptHidden: Boolean;
+  isRecConfirmationComponentHidden: Boolean;
+  isReturnRefundCancellationSyste: Boolean;
 
   //Incentive
   isFstAllowanceComponentHidden: Boolean;
@@ -49,6 +52,7 @@ export class HeaderComponent implements OnInit {
 
   isIncevtiveRateBancComponentHidden: Boolean;
   isIncevtiveConfigBancComponentHidden: Boolean;
+  
 
   //Agent
   isAGTMasterHidden: Boolean;

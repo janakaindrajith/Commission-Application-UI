@@ -7,13 +7,14 @@
 
 <div class="row">
   <div class="col-sm-8">
-    <div class="well">
-      <div class="row">
+    <!-- <div class="well">
+      <div class="row"> -->
         <!-- <table class="table vitamins"> -->
         <table class="table table-striped table-hover " id="myTable">
           <thead>
             <tr>
               <!-- <th>Select</th> -->
+              <th style="display:none;">RECEIPT_ID</th>
               <th style="display:none;">RECEIPT_NO</th>
               <th>RECEIPT_NO</th>
               <th>RECEIPT_DATE</th>
@@ -23,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let PID of PIDList | paginate: {itemsPerPage:5 , currentPage:page1, id: 'one'}; let i = index" (click)="setPIDReceiptNo(i,PID.RfdReceiptNo,PID.RfdAmt);">
+            <tr *ngFor="let PID of PIDList | paginate: {itemsPerPage:5 , currentPage:page1, id: 'one'}; let i = index" (click)="setPIDReceiptNo(i,PID.RfdReceiptNo,PID.RfdAmt,PID.RfdId);">
 
               <!-- <td><a href="javascript:void(0)">View</a></td> -->
 
@@ -31,7 +32,9 @@
                 <input type="checkbox" on="OnChangeCheckbox(this)" class="largerCheckbox" [checked]="PID.State" ngControl="Receipt" [(ngModel)]="PID.selected">
               </td> -->
 
-
+              <td style="display:none;">
+                  {{PID.RfdId}}
+                </td>
               <td style="display:none;">
                 {{PID.RfdReceiptNo}}
               </td>
@@ -56,8 +59,8 @@
         </table>
         <pagination-controls (pageChange)="page1 = $event" id="one" maxSize="5" directionLinks="true" autoHide="true">
         </pagination-controls>
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
   </div>
 
   <div class="col-sm-1">
@@ -172,23 +175,23 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <div class="well">
-      <div class="row">
+    <!-- <div class="well">
+      <div class="row"> -->
         <!-- <table class="table vitamins"> -->
         <table class="table table-striped table-hover " id="myTable1">
           <thead>
             <tr>
               <th>View</th>
               <th style="display:none;">RFD_PROPOSAL_NO</th>
-              <th>RFD_PROPOSAL_NO</th>
-              <th>RFD_RECEIPT_NO</th>
-              <th>RFD_REFUND_DATE</th>
-              <th>RFD_AMT</th>
-              <th>RFD_REASON</th>
+              <th>PROPOSAL NO</th>
+              <th>RECEIPT NO</th>
+              <th>REFUND_DATE</th>
+              <th>REFUND AMOUNT</th>
+              <th>REFUND REASON</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:10 , currentPage:page, id: 'two'}; let i = index" (click)="setRefundProposalNo(i,RFD.RfdProposalNo,RFD.RfdAmt);">
+            <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:10 , currentPage:page, id: 'two'}; let i = index" (click)="setRefundProposalNo(i,RFD.RfdProposalNo,RFD.RfdAmt,RFD.RfdId);">
 
               <!-- <td><a href="javascript:void(0)">View</a></td> -->
 
@@ -219,7 +222,7 @@
         </table>
         <pagination-controls (pageChange)="page = $event" id="two" maxSize="10" directionLinks="true" autoHide="true">
         </pagination-controls>
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
   </div>
 </div>

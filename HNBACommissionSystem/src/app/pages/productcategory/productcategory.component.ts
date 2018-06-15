@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../shared/models/user/user.model';
 import { ProductcategoryService } from '../../shared/services/ProductCategory/productcategory.service';
 import { Iproductcategory } from '../../shared/models/ProductCategory.models';
+import { ToastrService } from "toastr-ng2/toastr";
 
 
 @Component({
@@ -27,7 +28,7 @@ export class ProductCategoryComponent implements OnInit {
     isSAVEDisabled: boolean = false;
     isCANCELDisabled: boolean = false;
   
-    constructor(private ProductcategoryService: ProductcategoryService) { }
+    constructor(private ProductcategoryService: ProductcategoryService,private toastrService: ToastrService) { }
   
     ngOnInit() {
   
@@ -36,6 +37,25 @@ export class ProductCategoryComponent implements OnInit {
       this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
   
     }
+
+    showSuccess(message) {
+      this.toastrService.success(message, 'Success!');
+      }
+      
+        
+      showError(message) {
+      this.toastrService.error(message, 'Oops!');
+      }
+      
+        
+      showWarning(message) {
+      this.toastrService.warning(message, 'Alert!');
+      }
+      
+        
+      showInfo(message) {
+      this.toastrService.info(message);
+      }
   
   
     getProductCategories() {
@@ -64,6 +84,22 @@ export class ProductCategoryComponent implements OnInit {
     SaveRecord() {
   
   
+      if (this.CODE.length == 0) {
+        this.showError("Code can not be empty....");
+        return;
+      }
+  
+      if (this.DESCRIPTION.length == 0) {
+        this.showError("Description can not be empty....");
+        return;
+      }
+  
+      if ((this.BUSSINESS_TYPE.toString() == '0')) {
+        this.showError("Type can not be empty....");
+        return;
+      }
+  
+
       try {
   
         let obj: Iproductcategory = {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../shared/models/user/user.model';
 import { DesignationService } from '../../shared/services/designation/designation.service';
 import { Idesignation } from '../../shared/models/designation.models';
+import { ToastrService } from "toastr-ng2/toastr";
 
 @Component({
   selector: 'app-designation',
@@ -25,7 +26,7 @@ export class DesignationComponent implements OnInit {
   isSAVEDisabled: boolean = false;
   isCANCELDisabled: boolean = false;
 
-  constructor(private DesignationService: DesignationService) { }
+  constructor(private DesignationService: DesignationService, private toastrService: ToastrService) { }
 
   ngOnInit() {
 
@@ -59,7 +60,36 @@ export class DesignationComponent implements OnInit {
     this.FormButtonStatusChange('EDIT');
   }
 
+  showSuccess(message) {
+    this.toastrService.success(message, 'Success!');
+  }
+
+
+  showError(message) {
+    this.toastrService.error(message, 'Oops!');
+  }
+
+
+  showWarning(message) {
+    this.toastrService.warning(message, 'Alert!');
+  }
+
+
+  showInfo(message) {
+    this.toastrService.info(message);
+  }
+
   SaveRecord() {
+
+    if (this.CODE.length == 0) {
+      this.showError("Code can not be empty....");
+      return;
+    }
+
+    if (this.DESCRIPTION.length == 0) {
+      this.showError("Description can not be empty....");
+      return;
+    }
 
 
     try {

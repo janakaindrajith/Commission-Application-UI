@@ -62,6 +62,10 @@ import { IndexComponent} from './index/index.component';
 
 import { RecConfirmationComponent} from './rec-confirmation/rec-confirmation.component';
 
+import { BatchProcessComponent} from './batch-process/batch-process.component';
+
+import { ReturnRefundCancellationSystemComponent} from './return-refund-cancellation-system/return-refund-cancellation-system.component';
+
 export const PAGE_ROUTES: Routes = [
     {
         path: 'index',
@@ -187,7 +191,13 @@ export const PAGE_ROUTES: Routes = [
     {
         path:'RecConfirmationComponent',
         component: RecConfirmationComponent
+    },
+    {
+        path:'ReturnRefundCancellationSystem',
+        component: ReturnRefundCancellationSystemComponent
+    },
+    {
+        path:'BatchProcessComponent',
+        component: BatchProcessComponent
     }
-    
-
 ];
