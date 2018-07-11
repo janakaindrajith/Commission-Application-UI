@@ -285,7 +285,6 @@ export class RecConfirmationComponent implements OnInit {
   UpdateRecords() {
 
 
-
     if (confirm("Are you sure you want to confirm selected records? ")) {
 
       let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'reject');
