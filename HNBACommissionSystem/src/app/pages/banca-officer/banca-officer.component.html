@@ -1,45 +1,20 @@
-<p>
-  banca-officer works!
-</p>
-
-
-
-
-<table>
+<table class="table table-hover">
     <thead>
-      <tr>
-        <th>Header</th>
-        <th>Header</th>
-        <th>Header</th>
-        <th>Header</th>
-      </tr>
+        <tr>
+            <th>Game Name</th>
+            <th>Platform</th>
+            <th>Release Date</th>
+        </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-      </tr>
-       <tr>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-      </tr>
-       <tr>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-      </tr>
-       <tr>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-        <td>Item</td>
-      </tr>
+        <tr *ngFor="let game of games; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+            <td>{{game.game}}</td>
+            <td>{{game.platform}}</td>
+            <td>{{game.release}}</td>
+        </tr>
     </tbody>
-  </table>
-  
-  
+</table>
+
+<div class="well well-lg">
+    Selected Row : <strong>{{selectedRow}}</strong>
+</div>

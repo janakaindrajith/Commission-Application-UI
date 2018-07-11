@@ -123,7 +123,7 @@ export class ReturnRefundCancellationSystemComponent implements OnInit {
   isNarrationDisabled: boolean = false;
   isAmountDisabled: boolean = false;
 
-
+  selectedRow: Number;
 
   constructor(private PIDSearchService: PIDSearchService, private PIDDetailsService: PIDDetailsService, private RefundService: RefundService, private CommonService: CommonService, private toastrService: ToastrService) { }
   //constructor(private PIDSearchService: PIDSearchService) { }
@@ -381,6 +381,8 @@ export class ReturnRefundCancellationSystemComponent implements OnInit {
 
   private setPIDReceiptNo = function (index, RFD_ID, RECIEPT_NO) {
 
+
+    this.selectedRow = index;
 
     this.getRefundNOTRecordsByReceiptNo(RFD_ID);
     //this.FormButtonStatusChange('EDIT');

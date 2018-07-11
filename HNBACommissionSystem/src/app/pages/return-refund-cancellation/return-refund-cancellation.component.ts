@@ -358,6 +358,8 @@ export class ReturnRefundCancellationComponent implements OnInit {
 
   private setPIDReceiptNo = function (index, ID) {
 
+    this.selectedRow = index;
+
     this.getPIDDetailsByID(ID);
     //this.FormButtonStatusChange('EDIT');
 
@@ -595,6 +597,14 @@ export class ReturnRefundCancellationComponent implements OnInit {
           this.showError('Error Occured.');
         },
         () => console.log('done'));
+
+
+        //Clear Data
+        // this.PID_RECEIPT_NO_SEARCH = '';
+        // this.PID_PROPOSAL_NO_SEARCH = '';
+        // this.PID_POLICY_NO_SEARCH = '';
+
+
 
     } catch (error) {
 

@@ -60,7 +60,17 @@ export class RecConfirmationComponent implements OnInit {
 
   isLoading: string;
 
+  selectedRow: Number;
+  setClickedRow: Function;
+
+
+  Temp_Approve_List: string = '';
+  Temp_Reject_List: string = '';
+
+
   constructor(private RefundService: RefundService, private toastrService: ToastrService) { }
+
+
 
   ngOnInit() {
 
@@ -72,15 +82,27 @@ export class RecConfirmationComponent implements OnInit {
 
     //this.GetRealisationRequiredRefundsForReconciliation();
 
+
+
   }
 
-  private GetRefundRelatedCheque = function (RefundID) {
+  private GetRefundRelatedCheque = function (RefundID, index) {
 
-    this.isLoading = "loading";
+    try {
 
-    this.GetRealisationRequiredRefundsForReconciliation(RefundID);
+      this.selectedRow = index;
 
-    this.isLoading = "Unloading";
+      this.RED_SELECTED_REFUND_ID = RefundID;
+
+      this.isLoading = "loading";
+
+      this.GetRealisationRequiredRefundsForReconciliation(RefundID);
+
+      this.isLoading = "Unloading";
+
+    } catch (error) {
+      alert(error);
+    }
 
   }
 
@@ -134,20 +156,24 @@ export class RecConfirmationComponent implements OnInit {
   //------------------------------------------------------------------------------------
 
   GetRealisationRequiredRefundsForReconciliation(RefundID) {
+    try {
+      this.RefundService.GetRealisationRequiredRefundsForReconciliation(RefundID)
+        .subscribe((data) => {
 
-    this.RefundService.GetRealisationRequiredRefundsForReconciliation(RefundID)
-      .subscribe((data) => {
+          this.ChequeList = data;
 
-        this.ChequeList = data;
+          console.log(JSON.stringify(data));
 
-        console.log(JSON.stringify(data));
+          if (this.RefundList.length == 0) {
+            // alert('No Record Found....');
+            this.RefundList = null;
+            return;
+          }
+        });
+    } catch (error) {
 
-        if (this.RefundList.length == 0) {
-          // alert('No Record Found....');
-          this.RefundList = null;
-          return;
-        }
-      });
+    }
+
   }
 
 
@@ -168,125 +194,255 @@ export class RecConfirmationComponent implements OnInit {
   }
 
 
+
+  updateRejectRecords() {
+
+    let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'reject');
+
+    this.Temp_Reject_List = "";
+
+    //------------------------------------Rject----------------------------------------
+    for (let entry of NotselectedRows) {
+      this.Temp_Reject_List = this.Temp_Reject_List + "" + entry.RfdReceiptNo + ",";
+    }
+    console.log(this.Temp_Reject_List);
+    //---------------------------------------------------------------------------------
+
+    if (NotselectedRows.length == 0) {
+      return;
+    }
+
+
+    try {
+      let obj: IRefund = {
+        RfdId: Number(this.RED_SELECTED_REFUND_ID),//Number(entry.RfdId),
+        RfdReceiptNo: this.Temp_Reject_List,//entry.RfdReceiptNo,
+        RfdRefundDate: null,
+        RfdType: 0,
+        RfdAmt: 0,
+        RfdPercentage: 0,
+        RfdBy: '',
+        RfdReason: '',
+        RfdAgtCode: '',
+        RfdProcessInd: '',
+        RfdRvNo: '',
+        RfdPvNo: '',
+        RfdBalType: '',
+        RfdCreatedBy: '',
+        RfdStatus: 3, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
+        RfdProposalNo: '',
+        RfdPolicyNo: '',
+        RfdCancellationFee: 0,
+        RfdRecoveryFee: 0,
+        RfdRecStatus: '',
+        RfdRecNarration: '',
+        RfdRecUpdatedBy: this.User.UserName,
+        RfdRecUpdatedDate: ''
+      }
+
+      console.log(obj);
+
+      this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
+        console.log(data);
+
+        if (data.toString().replace(/"/g, '') == "ERROR") {
+          this.showError('Error Occured.');
+        } else {
+          this.showSuccess('Refund Successfully Saved.');
+        }
+      },
+        (err) => {
+          console.log(err);
+          console.log("Error saving Designation");
+          this.showError('Error Occured.');
+        },
+        () => console.log('done'));
+
+    } catch (error) {
+
+    }
+  }
+
+
+  UpdateRecordsccc() {
+
+    let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'no');
+    let SelectedRows = this.ChequeList.filter((data: any) => data.selected === 'yes');
+    alert(SelectedRows.length)
+    // for (let entry of NotselectedRows) {
+    //   //this.Temp_Reject_List = this.Temp_Reject_List + "" + entry.RfdReceiptNo + ",";
+    //   //alert(entry.);
+    // }
+
+  }
+
+
+  onPaginateChange(event){
+    alert(JSON.stringify("Current page index: " + event.pageIndex));
+  }
+
+
   UpdateRecords() {
-
-
-    let selectedRows = this.ChequeList.filter((data: any) => data.selected);
-    let NotselectedRows = this.ChequeList.filter((data: any) => data.NotselectedRows);
 
 
 
     if (confirm("Are you sure you want to confirm selected records? ")) {
 
-      //---------------Approve Cheque payments--------------
+      let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'reject');
+
+      let selectedRows = this.ChequeList.filter((data: any) => data.selected === 'approve');
+
+      let Rows = this.ChequeList.filter((data: any) => data);
+
+
+      if (Rows.length != NotselectedRows.length + selectedRows.length) {
+        this.showError('Please select the status for all the records either approve or reject...');
+        return;
+      }
+
+
+      this.Temp_Approve_List = "";
+
+
+      // if (NotselectedRows.length > 0 && selectedRows.length == 0) {
+      //   this.updateRejectRecords();
+      //   return;
+      // }
+
+
+
+
+
+      //-----------------------------------Approve--------------------------------------
       for (let entry of selectedRows) {
-        console.log(entry.RfdReceiptNo);
+        this.Temp_Approve_List = this.Temp_Approve_List + "" + entry.RfdReceiptNo + ",";
+      }
+      console.log(this.Temp_Approve_List);
+      //---------------------------------------------------------------------------------
 
-        try {
-          let obj: IRefund = {
-            RfdId: Number(entry.RfdId),
-            RfdReceiptNo: entry.RfdReceiptNo,
-            RfdRefundDate: null,
-            RfdType: 0,
-            RfdAmt: 0,
-            RfdPercentage: 0,
-            RfdBy: '',
-            RfdReason: '',
-            RfdAgtCode: '',
-            RfdProcessInd: '',
-            RfdRvNo: '',
-            RfdPvNo: '',
-            RfdBalType: '',
-            RfdCreatedBy: '',
-            RfdStatus: 2, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
-            RfdProposalNo: '',
-            RfdPolicyNo: '',
-            RfdCancellationFee: 0,
-            RfdRecoveryFee: 0,
-            RfdRecStatus: '',
-            RfdRecNarration: '',
-            RfdRecUpdatedBy: this.User.UserName,
-            RfdRecUpdatedDate: ''
-          }
 
-          console.log(obj);
+      //---------------Approve Cheque payments--------------
+      // for (let entry of selectedRows) {
+      //   console.log(entry.RfdReceiptNo);
 
-          this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
-            console.log(data);
-
-            if (data.toString().replace(/"/g, '') == "ERROR") {
-              this.showError('Error Occured.');
-            } else {
-              this.showSuccess('Refund Successfully Saved.');
-            }
-          },
-            (err) => {
-              console.log(err);
-              console.log("Error saving Designation");
-              this.showError('Error Occured.');
-            },
-            () => console.log('done'));
-
-        } catch (error) {
-
+      try {
+        let obj: IRefund = {
+          RfdId: Number(this.RED_SELECTED_REFUND_ID),//Number(entry.RfdId),
+          RfdReceiptNo: this.Temp_Approve_List,//entry.RfdReceiptNo,
+          RfdRefundDate: null,
+          RfdType: 0,
+          RfdAmt: 0,
+          RfdPercentage: 0,
+          RfdBy: '',
+          RfdReason: '',
+          RfdAgtCode: '',
+          RfdProcessInd: '',
+          RfdRvNo: '',
+          RfdPvNo: '',
+          RfdBalType: '',
+          RfdCreatedBy: '',
+          RfdStatus: 2, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
+          RfdProposalNo: '',
+          RfdPolicyNo: '',
+          RfdCancellationFee: 0,
+          RfdRecoveryFee: 0,
+          RfdRecStatus: '',
+          RfdRecNarration: '',
+          RfdRecUpdatedBy: this.User.UserName,
+          RfdRecUpdatedDate: ''
         }
 
+        console.log(obj);
+
+        this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
+          console.log(data);
+
+
+          //reject list update
+          this.updateRejectRecords();
+
+
+          if (data.toString().replace(/"/g, '') == "ERROR") {
+            this.showError('Error Occured.');
+          } else {
+            this.showSuccess('Refund Successfully Saved.');
+          }
+        },
+          (err) => {
+            console.log(err);
+            console.log("Error saving Designation");
+            this.showError('Error Occured.');
+          },
+          () => console.log('done'));
+
+      } catch (error) {
+
       }
+
+
+
+      // }
       //==================================================
 
       //--------------Reject cheque payments--------------
-      for (let entry of NotselectedRows) {
-        console.log(entry.RfdReceiptNo);
+      // for (let entry of NotselectedRows) {
+      //   console.log(entry.RfdReceiptNo);
 
-        try {
-          let obj: IRefund = {
-            RfdId: Number(entry.RfdId),
-            RfdReceiptNo: entry.RfdReceiptNo,
-            RfdRefundDate: null,
-            RfdType: 0,
-            RfdAmt: 0,
-            RfdPercentage: 0,
-            RfdBy: '',
-            RfdReason: '',
-            RfdAgtCode: '',
-            RfdProcessInd: '',
-            RfdRvNo: '',
-            RfdPvNo: '',
-            RfdBalType: '',
-            RfdCreatedBy: '',
-            RfdStatus: 3, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
-            RfdProposalNo: '',
-            RfdPolicyNo: '',
-            RfdCancellationFee: 0,
-            RfdRecoveryFee: 0,
-            RfdRecStatus: '',
-            RfdRecNarration: '',
-            RfdRecUpdatedBy: this.User.UserName,
-            RfdRecUpdatedDate: ''
-          }
 
-          console.log(obj);
 
-          this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
-            console.log(data);
 
-            if (data.toString().replace(/"/g, '') == "ERROR") {
-              this.showError('Error Occured.');
-            } else {
-              this.showSuccess('Refund Successfully Saved.');
-            }
-          },
-            (err) => {
-              console.log(err);
-              console.log("Error saving Designation");
-              this.showError('Error Occured.');
-            },
-            () => console.log('done'));
+      // try {
+      //   let obj: IRefund = {
+      //     RfdId: Number(this.RED_SELECTED_REFUND_ID),//Number(entry.RfdId),
+      //     RfdReceiptNo: this.Temp_Reject_List,//entry.RfdReceiptNo,
+      //     RfdRefundDate: null,
+      //     RfdType: 0,
+      //     RfdAmt: 0,
+      //     RfdPercentage: 0,
+      //     RfdBy: '',
+      //     RfdReason: '',
+      //     RfdAgtCode: '',
+      //     RfdProcessInd: '',
+      //     RfdRvNo: '',
+      //     RfdPvNo: '',
+      //     RfdBalType: '',
+      //     RfdCreatedBy: '',
+      //     RfdStatus: 3, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
+      //     RfdProposalNo: '',
+      //     RfdPolicyNo: '',
+      //     RfdCancellationFee: 0,
+      //     RfdRecoveryFee: 0,
+      //     RfdRecStatus: '',
+      //     RfdRecNarration: '',
+      //     RfdRecUpdatedBy: this.User.UserName,
+      //     RfdRecUpdatedDate: ''
+      //   }
 
-        } catch (error) {
+      //   console.log(obj);
 
-        }
-      }
+      //   this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
+      //     console.log(data);
+
+      //     if (data.toString().replace(/"/g, '') == "ERROR") {
+      //       this.showError('Error Occured.');
+      //     } else {
+      //       this.showSuccess('Refund Successfully Saved.');
+      //     }
+      //   },
+      //     (err) => {
+      //       console.log(err);
+      //       console.log("Error saving Designation");
+      //       this.showError('Error Occured.');
+      //     },
+      //     () => console.log('done'));
+
+      // } catch (error) {
+
+      // }
+
+
+
+      // }
       //========================================================
 
     }

@@ -56,6 +56,7 @@ export class ManualUploadsComponent implements OnInit {
         console.log(data);
 
         this.UploadDocList = data;
+
       },
       (err) => console.log(err));
   }

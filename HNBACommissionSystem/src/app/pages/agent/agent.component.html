@@ -1913,7 +1913,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let agent of AgentSearchList | paginate: {itemsPerPage:20 , currentPage:page, id: 'four'}; let i = index" (click)="setClickedRow(i,agent.AGT_ID,agent.AGT_CODE);">
+                <tr *ngFor="let agent of AgentSearchList | paginate: {itemsPerPage:20 , currentPage:page, id: 'four'}; let i = index" [class.active]="i == selectedRow" (click)="setClickedRow(i,agent.AGT_ID,agent.AGT_CODE);">
                   <td><a>View</a></td>
                   <td style="display:none;">
                     {{agent.AGT_ID}}

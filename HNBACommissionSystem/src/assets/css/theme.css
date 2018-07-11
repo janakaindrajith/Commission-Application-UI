@@ -7453,10 +7453,16 @@ table th, table td {
   }
   
   table tr:hover {
-    background: rgb(241, 244, 205);
+    background: rgb(241, 244, 205); 
   }
-  table tr:hover td {
+
+  /* table tr:hover td {
     font-style: italic;
+  } */
+
+  .table tr.active td {
+    background-color:#A1C060 !important;
+    color: white;
   }
 
   /* --------------------------Custom Table CSS------------------------------------ */

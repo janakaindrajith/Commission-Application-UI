@@ -79,6 +79,9 @@ export class CommissionRateChartComponent implements OnInit {
   DATE_FROM_CLS: string = '';
   DATE_TO_CLS: string = '';
 
+  
+selectedRow : Number;
+
 
   constructor(private ProductcategoryService: ProductcategoryService, private AgentTypeService: AgentTypeService, private PropertyService: PropertyService,private CommissionRateChartService:CommissionRateChartService) { }
 
@@ -501,6 +504,7 @@ export class CommissionRateChartComponent implements OnInit {
 
   private setRuleID = function (index, ID) {
 
+    this.selectedRow = index;
     this.getComRateDetailsByID(ID);
     this.FormButtonStatusChange('SELECT');
 

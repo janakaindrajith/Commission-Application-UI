@@ -69,6 +69,8 @@ export class OverridingRateChartComponent implements OnInit {
   isSAVEDisabled: boolean = false;
   isCANCELDisabled: boolean = false;
 
+  selectedRow : Number;
+
   constructor(private AgentTypeService: AgentTypeService, private PropertyService: PropertyService, private CommissionORDRateChartService: CommissionORDRateChartService) { }
   //constructor(private AgentTypeService: AgentTypeService,private PropertyService: PropertyService) { }
 
@@ -112,7 +114,7 @@ export class OverridingRateChartComponent implements OnInit {
 
   private setORDRateID = function (index, ID) {
 
-
+    this.selectedRow = index;
     this.getComORDRateDetailsByID(ID);
     this.FormButtonStatusChange('SELECT');
 

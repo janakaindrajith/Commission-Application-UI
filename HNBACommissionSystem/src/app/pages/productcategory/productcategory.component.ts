@@ -14,6 +14,9 @@ import { ToastrService } from "toastr-ng2/toastr";
 export class ProductCategoryComponent implements OnInit {
 
   User: IUser;
+
+  
+selectedRow : Number;
   
     ID: number = 0;
     CODE: string = '';
@@ -216,6 +219,7 @@ export class ProductCategoryComponent implements OnInit {
   
     private setProductCategoryID = function (index, ID) {
   
+      this.selectedRow = index;
   
       this.GetProductCategoryDetails(ID);
   

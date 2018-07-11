@@ -58,6 +58,9 @@ export class RefundRealisationComponent implements OnInit {
   UTILIZED_AMT_TEMP: Number = 0;
   BALANCE_AMT_TEMP: Number = 0;
 
+  
+selectedRow : Number;
+
 
   constructor(private PIDSearchService: PIDSearchService, private RefundService: RefundService, private toastrService: ToastrService) { }
 
@@ -190,7 +193,7 @@ export class RefundRealisationComponent implements OnInit {
 
     //alert(Receipt_No + '' + Receipt_Amt + '' + index);
 
-
+    this.selectedRow = index;
 
 
   }
@@ -200,7 +203,8 @@ export class RefundRealisationComponent implements OnInit {
 
     //this.GetDesignationDetails(ID);    
     //this.FormButtonStatusChange('SELECT');
-
+    this.selectedRow = index;
+    
     this.REFUND_AMT = RefundAmt;
 
     this.UTILIZED_AMT= 0;

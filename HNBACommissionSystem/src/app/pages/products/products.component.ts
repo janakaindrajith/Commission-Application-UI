@@ -17,26 +17,28 @@ import { ToastrService } from "toastr-ng2/toastr";
 export class ProductsComponent implements OnInit {
 
   User: IUser;
-  
-    ID: number = 0;
-    CODE: string = '';
-    DESCRIPTION: string = '';
-    ACTIVE_STATUS: number = 0;
-    PRODUCT_CAT_ID: string = '';
-    CREATED_BY: string = '';
-  
-    List: Array<Iproduct> = [];
-    ProCatList: Array<Iproduct> = [];
-    isNEWDisabled: boolean = false;
-    isEDITDisabled: boolean = false;
-    isSAVEDisabled: boolean = false;
-    isCANCELDisabled: boolean = false;
-  
-    constructor(private ProductService: ProductService,private ProductcategoryService:ProductcategoryService,private toastrService: ToastrService) { }
+
+  ID: number = 0;
+  CODE: string = '';
+  DESCRIPTION: string = '';
+  ACTIVE_STATUS: number = 0;
+  PRODUCT_CAT_ID: string = '';
+  CREATED_BY: string = '';
+
+  List: Array<Iproduct> = [];
+  ProCatList: Array<Iproduct> = [];
+  isNEWDisabled: boolean = false;
+  isEDITDisabled: boolean = false;
+  isSAVEDisabled: boolean = false;
+  isCANCELDisabled: boolean = false;
+
+  selectedRow: Number;
+
+  constructor(private ProductService: ProductService, private ProductcategoryService: ProductcategoryService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.getProducts();
-    this. getProductCategories();
+    this.getProductCategories();
     this.FormButtonStatusChange('LOAD');
     this.User = JSON.parse(localStorage.getItem('currentCOMUser'));
   }
@@ -78,22 +80,22 @@ export class ProductsComponent implements OnInit {
 
   showSuccess(message) {
     this.toastrService.success(message, 'Success!');
-    }
-    
-      
-    showError(message) {
+  }
+
+
+  showError(message) {
     this.toastrService.error(message, 'Oops!');
-    }
-    
-      
-    showWarning(message) {
+  }
+
+
+  showWarning(message) {
     this.toastrService.warning(message, 'Alert!');
-    }
-    
-      
-    showInfo(message) {
+  }
+
+
+  showInfo(message) {
     this.toastrService.info(message);
-    }
+  }
 
   SaveRecord() {
 
@@ -222,6 +224,7 @@ export class ProductsComponent implements OnInit {
 
   private setProductID = function (index, ID) {
 
+    this.selectedRow = index;
 
     this.GetLevelDetails(ID);
 
@@ -229,6 +232,7 @@ export class ProductsComponent implements OnInit {
     this.FormButtonStatusChange('SELECT');
 
   }
+
 
 
   private GetLevelDetails(ID) {

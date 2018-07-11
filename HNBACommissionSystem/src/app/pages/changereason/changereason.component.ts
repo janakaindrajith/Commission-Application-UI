@@ -27,7 +27,10 @@ export class ChangereasonComponent implements OnInit {
   isSAVEDisabled: boolean = false;
   isCANCELDisabled: boolean = false;
 
-  constructor(private ChangereasonService: ChangereasonService,private toastrService: ToastrService) { }
+
+  selectedRow: Number;
+
+  constructor(private ChangereasonService: ChangereasonService, private toastrService: ToastrService) { }
 
   ngOnInit() {
 
@@ -38,22 +41,22 @@ export class ChangereasonComponent implements OnInit {
 
   showSuccess(message) {
     this.toastrService.success(message, 'Success!');
-    }
-    
-      
-    showError(message) {
+  }
+
+
+  showError(message) {
     this.toastrService.error(message, 'Oops!');
-    }
-    
-      
-    showWarning(message) {
+  }
+
+
+  showWarning(message) {
     this.toastrService.warning(message, 'Alert!');
-    }
-    
-      
-    showInfo(message) {
+  }
+
+
+  showInfo(message) {
     this.toastrService.info(message);
-    }
+  }
 
   getChangeReasons() {
     this.ChangereasonService.getchangereasons()
@@ -196,6 +199,7 @@ export class ChangereasonComponent implements OnInit {
 
   private setDesignationID = function (index, ID) {
 
+    this.selectedRow = index;
     this.GetChangeReasonDetails(ID);
     this.FormButtonStatusChange('SELECT');
 

@@ -301,7 +301,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ORD of ORDRateChartList | paginate: {itemsPerPage:10 , currentPage:page, id: '1'}; let i = index" (click)="setORDRateID(i,ORD.Id);">
+            <tr *ngFor="let ORD of ORDRateChartList | paginate: {itemsPerPage:10 , currentPage:page, id: '1'}; let i = index" [class.active]="i == selectedRow" (click)="setORDRateID(i,ORD.Id);">
               <td><a href="javascript:void(0)">View</a></td>
               <td style="display:none;">
                 {{ORD.Id}}

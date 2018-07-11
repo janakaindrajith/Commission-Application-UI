@@ -25,6 +25,9 @@ export class FstAllowanceComponent implements OnInit {
 
   User: IUser;
 
+
+  selectedRow: Number;
+
   ID: number = 0;
   CODE: string = '';
   DESCRIPTION: string = '';
@@ -35,12 +38,12 @@ export class FstAllowanceComponent implements OnInit {
   FST_MAX_AMT: number = 0;
   ALLOWANCE: number = 0;
   SQL: string = '';
-  DATE_FROM: Date=null;
-  DATE_TO: Date=null;
+  DATE_FROM: Date = null;
+  DATE_TO: Date = null;
   ACTIVE_STATUS: number = 0;
   CREATED_BY: string = '';
 
-  rtnDate: Date=null;
+  rtnDate: Date = null;
 
   FSTAllowanceList: Array<IFSTAllowance> = [];
 
@@ -65,6 +68,7 @@ export class FstAllowanceComponent implements OnInit {
 
   private setFSTID = function (index, ID) {
 
+    this.selectedRow = index;
 
     this.GetFSTDetails(ID);
 
@@ -72,41 +76,41 @@ export class FstAllowanceComponent implements OnInit {
 
   }
 
-   //-------------Check Date when Retrive------------------------------------------------
- SetDateFormatNew(vDate): Date {
-  var moment = require('moment');
+  //-------------Check Date when Retrive------------------------------------------------
+  SetDateFormatNew(vDate): Date {
+    var moment = require('moment');
 
-  // console.log('SetDateFormatNew');
-  // console.log(vDate);
+    // console.log('SetDateFormatNew');
+    // console.log(vDate);
 
-  if ((vDate == '01/01/2000 12:00:00 AM') || (vDate == '01/01/2000 00:00:00') || (moment(vDate.toString().substr(0, 10), 'DD/MM/YYYY').toDate() == moment('01/01/1900 00:00:00'.toString().substr(0, 10), 'DD/MM/YYYY').toDate()) || (vDate == '01/01/1900 12:00:00 AM') || (vDate == '01/01/1900 00:00:00')) {//alert(vDate);
-    this.rtnDate = null;//moment('01/01/1900'.toString()).format('DD/MM/YYYY');
-  } else {
-    this.rtnDate = moment(vDate.toString().substr(0, 10), 'DD/MM/YYYY').toDate();// moment(vDate).format('DD/MM/YYYY');
-  }
-  return this.rtnDate;
-}
-//------------------------------------------------------------------------------------
-
-
-
-    //--------------Check Date when Save--------------------------------------------------
-    SetDateFormat(vDate): Date {
-      var moment = require('moment');
-  
-      // console.log('SetDateFormat');
-      // console.log(vDate);
-  
-      if (vDate == undefined || vDate == '') {//alert(vDate);
-        this.rtnDate = moment('01/01/1900'.toString()).format('DD/MM/YYYY');
-      } else {
-        this.rtnDate = moment(vDate).format('DD/MM/YYYY');
-      }
-      return this.rtnDate;
+    if ((vDate == '01/01/2000 12:00:00 AM') || (vDate == '01/01/2000 00:00:00') || (moment(vDate.toString().substr(0, 10), 'DD/MM/YYYY').toDate() == moment('01/01/1900 00:00:00'.toString().substr(0, 10), 'DD/MM/YYYY').toDate()) || (vDate == '01/01/1900 12:00:00 AM') || (vDate == '01/01/1900 00:00:00')) {//alert(vDate);
+      this.rtnDate = null;//moment('01/01/1900'.toString()).format('DD/MM/YYYY');
+    } else {
+      this.rtnDate = moment(vDate.toString().substr(0, 10), 'DD/MM/YYYY').toDate();// moment(vDate).format('DD/MM/YYYY');
     }
-    //------------------------------------------------------------------------------------
+    return this.rtnDate;
+  }
+  //------------------------------------------------------------------------------------
 
-    
+
+
+  //--------------Check Date when Save--------------------------------------------------
+  SetDateFormat(vDate): Date {
+    var moment = require('moment');
+
+    // console.log('SetDateFormat');
+    // console.log(vDate);
+
+    if (vDate == undefined || vDate == '') {//alert(vDate);
+      this.rtnDate = moment('01/01/1900'.toString()).format('DD/MM/YYYY');
+    } else {
+      this.rtnDate = moment(vDate).format('DD/MM/YYYY');
+    }
+    return this.rtnDate;
+  }
+  //------------------------------------------------------------------------------------
+
+
 
   private GetFSTDetails(ID) {
     this.FSTAllowanceService.getFSTAllowance(ID)
@@ -118,17 +122,17 @@ export class FstAllowanceComponent implements OnInit {
         this.ID = obj.Id;
         this.CODE = obj.Code;
         this.DESCRIPTION = obj.Description;
-        this.MAX_YEARS= obj.MaximumYears;
-        this.MAX_ALLOWANCE= obj.MaximumAllowance;
-        this.POLICY_COUNT= obj.PolicyCount;
-        this.FST_MIN_AMT= obj.FstMinimumAmt;
-        this.FST_MAX_AMT= obj.FstMaximumAmt;
-        this.ALLOWANCE= obj.Allowance;
-        this.SQL= obj.Sql;
+        this.MAX_YEARS = obj.MaximumYears;
+        this.MAX_ALLOWANCE = obj.MaximumAllowance;
+        this.POLICY_COUNT = obj.PolicyCount;
+        this.FST_MIN_AMT = obj.FstMinimumAmt;
+        this.FST_MAX_AMT = obj.FstMaximumAmt;
+        this.ALLOWANCE = obj.Allowance;
+        this.SQL = obj.Sql;
         this.DATE_FROM = this.SetDateFormatNew(obj.FromDate.toString()),
-        this.DATE_TO = this.SetDateFormatNew(obj.ToDate.toString()),
-        this.ACTIVE_STATUS= obj.ActiveStatus;
-        this.CREATED_BY= obj.CreatedBy;
+          this.DATE_TO = this.SetDateFormatNew(obj.ToDate.toString()),
+          this.ACTIVE_STATUS = obj.ActiveStatus;
+        this.CREATED_BY = obj.CreatedBy;
 
       });
 
@@ -181,7 +185,7 @@ export class FstAllowanceComponent implements OnInit {
     try {
 
       let obj: IFSTAllowance = {
-        Id:0,
+        Id: 0,
         Code: this.CODE,
         Description: this.DESCRIPTION,
         MaximumYears: this.MAX_YEARS,
@@ -247,15 +251,15 @@ export class FstAllowanceComponent implements OnInit {
       this.ID = 0;
       this.CODE = '';
       this.DESCRIPTION = '';
-      this.MAX_YEARS= null;
-      this.MAX_ALLOWANCE=  null;
-      this.POLICY_COUNT=  null;
-      this.FST_MIN_AMT=  null;
-      this.FST_MAX_AMT=  null;
-      this.ALLOWANCE=  null;
+      this.MAX_YEARS = null;
+      this.MAX_ALLOWANCE = null;
+      this.POLICY_COUNT = null;
+      this.FST_MIN_AMT = null;
+      this.FST_MAX_AMT = null;
+      this.ALLOWANCE = null;
       this.DATE_FROM = null;
       this.DATE_TO = null;
-      this.ACTIVE_STATUS= 0;
+      this.ACTIVE_STATUS = 0;
 
     }
     if (Status == 'EDIT') {
@@ -279,15 +283,15 @@ export class FstAllowanceComponent implements OnInit {
       this.ID = 0;
       this.CODE = '';
       this.DESCRIPTION = '';
-      this.MAX_YEARS= null;
-      this.MAX_ALLOWANCE=  null;
-      this.POLICY_COUNT=  null;
-      this.FST_MIN_AMT=  null;
-      this.FST_MAX_AMT=  null;
-      this.ALLOWANCE=  null;
+      this.MAX_YEARS = null;
+      this.MAX_ALLOWANCE = null;
+      this.POLICY_COUNT = null;
+      this.FST_MIN_AMT = null;
+      this.FST_MAX_AMT = null;
+      this.ALLOWANCE = null;
       this.DATE_FROM = null;
       this.DATE_TO = null;
-      this.ACTIVE_STATUS= 0;
+      this.ACTIVE_STATUS = 0;
     }
     if (Status == 'CANCEL') {
       this.isNEWDisabled = false;
@@ -298,15 +302,15 @@ export class FstAllowanceComponent implements OnInit {
       this.ID = 0;
       this.CODE = '';
       this.DESCRIPTION = '';
-      this.MAX_YEARS= null;
-      this.MAX_ALLOWANCE=  null;
-      this.POLICY_COUNT=  null;
-      this.FST_MIN_AMT=  null;
-      this.FST_MAX_AMT=  null;
-      this.ALLOWANCE=  null;
+      this.MAX_YEARS = null;
+      this.MAX_ALLOWANCE = null;
+      this.POLICY_COUNT = null;
+      this.FST_MIN_AMT = null;
+      this.FST_MAX_AMT = null;
+      this.ALLOWANCE = null;
       this.DATE_FROM = null;
       this.DATE_TO = null;
-      this.ACTIVE_STATUS= 0;
+      this.ACTIVE_STATUS = 0;
     }
     if (Status == 'LOAD') {
       this.isNEWDisabled = false;

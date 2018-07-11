@@ -143,7 +143,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let desig of DesignationList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index" (click)="setDesignationID(i,desig.Id);">
+            <tr *ngFor="let desig of DesignationList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index" [class.active]="i == selectedRow" (click)="setDesignationID(i,desig.Id);">
               <td><a href="javascript:void(0)">View</a></td>
               <td style="display:none;">
                 {{desig.Id}}

@@ -2,6 +2,9 @@
 </div>
 
 
+
+
+
 <div class="row">
   <div class="col-sm-8">
     <h1 class="content-subhead">Refund requested transactions.....</h1>
@@ -24,7 +27,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:5 , currentPage:page, id: 'two'}; let i = index" (click)="GetRefundRelatedCheque(RFD.RfdId);">
+        <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:5 , currentPage:page, id: 'two'}; let i = index" [class.active]="i == selectedRow"
+          (click)="GetRefundRelatedCheque(RFD.RfdId,i);">
 
           <td><a href="javascript:void(0)">View</a></td>
 
@@ -63,7 +67,12 @@
 
 <div class="row">
   <div class="col-sm-10">
-    <h1 class="content-subhead">Approval required Cheque related transactions.....</h1>
+    <h1 class="content-subhead">Approval required Cheque related transactions.....
+      <label><span>[Please select records you need to approve, none selected records will be taking as rejects]</span> </label>
+    </h1>
+
+    <!-- <label><span>Please select records you need to approve, none selected records will be taking as rejects...</span> </label> -->
+
   </div>
   <div class="col-sm-2">
     <button type="button" [disabled]="isSAVEDisabled" (click)="UpdateRecords()" class="btn orange-flat-button">Confirm</button>
@@ -79,7 +88,7 @@
     <table class="table table-striped table-hover " id="myTable2">
       <thead>
         <tr>
-          <th>SELECT</th>
+          <th>STATUS</th>
           <th style="display:none;">RFD_RECEIPT_NO</th>
           <th>RECEIPT_NUMBER</th>
           <th>CHEQUE_NO</th>
@@ -90,6 +99,7 @@
           <th>REFUND_BY</th>
           <th>REFUND REASON</th>
           <th>REFUND AGENT CODE</th>
+
         </tr>
       </thead>
       <tbody>
@@ -97,8 +107,16 @@
 
         <tr *ngFor="let CH of ChequeList | paginate: {itemsPerPage:10 , currentPage:page1, id: 'one'}; let i = index">
 
-          <td>
+          <!-- <td>
             <input class="largerCheckbox" type="checkbox" on="OnChangeCheckbox(this)" [checked]="CH.State" ngControl="Refund" [(ngModel)]="CH.selected">
+          </td> -->
+
+          <td>
+            <select class="form-control" [(ngModel)]="CH.selected">
+                  <option value="select">Select</option>
+                  <option value="approve">Approve</option>
+                  <option value="reject">Reject</option>
+                </select>
           </td>
 
           <td style="display:none;">
@@ -131,12 +149,15 @@
           <td>
             {{CH.RfdAgtCode}}
           </td>
+
         </tr>
       </tbody>
 
     </table>
-    <pagination-controls (pageChange)="page = $event" id="one" maxSize="10" directionLinks="true" autoHide="true">
+    <pagination-controls (pageChange)="page = onPaginateChange$event" id="one" maxSize="10" directionLinks="true" autoHide="true">
     </pagination-controls>
+
+    
     <!-- </div>
     </div> -->
   </div>

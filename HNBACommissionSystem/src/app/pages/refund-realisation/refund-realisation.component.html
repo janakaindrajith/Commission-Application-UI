@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let PID of PIDList | paginate: {itemsPerPage:5 , currentPage:page1, id: 'one'}; let i = index" (click)="setPIDReceiptNo(i,PID.RfdReceiptNo,PID.RfdAmt,PID.RfdId);">
+            <tr *ngFor="let PID of PIDList | paginate: {itemsPerPage:5 , currentPage:page1, id: 'one'}; let i = index" [class.active]="i == selectedRow" (click)="setPIDReceiptNo(i,PID.RfdReceiptNo,PID.RfdAmt,PID.RfdId);">
 
               <!-- <td><a href="javascript:void(0)">View</a></td> -->
 
@@ -191,7 +191,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:10 , currentPage:page, id: 'two'}; let i = index" (click)="setRefundProposalNo(i,RFD.RfdProposalNo,RFD.RfdAmt,RFD.RfdId);">
+            <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:10 , currentPage:page, id: 'two'}; let i = index" 
+            [class.active]="i == selectedRow" (click)="setRefundProposalNo(i,RFD.RfdProposalNo,RFD.RfdAmt,RFD.RfdId);">
 
               <!-- <td><a href="javascript:void(0)">View</a></td> -->
 

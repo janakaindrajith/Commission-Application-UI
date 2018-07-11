@@ -365,7 +365,7 @@ export class ReturnRefundCancellationConfirmComponent implements OnInit {
 
 
   private setPIDReceiptNo = function (index, ID) {
-
+    this.selectedRow = index;
   }
 
 

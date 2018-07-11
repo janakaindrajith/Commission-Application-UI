@@ -457,6 +457,7 @@ export class AgentComponent implements OnInit {
   isRecordFoundTCS: boolean;
   isNICExists: boolean;
 
+  selectedRow: Number;
 
   datepickerOpts = {
     format: 'dd/mm/yyyy'
@@ -2745,8 +2746,8 @@ export class AgentComponent implements OnInit {
     return new Promise((resolve, reject) => {
 
       //some agent types does not have NIC such as HNB Bank , Institution etc..
-      if ((this.AGT_TYPE_ID == 2) || (this.AGT_TYPE_ID == 3)|| (this.AGT_TYPE_ID == 7)|| (this.AGT_TYPE_ID == 8)|| (this.AGT_TYPE_ID == 9)) {
-        
+      if ((this.AGT_TYPE_ID == 2) || (this.AGT_TYPE_ID == 3) || (this.AGT_TYPE_ID == 7) || (this.AGT_TYPE_ID == 8) || (this.AGT_TYPE_ID == 9)) {
+
         this.isNICExists = false;
         resolve(this.isNICExists);
 
@@ -2855,7 +2856,7 @@ export class AgentComponent implements OnInit {
 
   setClickedRow = function (index, AGENT_ID, AGT_CODE_SELECTED) {
 
-
+    this.selectedRow = index;
 
     console.log('setClickedRow - ' + AGENT_ID);
 
@@ -2950,7 +2951,7 @@ export class AgentComponent implements OnInit {
           this.AGT_ISS_STATUS = obj.AGT_ISS_STATUS,
           this.AGT_ISS_AMOUNT = obj.AGT_ISS_AMOUNT,
           this.AGT_ISS_GIVEN_DATE = this.SetDateFormatNew(obj.AGT_ISS_GIVEN_DATE.toString());
-          this.AGT_LEADER_GIVEN_DATE = this.SetDateFormatNew(obj.AGT_LEADER_GIVEN_DATE.toString());
+        this.AGT_LEADER_GIVEN_DATE = this.SetDateFormatNew(obj.AGT_LEADER_GIVEN_DATE.toString());
         this.AGT_ISS_CLOSE_DATE = this.SetDateFormatNew(obj.AGT_ISS_CLOSE_DATE.toString());
         this.AGT_RETAINER_STATUS = obj.AGT_RETAINER_STATUS,
           this.AGT_RETAINER_AMOUNT = obj.AGT_RETAINER_AMOUNT,

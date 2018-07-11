@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:20 , currentPage:page, id: '1'}; let i = index" (click)="setPIDReceiptNo(i,RFD.RfdId);">
+          <tr *ngFor="let RFD of RefundList | paginate: {itemsPerPage:20 , currentPage:page, id: '1'}; let i = index" [class.active]="i == selectedRow" (click)="setPIDReceiptNo(i,RFD.RfdId);">
 
             <!-- <td><a href="javascript:void(0)">View</a></td> -->
             <td>

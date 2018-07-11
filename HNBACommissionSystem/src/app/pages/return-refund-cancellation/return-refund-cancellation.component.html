@@ -133,7 +133,7 @@
               <th>RECEIPT DATE</th>
               <th>PROPOSAL NO</th>
               <th>POLICY NO</th>
-              <th>CUS. NAME</th>
+              <th>CUSTOMER NAME</th>
               <th>AGT CODE</th>
 
 
@@ -151,7 +151,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ORD of PIDList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index" (click)="setPIDReceiptNo(i,ORD.PID_RECEIPT_NO);">
+            <tr *ngFor="let ORD of PIDList | paginate: {itemsPerPage:5 , currentPage:page, id: '1'}; let i = index" [class.active]="i == selectedRow" (click)="setPIDReceiptNo(i,ORD.PID_RECEIPT_NO);">
               <td><a href="javascript:void(0)">View</a></td>
               <td style="display:none;">
                 {{ORD.PID_RECEIPT_NO}}

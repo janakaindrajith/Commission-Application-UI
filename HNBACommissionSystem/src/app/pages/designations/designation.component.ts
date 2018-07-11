@@ -26,6 +26,8 @@ export class DesignationComponent implements OnInit {
   isSAVEDisabled: boolean = false;
   isCANCELDisabled: boolean = false;
 
+  selectedRow : Number;
+
   constructor(private DesignationService: DesignationService, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -78,6 +80,13 @@ export class DesignationComponent implements OnInit {
   showInfo(message) {
     this.toastrService.info(message);
   }
+
+
+
+  // pageChanged(event){
+  //   console.log("pageChanged")
+  // }
+
 
   SaveRecord() {
 
@@ -198,6 +207,7 @@ export class DesignationComponent implements OnInit {
 
   private setDesignationID = function (index, ID) {
 
+    this.selectedRow = index;
 
     this.GetDesignationDetails(ID);
 

@@ -33,7 +33,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ORD of PIDList | paginate: {itemsPerPage:5  , currentPage:page, id: '1'}; let i = index" (click)="setPIDReceiptNo(i,ORD.RfdId,ORD.RfdReceiptNo);">
+        <tr *ngFor="let ORD of PIDList | paginate: {itemsPerPage:5  , currentPage:page, id: '1'}; let i = index" 
+        [class.active]="i == selectedRow" (click)="setPIDReceiptNo(i,ORD.RfdId,ORD.RfdReceiptNo);">
 
           <td><a href="javascript:void(0)">View</a></td>
           <td style="display:none;">
