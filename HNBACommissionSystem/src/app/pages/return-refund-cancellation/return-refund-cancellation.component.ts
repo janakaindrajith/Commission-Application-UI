@@ -220,6 +220,30 @@ export class ReturnRefundCancellationComponent implements OnInit {
 
     this.PIDList = [];
 
+    this.CommissionList = [];
+    this.RefundList = [];
+    this.CommissionRefundList = [];
+
+    this.PID_RECEIPT_NO = "";
+    this.PID_RECEIPT_DATE = "";
+    this.PID_CUSTOMER = "";
+    this.PID_PROPOSAL_NO = "";
+    this.PID_POLICY_NO = "";
+    this.PID_RECEIPT_AMT = "";
+    this.PID_TIME_SLAB = "";
+    this.PID_CONFIRM_AMT = "";
+    this.PID_CONFIRM_DATE = "";
+    this.PID_RV_NO = "";
+    this.PID_BAL_TYPE = "";
+    this.PID_AGT_CODE = "";
+
+    this.PID_RECEIPT_AMT = "";
+    this.PID_AVAILABLE_AMT = "";
+    this.RFD_PV_NO = "";
+    this.RFD_TYPE = 0;
+
+
+
   }
 
   FormButtonStatusChange(Status) {
@@ -645,7 +669,7 @@ export class ReturnRefundCancellationComponent implements OnInit {
 
         this.PIDList = data;
 
-        this.isLoading = "Unloading";
+        
 
         console.log(JSON.stringify(data));
 

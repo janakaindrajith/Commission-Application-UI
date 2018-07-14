@@ -21,7 +21,7 @@
           <th>View</th>
           <th style="display:none;">RFD_PROPOSAL_NO</th>
           <th>PROPOSAL NO</th>
-          <th>REFUND_DATE</th>
+          <th>REFUND DATE</th>
           <th>REFUND AMOUNT</th>
           <th>REFUND REASON</th>
         </tr>
@@ -68,7 +68,7 @@
 <div class="row">
   <div class="col-sm-10">
     <h1 class="content-subhead">Approval required Cheque related transactions.....
-      <label><span>[Please select records you need to approve, none selected records will be taking as rejects]</span> </label>
+      <!-- <label><span>[Please select records you need to approve, none selected records will be taking as rejects]</span> </label> -->
     </h1>
 
     <!-- <label><span>Please select records you need to approve, none selected records will be taking as rejects...</span> </label> -->
@@ -110,6 +110,7 @@
           <!-- <td>
             <input class="largerCheckbox" type="checkbox" on="OnChangeCheckbox(this)" [checked]="CH.State" ngControl="Refund" [(ngModel)]="CH.selected">
           </td> -->
+
 
           <td>
             <select class="form-control" [(ngModel)]="CH.selected">

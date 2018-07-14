@@ -59,17 +59,17 @@ export class RefundService {
 
   GetRealisationRequiredRefundsForReconciliation(RefundID) {
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        headers.append('Authorization', USER.USER_AUTH_TOKEN);
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRealisationRequiredRefundsForReconciliation?RefundID=' + RefundID, options)
-          .map((response: Response) => response.json())
-          .timeout(60000)
-          .catch((error: any) => {
-            //this.handleError; 
-            return Observable.throw(new Error(error.status))
-          });
-      }
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRealisationRequiredRefundsForReconciliation?RefundID=' + RefundID, options)
+      .map((response: Response) => response.json())
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError; 
+        return Observable.throw(new Error(error.status))
+      });
+  }
 
 
   GetSystemMappingFailedRefunds() {
@@ -117,19 +117,19 @@ export class RefundService {
       });
   }
 
-    //getSingleRecord
-    GetRefundNOT(RFD_ID) {
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      headers.append('Authorization', USER.USER_AUTH_TOKEN);
-      let options = new RequestOptions({ headers: headers });
-      return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRefundNOT?RFD_ID=' + RFD_ID, options)
-        .map((response: Response) => response.json())
-        .timeout(60000)
-        .catch((error: any) => {
-          //this.handleError; 
-          return Observable.throw(new Error(error.status))
-        });
-    }
+  //getSingleRecord
+  GetRefundNOT(RFD_ID) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/GetRefundNOT?RFD_ID=' + RFD_ID, options)
+      .map((response: Response) => response.json())
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError; 
+        return Observable.throw(new Error(error.status))
+      });
+  }
 
 
   //post   
@@ -150,22 +150,43 @@ export class RefundService {
   }
 
 
-    //post   
+  //post   
   saveRefundNOT(params) {
-      let body = params;
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      headers.append('Authorization', USER.USER_AUTH_TOKEN);
-      let postoptions = new RequestOptions({ headers: headers });
-      return this.http.post(URL_CONST.URL_PREFIX + 'api/Refund/SaveRefundNOT', body, postoptions)
-        .map((response: Response) => {
-          return response;
-        })
-        .timeout(60000)
-        .catch((error: any) => {
-          //this.handleError;
-          return Observable.throw(new Error(error.status))
-        });
-    }
+    let body = params;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let postoptions = new RequestOptions({ headers: headers });
+    return this.http.post(URL_CONST.URL_PREFIX + 'api/Refund/SaveRefundNOT', body, postoptions)
+      .map((response: Response) => {
+        return response;
+      })
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError;
+        return Observable.throw(new Error(error.status))
+      });
+  }
+
+
+
+  Updatetest(ReceiptList) {
+    
+    let body = ReceiptList;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Authorization', USER.USER_AUTH_TOKEN);
+    let postoptions = new RequestOptions({ headers: headers });
+    //return this.http.get(URL_CONST.URL_PREFIX + 'api/Refund/Updatetest?aa=' + aa, postoptions)
+    return this.http.post(URL_CONST.URL_PREFIX + 'api/Refund/Updatetest', body, postoptions)
+
+      .map((response: Response) => {
+        return response;
+      })
+      .timeout(60000)
+      .catch((error: any) => {
+        //this.handleError;
+        return Observable.throw(new Error(error.status))
+      });
+  }
 
 
   UpdateRecStatus(params) {

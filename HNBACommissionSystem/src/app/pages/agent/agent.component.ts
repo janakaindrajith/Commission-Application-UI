@@ -478,6 +478,8 @@ export class AgentComponent implements OnInit {
     this.inputUploadEvents = new EventEmitter<string>();
   }
 
+  
+
   ngOnInit() {
     try {
 

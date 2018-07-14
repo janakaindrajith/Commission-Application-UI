@@ -66,6 +66,9 @@ export class RecConfirmationComponent implements OnInit {
 
   Temp_Approve_List: string = '';
   Temp_Reject_List: string = '';
+  Temp_ApproveReject_List: string = '';
+
+  ReceiptList: Array<string> = [];
 
 
   constructor(private RefundService: RefundService, private toastrService: ToastrService) { }
@@ -197,6 +200,8 @@ export class RecConfirmationComponent implements OnInit {
 
   updateRejectRecords() {
 
+    //alert();
+
     let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'reject');
 
     this.Temp_Reject_List = "";
@@ -263,36 +268,16 @@ export class RecConfirmationComponent implements OnInit {
     }
   }
 
+  updateApproveRecords(): Promise<any> {
 
-  UpdateRecordsccc() {
+    return new Promise((resolve, reject) => {
 
-    let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'no');
-    let SelectedRows = this.ChequeList.filter((data: any) => data.selected === 'yes');
-    alert(SelectedRows.length)
-    // for (let entry of NotselectedRows) {
-    //   //this.Temp_Reject_List = this.Temp_Reject_List + "" + entry.RfdReceiptNo + ",";
-    //   //alert(entry.);
-    // }
+      // return new Promise((resolve, reject) => {
 
-  }
-
-
-  onPaginateChange(event){
-    alert(JSON.stringify("Current page index: " + event.pageIndex));
-  }
-
-
-  UpdateRecords() {
-
-
-    if (confirm("Are you sure you want to confirm selected records? ")) {
 
       let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'reject');
-
       let selectedRows = this.ChequeList.filter((data: any) => data.selected === 'approve');
-
       let Rows = this.ChequeList.filter((data: any) => data);
-
 
       if (Rows.length != NotselectedRows.length + selectedRows.length) {
         this.showError('Please select the status for all the records either approve or reject...');
@@ -300,18 +285,8 @@ export class RecConfirmationComponent implements OnInit {
       }
 
 
+
       this.Temp_Approve_List = "";
-
-
-      // if (NotselectedRows.length > 0 && selectedRows.length == 0) {
-      //   this.updateRejectRecords();
-      //   return;
-      // }
-
-
-
-
-
       //-----------------------------------Approve--------------------------------------
       for (let entry of selectedRows) {
         this.Temp_Approve_List = this.Temp_Approve_List + "" + entry.RfdReceiptNo + ",";
@@ -320,9 +295,18 @@ export class RecConfirmationComponent implements OnInit {
       //---------------------------------------------------------------------------------
 
 
-      //---------------Approve Cheque payments--------------
-      // for (let entry of selectedRows) {
-      //   console.log(entry.RfdReceiptNo);
+
+      // this.Temp_Reject_List = "";
+      // //------------------------------------Reject---------------------------------------
+      // for (let entry of NotselectedRows) {
+      //   this.Temp_Reject_List = this.Temp_Reject_List + "" + entry.RfdReceiptNo + ",";
+      // }
+      // console.log(this.Temp_Approve_List);
+      // //---------------------------------------------------------------------------------
+
+
+
+
 
       try {
         let obj: IRefund = {
@@ -356,10 +340,10 @@ export class RecConfirmationComponent implements OnInit {
         this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
           console.log(data);
 
-
-          //reject list update
           this.updateRejectRecords();
 
+          //test
+          //this.updatetest();
 
           if (data.toString().replace(/"/g, '') == "ERROR") {
             this.showError('Error Occured.');
@@ -376,79 +360,98 @@ export class RecConfirmationComponent implements OnInit {
 
       } catch (error) {
 
+        reject(error);
+
+      }
+    });
+  }
+  // }
+
+
+  updateRecords() {
+    try {
+      alert();
+
+      let selectedRows = this.ChequeList.filter((data: any) => data.selected === 'approve');
+      let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'reject');
+
+
+      for (let entry of selectedRows) {
+        this.ReceiptList.push("Parameter1:" + entry.RfdReceiptNo + "Parameter2:" + "2" + "Parameter3:" + Number(this.RED_SELECTED_REFUND_ID) + "Parameter4:" + this.User.UserName + "Parameter5:");
       }
 
+      for (let entry of NotselectedRows) {
+        this.ReceiptList.push("Parameter1:" + entry.RfdReceiptNo + "Parameter2:" + "3" + "Parameter3:" + Number(this.RED_SELECTED_REFUND_ID) + "Parameter4:" + this.User.UserName + "Parameter5:");
 
+      }
 
-      // }
-      //==================================================
-
-      //--------------Reject cheque payments--------------
-      // for (let entry of NotselectedRows) {
-      //   console.log(entry.RfdReceiptNo);
-
-
-
-
-      // try {
-      //   let obj: IRefund = {
-      //     RfdId: Number(this.RED_SELECTED_REFUND_ID),//Number(entry.RfdId),
-      //     RfdReceiptNo: this.Temp_Reject_List,//entry.RfdReceiptNo,
-      //     RfdRefundDate: null,
-      //     RfdType: 0,
-      //     RfdAmt: 0,
-      //     RfdPercentage: 0,
-      //     RfdBy: '',
-      //     RfdReason: '',
-      //     RfdAgtCode: '',
-      //     RfdProcessInd: '',
-      //     RfdRvNo: '',
-      //     RfdPvNo: '',
-      //     RfdBalType: '',
-      //     RfdCreatedBy: '',
-      //     RfdStatus: 3, //1-UPLOADED / 2-APPROVED / 3-REJECTED / 3-REFUNDED / 4-TRANSFERRED
-      //     RfdProposalNo: '',
-      //     RfdPolicyNo: '',
-      //     RfdCancellationFee: 0,
-      //     RfdRecoveryFee: 0,
-      //     RfdRecStatus: '',
-      //     RfdRecNarration: '',
-      //     RfdRecUpdatedBy: this.User.UserName,
-      //     RfdRecUpdatedDate: ''
-      //   }
-
-      //   console.log(obj);
-
-      //   this.RefundService.UpdateRecStatus(obj).subscribe((data: any) => {
-      //     console.log(data);
-
-      //     if (data.toString().replace(/"/g, '') == "ERROR") {
-      //       this.showError('Error Occured.');
-      //     } else {
-      //       this.showSuccess('Refund Successfully Saved.');
-      //     }
-      //   },
-      //     (err) => {
-      //       console.log(err);
-      //       console.log("Error saving Designation");
-      //       this.showError('Error Occured.');
-      //     },
-      //     () => console.log('done'));
-
-      // } catch (error) {
-
-      // }
+      // this.ReceiptList.push("ff"); 
+      // this.ReceiptList.push("sfsd"); 
+      // this.ReceiptList.push("asdfas"); 
 
 
 
-      // }
-      //========================================================
+      this.RefundService.UpdateRecStatus(this.ReceiptList).subscribe((data: any) => {
+        console.log(data);
+
+        this.ngOnInit();
+
+        if (data.toString().replace(/"/g, '') == "ERROR") {
+          this.showError('Error Occured.');
+        } else {
+          this.showSuccess('Refund Successfully Saved.');
+        }
+      },
+        (err) => {
+          this.showError('Error Occured.');
+        },
+        () =>
+          console.log('done'));
+
+    } catch (error) {
 
     }
+  }
+
+
+  // UpdateRecordsccc() {
+
+  //   let NotselectedRows = this.ChequeList.filter((data: any) => data.selected === 'no');
+  //   let SelectedRows = this.ChequeList.filter((data: any) => data.selected === 'yes');
+  //   alert(SelectedRows.length)
+  //   // for (let entry of NotselectedRows) {
+  //   //   //this.Temp_Reject_List = this.Temp_Reject_List + "" + entry.RfdReceiptNo + ",";
+  //   //   //alert(entry.);
+  //   // }
+
+  // }
+
+
+  onPaginateChange(event) {
+    alert(JSON.stringify("Current page index: " + event.pageIndex));
+  }
+
+
+  UpdateRecords() {
+
+    this.updateRecords();
+
+    
+
+    // if (confirm("Are you sure you want to confirm selected records? ")) {
+
+
+    //   this.updateApproveRecords();
+
+
+    // }
 
     //this.GetRealisationRequiredRefundsForReconciliation();
 
   }
+
+
+
 
 
   // RejectRecords() {
